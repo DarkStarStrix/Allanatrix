@@ -12,7 +12,7 @@
             padding: 0;
             font-family: 'Courier Prime', monospace;
             background-color: #000;
-            color: #0f0;
+            color: #3afa02;
             line-height: 1.6;
         }
 
@@ -31,7 +31,7 @@
         h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
-            text-shadow: 0 0 5px #0f0, 0 0 10px #0f0;
+            text-shadow: 0 0 5px #09e0ea, 0 0 10px #06e899;
         }
 
         nav ul {
@@ -47,22 +47,22 @@
         }
 
         nav ul li a {
-            color: #0f0;
+            color: #07ec8c;
             text-decoration: none;
             font-size: 1.2rem;
             padding: 5px 10px;
-            border: 1px solid #0f0;
+            border: 1px solid #02f690;
             transition: all 0.3s ease;
         }
 
         nav ul li a:hover {
-            background-color: #0f0;
+            background-color: #06ead8;
             color: #000;
         }
 
         section {
             margin-top: 50px;
-            border: 1px solid #0f0;
+            border: 1px solid #03e5ee;
             padding: 20px;
             background-color: rgba(0, 255, 0, 0.05);
         }
@@ -71,7 +71,7 @@
             position: relative;
             font-size: 2rem;
             font-weight: bold;
-            color: #0f0;
+            color: #07a7ea;
             letter-spacing: 3px;
             margin-bottom: 1rem;
         }
@@ -154,18 +154,75 @@
         }
 
         .content-box a {
-            color: #0f0;
+            color: #02f6a1;
             text-decoration: none;
-            border-bottom: 1px solid #0f0;
+            border-bottom: 1px solid #06ecb6;
         }
 
         .content-box a:hover {
             color: #fff;
             border-bottom: 1px solid #fff;
         }
+
+    .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+    }
+
+    .background iframe {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+        opacity: 0.3; /* Adjust opacity to make the background more subtle */
+    }
+
+    .background p {
+        display: none;
+    }
+    /* Add this to the style section of index.html */
+
+    .image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+
+    .image-container.visible {
+        opacity: 1;
+    }
+
+    .image-container img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .back-link {
+        color: #07ec8c;
+        text-decoration: none;
+        font-size: 1.2rem;
+        padding: 5px 10px;
+        border: 1px solid #02f690;
+        transition: all 0.3s ease;
+    }
+
     </style>
 </head>
 <body>
+
+<body>
+    <div class="background">
+        <iframe src="https://giphy.com/embed/1SDZzCAq0nAcmTXewK" width="320" height="480" class="giphy-embed" allowFullScreen></iframe>
+        <p><a href="https://giphy.com/gifs/loop-sub-pt-1SDZzCAq0nAcmTXewK">via GIPHY</a></p>
+    </div>
     <div class="container">
         <header>
             <h1>Technomancer</h1>
@@ -176,6 +233,7 @@
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="#Blog">Blog</a></li>
             </ul>
         </nav>
         <main>
@@ -184,6 +242,13 @@
                 <div class="content-box">
                     <p>Welcome to my digital realm. I am a technomancer, weaving code and magic into digital reality.</p>
                     <p>Learn more about my journey: <a href="Story.html" id="Story.html">My Story</a></p>
+                </div>
+            </section>
+            <section id="Blog">
+                <h2 class="glitch" data-text="Blog">Blog</h2>
+                <div class="content-box">
+                    <p>Read my latest incantations:</p>
+                    <p>Coming soon...</p>
                 </div>
             </section>
             <section id="projects">
@@ -295,10 +360,31 @@
                     <p>Twitter: <a href="https://x.com/AllanatrixQ">@AllantrixQ</a></p>
                     <p>GitHub: <a href="https://github.com/DarkStarStrix">github.com/Darkstalker</a></p>
                     <p>LinkedIn: <a href="https://www.linkedin.com/in/technomancertrix/">linkedin.com/in/Technomancertrix</a></p>
-                    <p>Gitroll: <a herf="https://gitroll.io/profile/ub6lfmQZWuKhVyWyUAwntcWetBf52">GitRoll statistics</a></p>
+                    <p>Gitroll: <a href="https://gitroll.io/profile/ub6lfmQZWuKhVyWyUAwntcWetBf52">GitRoll statistics</a></p>
                 </div>
             </section>
-        </main>
+        <footer>
+            <section>
+            <div>
+            <a href="index.html" class="back-link">Back to Home</a>
+            </div>
+            </section>
+        </footer>
+<body>
+    <div class="image-container">
+        <img id="Cyberpunk" src="Cyberpunk.JPEG" alt="Cyber">
     </div>
+</body>
+<script>
+    window.addEventListener('scroll', function() {
+        const imageContainer = document.querySelector('.image-container');
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+            imageContainer.classList.add('visible');
+        }
+    });
+</script>
+    </main>
+    </div>
+</body>
 </body>
 </html>
