@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberpunk Retro Green Blog</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+        :root {
+            --neon-green: #0f0;
+            --neon-blue: #0ff;
+            --neon-pink: #f0f;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000;
+            color: var(--neon-green);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: #000;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--neon-green);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 1px,
+                rgba(0, 255, 0, 0.1) 1px,
+                rgba(0, 255, 0, 0.1) 2px
+            );
+            animation: scan 10s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50%); }
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+            color: var(--neon-green);
+            text-shadow: 0 0 5px var(--neon-green), 0 0 10px var(--neon-green), 0 0 15px var(--neon-green);
+            position: relative;
+            animation: glitch 3s infinite;
+        }
+
+        @keyframes glitch {
+            0% { text-shadow: 0 0 5px var(--neon-green), 0 0 10px var(--neon-green), 0 0 15px var(--neon-green); }
+            25% { text-shadow: -2px 0 var(--neon-blue), 2px 2px var(--neon-pink); }
+            50% { text-shadow: 2px -2px var(--neon-blue), -2px 2px var(--neon-pink); }
+            75% { text-shadow: -2px 0 var(--neon-blue), 2px 2px var(--neon-pink); }
+            100% { text-shadow: 0 0 5px var(--neon-green), 0 0 10px var(--neon-green), 0 0 15px var(--neon-green); }
+        }
+
+        .post {
+            background: rgba(0, 255, 0, 0.05);
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 2px solid var(--neon-green);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 10px var(--neon-green);
+        }
+
+        .post::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.2), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .post h2 {
+            color: var(--neon-blue);
+            margin-top: 0;
+            text-shadow: 0 0 5px var(--neon-blue);
+        }
+
+        .post p {
+            line-height: 1.6;
+        }
+
+        .post .date {
+            font-style: italic;
+            margin-bottom: 10px;
+            color: var(--neon-pink);
+        }
+
+        .read-more {
+            color: var(--neon-blue);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .read-more:hover {
+            text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Cyberpunk Retro Blog</h1>
+        </header>
+
+        <div id="posts-container">
+            <!-- Blog posts will be dynamically added here -->
+        </div>
+    </div>
+
+    <script>
+        function fetchPosts() {
+            // In a real application, this would be a fetch request to your server
+            // For demonstration, we'll use a setTimeout to simulate an API call
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve([
+                        {
+                            id: 1,
+                            title: "The Rise of AI",
+                            content: "In the neon-lit streets of Neo-Tokyo, artificial intelligence has become an integral part of daily life...",
+                            date: "2023-09-27",
+                            link: "post1.html"
+                        },
+                        {
+                            id: 2,
+                            title: "Cybernetic Enhancements",
+                            content: "The latest cybernetic implants promise to enhance human capabilities beyond imagination...",
+                            date: "2023-09-28",
+                            link: "post2.html"
+                        },
+                        {
+                            id: 3,
+                            title: "Digital Dreamscapes",
+                            content: "As virtual reality becomes indistinguishable from the physical world, new forms of art and expression emerge...",
+                            date: "2023-09-29",
+                            link: "post3.html"
+                        }
+                    ]);
+                }, 100);
+            });
+        }
+
+        function renderPosts(posts) {
+            const postsContainer = document.getElementById('posts-container');
+            postsContainer.innerHTML = '';
+            posts.forEach((post) => {
+                const postElement = document.createElement('div');
+                postElement.className = 'post';
+                postElement.innerHTML = `
+                    <h2>${post.title}</h2>
+                    <div class="date">Published on: ${post.date}</div>
+                    <p>${post.content}</p>
+                    <a href="${post.link}" class="read-more">Read Full Article</a>
+                `;
+                postsContainer.appendChild(postElement);
+            });
+        }
+
+        // Set up SSE
+        const evtSource = new EventSource('/api/sse');
+        evtSource.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            if (data.action === 'update') {
+                fetchPosts().then(renderPosts);
+            }
+        };
+
+        evtSource.onerror = function(err) {
+            console.error("EventSource failed:", err);
+        };
+
+        // Initial load
+        fetchPosts().then((posts) => {
+            renderPosts(posts);
+        });
+    </script>
+</body>
+</html>
