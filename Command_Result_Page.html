@@ -160,8 +160,22 @@
                 }
             });
 
+            function escapeHTML(str) {
+                return str.replace(/[&<>"']/g, function(match) {
+                    const escapeMap = {
+                        '&': '&amp;',
+                        '<': '&lt;',
+                        '>': '&gt;',
+                        '"': '&quot;',
+                        "'": '&#39;'
+                    };
+                    return escapeMap[match];
+                });
+            }
+
             function processCommand(command) {
-                commandOutput.innerHTML += `>>>> ${command}\n`;
+                const safeCommand = escapeHTML(command);
+                commandOutput.innerHTML += `>>>> ${safeCommand}\n`;
 
                 switch(command.toLowerCase()) {
                     case 'stop':
@@ -186,7 +200,7 @@
                         commandOutput.innerHTML = '';
                         break;
                     default:
-                        commandOutput.innerHTML += `Command not recognized: ${command}\n`;
+                        commandOutput.innerHTML += `Command not recognized: ${safeCommand}\n`;
                 }
 
                 // Scroll to the bottom of the output
