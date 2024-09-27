@@ -209,7 +209,106 @@
         border: 1px solid #02f690;
         transition: all 0.3s ease;
     }
+    .glitch {
+    text-shadow:
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px #fff,
+        0 0 40px #0ff,
+        0 0 80px #0ff,
+        0 0 90px #0ff,
+        0 0 100px #0ff,
+        0 0 150px #0ff;
+}
+    #skills img {
+    transition: all 0.3s ease;
+}
 
+#skills img:hover {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 10px #0ff);
+}
+/* Webkit browsers */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0f0;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #00ff00;
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #0f0 #000;
+}
+#terminal-section {
+    margin-top: 50px;
+    padding: 20px;
+}
+
+#terminal {
+    background-color: #000;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 20px;
+    height: 400px;
+    overflow-y: auto;
+    border: none;
+}
+
+#terminal-input-line {
+    display: flex;
+    align-items: center;
+}
+
+.prompt {
+    color: #00ff00;
+    margin-right: 5px;
+}
+
+#terminal-section {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #000;
+}
+
+#terminal-line {
+    display: flex;
+    align-items: center;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    color: #0f0;
+}
+
+.prompt {
+    margin-right: 5px;
+}
+
+#input {
+    background-color: transparent;
+    border: none;
+    color: #0f0;
+    font-family: inherit;
+    font-size: inherit;
+    outline: none;
+    flex-grow: 1;
+}
+
+#input:focus {
+    outline: none;
+}
     </style>
 </head>
 <body>
@@ -385,6 +484,13 @@
                     <p>Gitroll: <a href="https://gitroll.io/profile/ub6lfmQZWuKhVyWyUAwntcWetBf52">GitRoll statistics</a></p>
                 </div>
             </section>
+            <section id="terminal-section">
+    <div id="terminal-line">
+        <span class="prompt">>>></span>
+        <span id="input" contenteditable="true" spellcheck="false"></span>
+    </div>
+</section>
+        </main>
         <footer>
             <section>
             <div>
@@ -392,20 +498,45 @@
             </div>
             </section>
         </footer>
-<body>
-    <div class="image-container">
-        <img id="Cyberpunk" src="Cyberpunk.JPEG" alt="Cyber">
-    </div>
-</body>
-<script>
-    window.addEventListener('scroll', function() {
-        const imageContainer = document.querySelector('.image-container');
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-            imageContainer.classList.add('visible');
+        <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const input = document.getElementById('input');
+    const terminalLine = document.getElementById('terminal-line');
+
+    // Focus the input span when the terminal line is clicked
+    terminalLine.addEventListener('click', function() {
+        input.focus();
+    });
+
+    input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault(); // Prevent default behavior (new line)
+            const command = this.textContent.trim().toLowerCase();
+
+            if (command === 'enter') {
+                // Redirect to command result page
+                window.location.href = 'Command_Result_Page.html';
+            } else {
+                // Clear the input for other commands
+                this.textContent = '';
+            }
         }
     });
-</script>
-    </main>
+
+    // Ensure the cursor stays at the end of the input
+    input.addEventListener('input', function() {
+        const range = document.createRange();
+        const sel = window.getSelection();
+        range.setStart(input.childNodes[0], input.textContent.length);
+        range.collapse(true);
+        sel.removeAllRanges();
+        sel.addRange(range);
+    });
+
+    // Initial focus
+    input.focus();
+});
+        </script>
     </div>
 </body>
 </body>
