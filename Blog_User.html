@@ -8,9 +8,9 @@
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
         :root {
-            --neon-green: #0f0;
-            --neon-blue: #0ff;
-            --neon-pink: #f0f;
+            --neon-green: #00ff00;
+            --neon-blue: #00cc00;
+            --neon-pink: #009900;
         }
 
         body {
@@ -26,98 +26,44 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px;
         }
 
         header {
             background: #000;
-            padding: 20px;
+            padding: 40px;
             text-align: center;
             border-bottom: 2px solid var(--neon-green);
             position: relative;
             overflow: hidden;
         }
 
-        header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 1px,
-                rgba(0, 255, 0, 0.1) 1px,
-                rgba(0, 255, 0, 0.1) 2px
-            );
-            animation: scan 10s linear infinite;
-        }
-
-        @keyframes scan {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(50%); }
-        }
-
         header h1 {
             margin: 0;
             font-size: 3rem;
             color: var(--neon-green);
-            text-shadow: 0 0 5px var(--neon-green), 0 0 10px var(--neon-green), 0 0 15px var(--neon-green);
+            text-shadow: none;
             position: relative;
-            animation: glitch 3s infinite;
-        }
-
-        @keyframes glitch {
-            0% { text-shadow: 0 0 5px var(--neon-green), 0 0 10px var(--neon-green), 0 0 15px var(--neon-green); }
-            25% { text-shadow: -2px 0 var(--neon-blue), 2px 2px var(--neon-pink); }
-            50% { text-shadow: 2px -2px var(--neon-blue), -2px 2px var(--neon-pink); }
-            75% { text-shadow: -2px 0 var(--neon-blue), 2px 2px var(--neon-pink); }
-            100% { text-shadow: 0 0 5px var(--neon-green), 0 0 10px var(--neon-green), 0 0 15px var(--neon-green); }
         }
 
         .post {
             background: rgba(0, 255, 0, 0.05);
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 30px;
+            margin-bottom: 30px; /* Add margin-bottom to separate posts */
             border: 2px solid var(--neon-green);
             border-radius: 10px;
             position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 10px var(--neon-green);
-        }
-
-        .post::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.2), transparent);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% { left: -100%; }
-            100% { left: 100%; }
+            box-shadow: none;
         }
 
         .post h2 {
             color: var(--neon-blue);
             margin-top: 0;
-            text-shadow: 0 0 5px var(--neon-blue);
+            text-shadow: none;
         }
 
         .post p {
             line-height: 1.6;
-        }
-
-        .post .date {
-            font-style: italic;
-            margin-bottom: 10px;
-            color: var(--neon-pink);
         }
 
         .read-more {
@@ -126,11 +72,31 @@
             cursor: pointer;
             transition: all 0.3s ease;
             display: inline-block;
-            margin-top: 10px;
+            margin-top: 20px;
         }
 
         .read-more:hover {
-            text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
+            text-shadow: none;
+        }
+
+        .back-to-home {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .back-to-home a {
+            color: var(--neon-green);
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            border: 2px solid var(--neon-green);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-home a:hover {
+            background-color: var(--neon-green);
+            color: #000;
         }
     </style>
 </head>
@@ -142,6 +108,10 @@
 
         <div id="posts-container">
             <!-- Blog posts will be dynamically added here -->
+        </div>
+
+        <div class="back-to-home">
+            <a href="index.html">Back to Home</a>
         </div>
     </div>
 

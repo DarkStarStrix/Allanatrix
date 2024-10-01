@@ -5,229 +5,190 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Technomancer's Realm</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
-
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Courier Prime', monospace;
-            background-color: #000;
-            color: #3afa02;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        h1, h2 {
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 5px #09e0ea, 0 0 10px #06e899;
-        }
-
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            margin-top: 30px;
-        }
-
-        nav ul li {
-            margin: 0 15px;
-        }
-
-        nav ul li a {
-            color: #07ec8c;
-            text-decoration: none;
-            font-size: 1.2rem;
-            padding: 5px 10px;
-            border: 1px solid #02f690;
-            transition: all 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            background-color: #06ead8;
-            color: #000;
-        }
-
-        section {
-            margin-top: 50px;
-            border: 1px solid #03e5ee;
-            padding: 20px;
-            background-color: rgba(0, 255, 0, 0.05);
-        }
-
-        .glitch {
-            position: relative;
-            font-size: 2rem;
-            font-weight: bold;
-            color: #07a7ea;
-            letter-spacing: 3px;
-            margin-bottom: 1rem;
-        }
-
-        .glitch:before,
-        .glitch:after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-        }
-
-        .glitch:before {
-            left: 2px;
-            text-shadow: -1px 0 #ff00de;
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim 5s infinite linear alternate-reverse;
-        }
-
-        .glitch:after {
-            left: -2px;
-            text-shadow: -1px 0 #00fff9;
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim2 5s infinite linear alternate-reverse;
-        }
-
-        @keyframes glitch-anim {
-            0% { clip: rect(10px, 9999px, 28px, 0); }
-            5% { clip: rect(66px, 9999px, 98px, 0); }
-            10% { clip: rect(37px, 9999px, 23px, 0); }
-            15% { clip: rect(89px, 9999px, 76px, 0); }
-            20% { clip: rect(65px, 9999px, 57px, 0); }
-            25% { clip: rect(74px, 9999px, 94px, 0); }
-            30% { clip: rect(47px, 9999px, 9px, 0); }
-            35% { clip: rect(37px, 9999px, 45px, 0); }
-            40% { clip: rect(96px, 9999px, 84px, 0); }
-            45% { clip: rect(72px, 9999px, 43px, 0); }
-            50% { clip: rect(19px, 9999px, 15px, 0); }
-            55% { clip: rect(55px, 9999px, 65px, 0); }
-            60% { clip: rect(81px, 9999px, 4px, 0); }
-            65% { clip: rect(38px, 9999px, 49px, 0); }
-            70% { clip: rect(15px, 9999px, 43px, 0); }
-            75% { clip: rect(70px, 9999px, 69px, 0); }
-            80% { clip: rect(2px, 9999px, 14px, 0); }
-            85% { clip: rect(33px, 9999px, 59px, 0); }
-            90% { clip: rect(20px, 9999px, 46px, 0); }
-            95% { clip: rect(100px, 9999px, 86px, 0); }
-            100% { clip: rect(43px, 9999px, 77px, 0); }
-        }
-
-        @keyframes glitch-anim2 {
-            0% { clip: rect(65px, 9999px, 36px, 0); }
-            5% { clip: rect(36px, 9999px, 4px, 0); }
-            10% { clip: rect(85px, 9999px, 66px, 0); }
-            15% { clip: rect(91px, 9999px, 91px, 0); }
-            20% { clip: rect(48px, 9999px, 38px, 0); }
-            25% { clip: rect(38px, 9999px, 22px, 0); }
-            30% { clip: rect(69px, 9999px, 54px, 0); }
-            35% { clip: rect(98px, 9999px, 71px, 0); }
-            40% { clip: rect(46px, 9999px, 34px, 0); }
-            45% { clip: rect(34px, 9999px, 43px, 0); }
-            50% { clip: rect(2px, 9999px, 80px, 0); }
-            55% { clip: rect(27px, 9999px, 65px, 0); }
-            60% { clip: rect(81px, 9999px, 4px, 0); }
-            65% { clip: rect(38px, 9999px, 49px, 0); }
-            70% { clip: rect(15px, 9999px, 43px, 0); }
-            75% { clip: rect(70px, 9999px, 69px, 0); }
-            80% { clip: rect(2px, 9999px, 14px, 0); }
-            85% { clip: rect(33px, 9999px, 59px, 0); }
-            90% { clip: rect(20px, 9999px, 46px, 0); }
-            95% { clip: rect(100px, 9999px, 86px, 0); }
-            100% { clip: rect(43px, 9999px, 77px, 0); }
-        }
-
-        .content-box {
-            margin-top: 1rem;
-        }
-
-        .content-box a {
-            color: #02f6a1;
-            text-decoration: none;
-            border-bottom: 1px solid #06ecb6;
-        }
-
-        .content-box a:hover {
-            color: #fff;
-            border-bottom: 1px solid #fff;
-        }
-
-    .background {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        overflow: hidden;
-    }
-
-    .background iframe {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        pointer-events: none;
-        opacity: 0.3; /* Adjust opacity to make the background more subtle */
-    }
-
-    .background p {
-        display: none;
-    }
-    /* Add this to the style section of index.html */
-
-    .image-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 50px;
-        opacity: 0;
-        transition: opacity 1s ease-in-out;
-    }
-
-        .image-container img {
-        max-width: 100%;
-        height: auto;
-    }
-
-    .back-link {
-        color: #07ec8c;
-        text-decoration: none;
-        font-size: 1.2rem;
-        padding: 5px 10px;
-        border: 1px solid #02f690;
-        transition: all 0.3s ease;
-    }
-    .glitch {
-    text-shadow:
-        0 0 5px #fff,
-        0 0 10px #fff,
-        0 0 20px #fff,
-        0 0 40px #0ff,
-        0 0 80px #0ff,
-        0 0 90px #0ff,
-        0 0 100px #0ff,
-        0 0 150px #0ff;
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier Prime', monospace;
+    background-color: #000;
+    color: #3afa02;
+    line-height: 1.6;
 }
-    #skills img {
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2 {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #07ec8c;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 5px 10px;
+    border: 1px solid #02f690;
     transition: all 0.3s ease;
 }
 
-#skills img:hover {
-    transform: scale(1.2);
-    filter: drop-shadow(0 0 10px #0ff);
+nav ul li a:hover {
+    background-color: #06ead8;
+    color: #000;
 }
+
+section {
+    margin-top: 50px;
+    border: 1px solid #03e5ee;
+    padding: 20px;
+    background-color: rgba(0, 255, 0, 0.05);
+}
+
+.glitch {
+    position: relative;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #07a7ea;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+}
+
+.glitch:before,
+.glitch:after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+
+.glitch:before {
+    left: 2px;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch:after {
+    left: -2px;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% { clip: rect(10px, 9999px, 28px, 0); }
+    5% { clip: rect(66px, 9999px, 98px, 0); }
+    10% { clip: rect(37px, 9999px, 23px, 0); }
+    15% { clip: rect(89px, 9999px, 76px, 0); }
+    20% { clip: rect(65px, 9999px, 57px, 0); }
+    25% { clip: rect(74px, 9999px, 94px, 0); }
+    30% { clip: rect(47px, 9999px, 9px, 0); }
+    35% { clip: rect(37px, 9999px, 45px, 0); }
+    40% { clip: rect(96px, 9999px, 84px, 0); }
+    45% { clip: rect(72px, 9999px, 43px, 0); }
+    50% { clip: rect(19px, 9999px, 15px, 0); }
+    55% { clip: rect(55px, 9999px, 65px, 0); }
+    60% { clip: rect(81px, 9999px, 4px, 0); }
+    65% { clip: rect(38px, 9999px, 49px, 0); }
+    70% { clip: rect(15px, 9999px, 43px, 0); }
+    75% { clip: rect(70px, 9999px, 69px, 0); }
+    80% { clip: rect(2px, 9999px, 14px, 0); }
+    85% { clip: rect(33px, 9999px, 59px, 0); }
+    90% { clip: rect(20px, 9999px, 46px, 0); }
+    95% { clip: rect(100px, 9999px, 86px, 0); }
+    100% { clip: rect(43px, 9999px, 77px, 0); }
+}
+
+@keyframes glitch-anim2 {
+    0% { clip: rect(65px, 9999px, 36px, 0); }
+    5% { clip: rect(36px, 9999px, 4px, 0); }
+    10% { clip: rect(85px, 9999px, 66px, 0); }
+    15% { clip: rect(91px, 9999px, 91px, 0); }
+    20% { clip: rect(48px, 9999px, 38px, 0); }
+    25% { clip: rect(38px, 9999px, 22px, 0); }
+    30% { clip: rect(69px, 9999px, 54px, 0); }
+    35% { clip: rect(98px, 9999px, 71px, 0); }
+    40% { clip: rect(46px, 9999px, 34px, 0); }
+    45% { clip: rect(34px, 9999px, 43px, 0); }
+    50% { clip: rect(2px, 9999px, 80px, 0); }
+    55% { clip: rect(27px, 9999px, 65px, 0); }
+    60% { clip: rect(81px, 9999px, 4px, 0); }
+    65% { clip: rect(38px, 9999px, 49px, 0); }
+    70% { clip: rect(15px, 9999px, 43px, 0); }
+    75% { clip: rect(70px, 9999px, 69px, 0); }
+    80% { clip: rect(2px, 9999px, 14px, 0); }
+    85% { clip: rect(33px, 9999px, 59px, 0); }
+    90% { clip: rect(20px, 9999px, 46px, 0); }
+    95% { clip: rect(100px, 9999px, 86px, 0); }
+    100% { clip: rect(43px, 9999px, 77px, 0); }
+}
+
+.content-box {
+    margin-top: 1rem;
+}
+
+.content-box a {
+    color: #02f6a1;
+    text-decoration: none;
+    border-bottom: 1px solid #06ecb6;
+}
+
+.content-box a:hover {
+    color: #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.background iframe {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    opacity: 0.3; /* Adjust opacity to make the background more subtle */
+}
+
+.background p {
+    display: none;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+.back-link {
+    color: #07ec8c;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 5px 10px;
+    border: 1px solid #02f690;
+    transition: all 0.3s ease;
+}
+
+#skills img {
+    transition: all 0.3s ease;
+}
+
 /* Webkit browsers */
 ::-webkit-scrollbar {
     width: 10px;
@@ -251,26 +212,10 @@
     scrollbar-width: thin;
     scrollbar-color: #0f0 #000;
 }
+
 #terminal-section {
     margin-top: 50px;
     padding: 20px;
-}
-
-#terminal {
-    background-color: #000;
-    color: #00ff00;
-    font-family: 'Courier New', monospace;
-    font-size: 16px;
-    line-height: 1.6;
-    padding: 20px;
-    height: 400px;
-    overflow-y: auto;
-    border: none;
-}
-
-#terminal-input-line {
-    display: flex;
-    align-items: center;
 }
 
 .prompt {
@@ -434,17 +379,9 @@
   <img width="12"  alt="" src=""/>
   <img src="https://github.com/DarkStarStrix/DarkStarStrix/assets/108637439/dc8ffecf-6a7b-44de-9170-60c3e7a0bc09" height="41" alt="Plotly"/>
   <img width="12"  alt="" src=""/>
-  <img src="https://github.com/DarkStarStrix/DarkStarStrix/assets/108637439/237a403b-edc1-402f-9275-d4e33d727473" height="41" alt="Numpy"/>
-  <img width="12"  alt="" src=""/>
   <img src="https://github.com/DarkStarStrix/DarkStarStrix/assets/108637439/85af4120-e870-4944-b825-c6d68a5d1fcb" height="41" alt="Pandas"/>
   <img width="12"  alt="" src=""/>
-  <img src="https://github.com/DarkStarStrix/DarkStarStrix/assets/108637439/f1a18a3a-4cda-432b-890b-593ce49efcbc" height="41" alt="Qubit"/>
-  <img width="12"  alt="" src=""/>
   <img src="https://github.com/DarkStarStrix/DarkStarStrix/assets/108637439/c5e28e54-0397-491a-963f-1fe01466a15b" height="41" alt="ChatGpt"/>
-  <img width="12"  alt="" src=""/>
-  <img src="https://github.com/DarkStarStrix/DarkStarStrix/assets/108637439/e4dea751-6653-486a-b814-a8f699c409c8" height="41" alt="Atom"/>
-  <img width="12"  alt="" src=""/>
-  <img src="https://github.com/DarkStarStrix/DarkStarStrix/assets/108637439/48e851a3-a723-491f-9722-1c2db22102c6" height="41" alt="Industry 4.0"/>
   <img width="12"  alt="" src=""/>
   <img src="https://github.com/DarkStarStrix/DarkStarStrix/assets/108637439/67c31043-c30c-4b38-acfe-adb9a911ffeb" height="41" alt="Writerside"/>
   <img width="12"  alt="" src=""/>
@@ -474,6 +411,7 @@
   <img width="12"  alt="" src=""/>
   <img src="https://skillicons.dev/icons?i=windows" height="41" alt="windows"  />
   <img width="12"  alt="" src=""/>
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" height="41"  alt="numpy"/>
 </div>
             </section>
             <section id="contact">
@@ -491,11 +429,13 @@
                 <div style="background-color: #FFF3CD; color: #856404; padding: 10px; text-align: center; font-weight: bold; margin-bottom: 10px;">
     🚧 Under Development 🚧
 </div>
-    <div id="terminal-line">
-        <span class="prompt">>>></span>
-        <span id="input" contenteditable="true" spellcheck="false"></span>
-    </div>
-</section>
+                <h2 class="glitch" data-text="Terminal">Terminal
+                    <h2>Input Enter</h2></h2>
+    <span class="prompt">>>></span>
+    <span id="input" contenteditable="true" spellcheck="false"></span>
+
+    <div id="command-output"></div>
+            </section>
         </main>
         <footer>
             <section>
