@@ -49,11 +49,18 @@
         .post {
             background: rgba(0, 255, 0, 0.05);
             padding: 30px;
-            margin-bottom: 30px; /* Add margin-bottom to separate posts */
+            margin-bottom: 30px;
             border: 2px solid var(--neon-green);
             border-radius: 10px;
             position: relative;
             box-shadow: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .post:hover {
+            background: rgba(0, 255, 0, 0.1);
+            box-shadow: 0 0 15px var(--neon-green);
         }
 
         .post h2 {
@@ -66,17 +73,9 @@
             line-height: 1.6;
         }
 
-        .read-more {
-            color: var(--neon-blue);
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-block;
-            margin-top: 20px;
-        }
-
-        .read-more:hover {
-            text-shadow: none;
+        .date {
+            color: var(--neon-pink);
+            margin-bottom: 10px;
         }
 
         .back-to-home {
@@ -116,71 +115,53 @@
     </div>
 
     <script>
-        function fetchPosts() {
-            // In a real application, this would be a fetch request to your server
-            // For demonstration, we'll use a setTimeout to simulate an API call
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve([
-                        {
-                            id: 1,
-                            title: "The Rise of AI",
-                            content: "In the neon-lit streets of Neo-Tokyo, artificial intelligence has become an integral part of daily life...",
-                            date: "2023-09-27",
-                            link: "post1.html"
-                        },
-                        {
-                            id: 2,
-                            title: "Cybernetic Enhancements",
-                            content: "The latest cybernetic implants promise to enhance human capabilities beyond imagination...",
-                            date: "2023-09-28",
-                            link: "post2.html"
-                        },
-                        {
-                            id: 3,
-                            title: "Digital Dreamscapes",
-                            content: "As virtual reality becomes indistinguishable from the physical world, new forms of art and expression emerge...",
-                            date: "2023-09-29",
-                            link: "post3.html"
-                        }
-                    ]);
-                }, 100);
-            });
-        }
+        async function writePosts(posts) {
+    await fs.writeFile(POSTS_FILE, JSON.stringify(posts, null, 2));
+    await updateBlogUserHtml(posts);
+}
 
-        function renderPosts(posts) {
-            const postsContainer = document.getElementById('posts-container');
-            postsContainer.innerHTML = '';
-            posts.forEach((post) => {
-                const postElement = document.createElement('div');
-                postElement.className = 'post';
-                postElement.innerHTML = `
-                    <h2>${post.title}</h2>
-                    <div class="date">Published on: ${post.date}</div>
-                    <p>${post.content}</p>
-                    <a href="${post.link}" class="read-more">Read Full Article</a>
-                `;
-                postsContainer.appendChild(postElement);
-            });
-        }
+// Helper function to update Blog_User.html
+async function updateBlogUserHtml(posts) {
+    const userHtmlPath = path.join(__dirname, 'public', 'Blog_User.html');
+    let userHtml = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Blog User Interface</title>
+        <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; background-color: #fff; color: #000; }
+            .container { max-width: 800px; margin: 0 auto; }
+            h1, h2 { color: #000; }
+            .post { border: 1px solid #000; padding: 10px; margin-bottom: 10px; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Blog User Interface</h1>
+            <div id="postList">
+    `;
 
-        // Set up SSE
-        const evtSource = new EventSource('/api/sse');
-        evtSource.onmessage = function(event) {
-            const data = JSON.parse(event.data);
-            if (data.action === 'update') {
-                fetchPosts().then(renderPosts);
-            }
-        };
+    posts.forEach(post => {
+        userHtml += `
+            <div class="post">
+                <h3>${post.title}</h3>
+                <p>${post.content}</p>
+                <p><small>${post.date}</small></p>
+            </div>
+        `;
+    });
 
-        evtSource.onerror = function(err) {
-            console.error("EventSource failed:", err);
-        };
+    userHtml += `
+            </div>
+        </div>
+    </body>
+    </html>
+    `;
 
-        // Initial load
-        fetchPosts().then((posts) => {
-            renderPosts(posts);
-        });
+    await fs.writeFile(userHtmlPath, userHtml);
+}
     </script>
 </body>
 </html>

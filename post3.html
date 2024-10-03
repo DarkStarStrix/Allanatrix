@@ -9,8 +9,6 @@
 
         :root {
             --neon-green: #0f0;
-            --neon-blue: #0ff;
-            --neon-pink: #f0f;
         }
 
         body {
@@ -20,7 +18,6 @@
             background-color: #000;
             color: var(--neon-green);
             line-height: 1.6;
-            overflow-x: hidden;
         }
 
         .container {
@@ -34,76 +31,24 @@
             padding: 20px;
             text-align: center;
             border-bottom: 2px solid var(--neon-green);
-            position: relative;
-            overflow: hidden;
-        }
-
-        header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 1px,
-                rgba(0, 255, 0, 0.1) 1px,
-                rgba(0, 255, 0, 0.1) 2px
-            );
-            animation: scan 10s linear infinite;
-        }
-
-        @keyframes scan {
-            0% {
-                transform: translateY(0);
-            }
-            100% {
-                transform: translateY(50%);
-            }
         }
 
         header h1 {
             margin: 0;
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: var(--neon-green);
-            text-shadow: 0 0 5px var(--neon-green), 0 0 10px var(--neon-green), 0 0 15px var(--neon-green);
-            position: relative;
-            animation: glitch 3s infinite;
-        }
-
-        @keyframes glitch {
-            0% {
-                text-shadow: 0 0 5px var(--neon-green), 0 0 10px var(--neon-green), 0 0 15px var(--neon-green);
-            }
-            25% {
-                text-shadow: -2px 0 var(--neon-blue), 2px 2px var(--neon-pink);
-            }
-            50% {
-                text-shadow: 2px -2px var(--neon-blue), -2px 2px var(--neon-pink);
-            }
-            75% {
-                text-shadow: -2px 0 var(--neon-blue), 2px 2px var(--neon-pink);
-            }
-            100% {
-                text-shadow: 0 0 5px var(--neon-green), 0 0 10px var(--neon-green), 0 0 15px var(--neon-green);
-            }
         }
 
         .post-meta {
-            font-style: italic;
             margin-bottom: 20px;
-            color: var(--neon-pink);
+            color: var(--neon-green);
         }
 
         .post-content {
             margin-bottom: 40px;
-            background: rgba(0, 255, 0, 0.05);
             padding: 20px;
-            border: 2px solid var(--neon-green);
-            border-radius: 10px;
-            box-shadow: 0 0 10px var(--neon-green);
+            border: 1px solid var(--neon-green);
+            border-radius: 5px;
         }
 
         .post-navigation {
@@ -113,55 +58,36 @@
         }
 
         .post-navigation a {
-            color: var(--neon-blue);
+            color: var(--neon-green);
             text-decoration: none;
-            transition: all 0.3s ease;
         }
 
         .post-navigation a:hover {
-            text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
-        }
-
-        .like-button {
-            margin-bottom: 20px;
+            text-decoration: underline;
         }
 
         .like-button button {
-            padding: 10px 20px;
+            padding: 5px 10px;
             font-family: 'Orbitron', sans-serif;
-            background-color: var(--neon-blue);
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .like-button button:hover {
             background-color: #000;
-            color: var(--neon-blue);
-            box-shadow: 0 0 10px var(--neon-blue);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            cursor: pointer;
         }
 
         .like-button button:disabled {
-            background-color: #070;
+            opacity: 0.5;
             cursor: not-allowed;
         }
 
-        .comments-section {
-            margin-top: 40px;
-        }
-
         .comments-section h3 {
-            color: var(--neon-pink);
-            text-shadow: 0 0 5px var(--neon-pink);
+            color: var(--neon-green);
         }
 
         .comment {
             border: 1px solid var(--neon-green);
             padding: 10px;
             margin-bottom: 10px;
-            background: rgba(0, 255, 0, 0.05);
             border-radius: 5px;
         }
 
@@ -173,50 +99,25 @@
             margin-bottom: 10px;
             padding: 10px;
             font-family: 'Orbitron', sans-serif;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: #000;
             color: var(--neon-green);
-            border: 2px solid var(--neon-green);
-            border-radius: 5px;
+            border: 1px solid var(--neon-green);
         }
 
         .comment-form button,
-        .reply-form button {
-            padding: 10px 20px;
+        .reply-form button,
+        .reply-button {
+            padding: 5px 10px;
             font-family: 'Orbitron', sans-serif;
-            background-color: var(--neon-green);
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .comment-form button:hover,
-        .reply-form button:hover {
             background-color: #000;
             color: var(--neon-green);
-            box-shadow: 0 0 10px var(--neon-green);
-        }
-
-        .reply-button {
-            background-color: transparent;
-            color: var(--neon-blue);
-            border: 1px solid var(--neon-blue);
-            padding: 5px 10px;
+            border: 1px solid var(--neon-green);
             cursor: pointer;
-            margin-top: 5px;
-            font-family: 'Orbitron', sans-serif;
-            transition: all 0.3s ease;
-        }
-
-        .reply-button:hover {
-            background-color: var(--neon-blue);
-            color: #000;
         }
 
         .replies {
             margin-left: 20px;
-            border-left: 1px solid var(--neon-pink);
+            border-left: 1px solid var(--neon-green);
             padding-left: 10px;
         }
     </style>
@@ -231,10 +132,10 @@
                 <p>Posted on 2021-01-01 | By: Author</p>
             </div>
             <div class="post-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo nec magna varius, a tincidunt nulla facilisis. Phasellus vehicula justo eget diam posuere sollicitudin eu tincidunt nulla. Integer vitae justo nec mi facilisis fermentum. Nullam scelerisque leo nec magna varius, a tincidunt nulla facilisis. Phasellus vehicula justo eget diam posuere sollicitudin eu tincidunt nulla. Integer vitae justo nec mi facilisis fermentum. Nullam scelerisque leo nec magna varius, a tincidunt nulla facilisis. Phasellus vehicula justo eget diam posuere sollicitudin eu tincidunt nulla. Integer vitae justo nec mi facilisis fermentum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo nec magna varius, a tincidunt nulla facilisis. Phasellus vehicula justo eget diam posuere sollicitudin eu tincidunt nulla. Integer vitae justo nec mi facilisis fermentum.</p>
             </div>
             <div class="post-navigation">
-                <a href="Blog_admin.html">Back to Blog</a>
+                <a href="Blog_User.html">Back to Blog</a>
                 <a href="post3.html">Previous Post</a>
                 <a href="post1.html">Next Post</a>
             </div>
@@ -247,7 +148,7 @@
                     <!-- Comments will be dynamically added here -->
                 </div>
                 <div class="comment-form">
-                    <textarea id="comment-input" placeholder="Add a comment..."></textarea>
+                    <label for="comment-input"></label><textarea id="comment-input" placeholder="Add a comment..."></textarea>
                     <button onclick="addComment()">Post Comment</button>
                 </div>
             </div>

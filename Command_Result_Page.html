@@ -82,10 +82,6 @@
             100% { opacity: 0; }
         }
 
-        #input::after {
-            content: '|';
-            animation: blink 1s infinite;
-        }
 
         @keyframes glow {
             0% { text-shadow: 0 0 5px #0f0; }
@@ -93,9 +89,6 @@
             100% { text-shadow: 0 0 5px #0f0; }
         }
 
-        #command-output, #input-line {
-            animation: glow 2s ease-in-out infinite;
-        }
     </style>
 </head>
 <body>
@@ -174,42 +167,45 @@
             }
 
             function processCommand(command) {
-                const safeCommand = escapeHTML(command);
-                commandOutput.innerHTML += `>>>> ${safeCommand}\n`;
+    const safeCommand = escapeHTML(command);
+    commandOutput.innerHTML += `>>>> ${safeCommand}\n`;
 
-                switch(command.toLowerCase()) {
-                    case 'stop':
-                        window.location.href = 'index.html';
-                        break;
-                    case 'help':
-                        commandOutput.innerHTML += 'Available commands: help, about, skills, projects, contact, clear, stop\n';
-                        break;
-                    case 'about':
-                        commandOutput.innerHTML += 'I am a technomancer, weaving code and magic into digital reality.\n';
-                        break;
-                    case 'skills':
-                        commandOutput.innerHTML += 'My skills include: JavaScript, Python, Quantum Computing, and more. Linux, Operating systems, Rust, loyalty Marketing, Data Structures ' +
-                            ' Algorithms, Github/Github Actions, Automation, PQC, Cybersecurity, Encryption, RSA security, Fine Tuning, LLMs, Embedded systems, Network Engineering, Networking Design' +
-                            'IOT, Logistics Management , Supply Chain Management, Software Development, Software Architecture, Customer Service, Retail, Sales, Applied Research, Cloud dev, ' +
-                            'Computational Physics, Writing, Presentation skills, Digital transformation, IT, Communication, SOLID Software Dev, ML Engineering, Applied Quantum computing, Operations research' +
-                            'Debate\n';
-                        break;
-                    case 'projects':
-                        commandOutput.innerHTML += 'Some of my projects: QSolvers, Emergent Neural Nets, Math Programming \n';
-                        break;
-                    case 'contact':
-                        commandOutput.innerHTML += 'Contact me at: allanw.mk@gmail.com\n';
-                        break;
-                    case 'clear':
-                        commandOutput.innerHTML = '';
-                        break;
-                    default:
-                        commandOutput.innerHTML += `Command not recognized: ${safeCommand}\n`;
-                }
+    switch(command.toLowerCase()) {
+        case 'stop':
+            window.location.href = 'index.html';
+            break;
+        case 'help':
+            commandOutput.innerHTML += 'Available commands: help, about, skills, projects, contact, clear, stop, glory to mankind\n';
+            break;
+        case 'about':
+            commandOutput.innerHTML += 'I am a technomancer, weaving code and magic into digital reality.\n';
+            break;
+        case 'skills':
+            commandOutput.innerHTML += 'My skills include: JavaScript, Python, Quantum Computing, and more. Linux, Operating systems, Rust, loyalty Marketing, Data Structures ' +
+                ' Algorithms, Github/Github Actions, Automation, PQC, Cybersecurity, Encryption, RSA security, Fine Tuning, LLMs, Embedded systems, Network Engineering, Networking Design' +
+                'IOT, Logistics Management , Supply Chain Management, Software Development, Software Architecture, Customer Service, Retail, Sales, Applied Research, Cloud dev, ' +
+                'Computational Physics, Writing, Presentation skills, Digital transformation, IT, Communication, SOLID Software Dev, ML Engineering, Applied Quantum computing, Operations research' +
+                'Debate\n';
+            break;
+        case 'projects':
+            commandOutput.innerHTML += 'Some of my projects: QSolvers, Emergent Neural Nets, Math Programming \n';
+            break;
+        case 'contact':
+            commandOutput.innerHTML += 'Contact me at: allanw.mk@gmail.com\n';
+            break;
+        case 'clear':
+            commandOutput.innerHTML = '';
+            break;
+        case 'glory to mankind':
+            window.location.href = 'YoRHa_matrix.html';
+            break;
+        default:
+            commandOutput.innerHTML += `Command not recognized: ${safeCommand}\n`;
+    }
 
-                // Scroll to the bottom of the output
-                commandOutput.scrollTop = commandOutput.scrollHeight;
-            }
+    // Scroll to the bottom of the output
+    commandOutput.scrollTop = commandOutput.scrollHeight;
+}
 
             // Focus on input when the page loads
             input.focus();
