@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command Result</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+        }
+
+        #matrix-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        #terminal {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
+            z-index: 2;
+        }
+
+        #command-output {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        #input-line {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .prompt {
+            color: #0f0;
+            margin-right: 5px;
+        }
+
+        #input {
+            background-color: transparent;
+            border: none;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            flex-grow: 1;
+            caret-color: #0f0;
+            outline: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #0f0;
+            border: 2px solid #000;
+        }
+
+        @keyframes blink {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px #0f0; }
+            50% { text-shadow: 0 0 20px #0f0; }
+            100% { text-shadow: 0 0 5px #0f0; }
+        }
+
+    </style>
+</head>
+<body>
+    <canvas id="matrix-rain"></canvas>
+    <div id="terminal">
+        <div id="command-output"></div>
+        <div id="input-line">
+            <span class="prompt">>>></span>
+            <span id="input" contenteditable="true" spellcheck="false"></span>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('input');
+            const commandOutput = document.getElementById('command-output');
+            const canvas = document.getElementById('matrix-rain');
+            const ctx = canvas.getContext('2d');
+
+            // Set canvas size
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            // Matrix rain effect
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%';
+            const fontSize = 10;
+            const columns = canvas.width / fontSize;
+            const drops = [];
+
+            for (let i = 0; i < columns; i++) {
+                drops[i] = 1;
+            }
+
+            function draw() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = '#0f0';
+                ctx.font = fontSize + 'px monospace';
+
+                for (let i = 0; i < drops.length; i++) {
+                    const text = letters[Math.floor(Math.random() * letters.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+
+            // Start matrix rain immediately
+            setInterval(draw, 33);
+
+            // Handle input
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const command = this.textContent.trim();
+                    processCommand(command);
+                    this.textContent = '';
+                }
+            });
+
+            function escapeHTML(str) {
+                return str.replace(/[&<>"']/g, function(match) {
+                    const escapeMap = {
+                        '&': '&amp;',
+                        '<': '&lt;',
+                        '>': '&gt;',
+                        '"': '&quot;',
+                        "'": '&#39;'
+                    };
+                    return escapeMap[match];
+                });
+            }
+
+            function processCommand(command) {
+    const safeCommand = escapeHTML(command);
+    commandOutput.innerHTML += `>>>> ${safeCommand}\n`;
+
+    switch(command.toLowerCase()) {
+        case 'stop':
+            window.location.href = 'index.html';
+            break;
+        case 'help':
+            commandOutput.innerHTML += 'Available commands: help, about, skills, projects, contact, clear, stop, glory to mankind\n';
+            break;
+        case 'about':
+            commandOutput.innerHTML += 'I am a technomancer, weaving code and magic into digital reality.\n';
+            break;
+        case 'skills':
+            commandOutput.innerHTML += 'My skills include: JavaScript, Python, Quantum Computing, and more. Linux, Operating systems, Rust, loyalty Marketing, Data Structures ' +
+                ' Algorithms, Github/Github Actions, Automation, PQC, Cybersecurity, Encryption, RSA security, Fine Tuning, LLMs, Embedded systems, Network Engineering, Networking Design' +
+                'IOT, Logistics Management , Supply Chain Management, Software Development, Software Architecture, Customer Service, Retail, Sales, Applied Research, Cloud dev, ' +
+                'Computational Physics, Writing, Presentation skills, Digital transformation, IT, Communication, SOLID Software Dev, ML Engineering, Applied Quantum computing, Operations research' +
+                'Debate\n';
+            break;
+        case 'projects':
+            commandOutput.innerHTML += 'Some of my projects: QSolvers, Emergent Neural Nets, Math Programming \n';
+            break;
+        case 'contact':
+            commandOutput.innerHTML += 'Contact me at: allanw.mk@gmail.com\n';
+            break;
+        case 'clear':
+            commandOutput.innerHTML = '';
+            break;
+        case 'glory to mankind':
+            window.location.href = 'YoRHa_matrix.html';
+            break;
+        default:
+            commandOutput.innerHTML += `Command not recognized: ${safeCommand}\n`;
+    }
+
+    // Scroll to the bottom of the output
+    commandOutput.scrollTop = commandOutput.scrollHeight;
+}
+
+            // Focus on input when the page loads
+            input.focus();
+        });
+    </script>
+</body>
+</html>
