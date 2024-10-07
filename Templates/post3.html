@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thoughts on thing</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+        :root {
+            --neon-green: #0f0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000;
+            color: var(--neon-green);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: #000;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--neon-green);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: var(--neon-green);
+        }
+
+        .post-meta {
+            margin-bottom: 20px;
+            color: var(--neon-green);
+        }
+
+        .post-content {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid var(--neon-green);
+            border-radius: 5px;
+        }
+
+        .post-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .post-navigation a {
+            color: var(--neon-green);
+            text-decoration: none;
+        }
+
+        .post-navigation a:hover {
+            text-decoration: underline;
+        }
+
+        .like-button button {
+            padding: 5px 10px;
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000;
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            cursor: pointer;
+        }
+
+        .like-button button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .comments-section h3 {
+            color: var(--neon-green);
+        }
+
+        .comment {
+            border: 1px solid var(--neon-green);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .comment-form textarea,
+        .reply-form textarea {
+            width: 100%;
+            height: 100px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000;
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+        }
+
+        .comment-form button,
+        .reply-form button,
+        .reply-button {
+            padding: 5px 10px;
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000;
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            cursor: pointer;
+        }
+
+        .replies {
+            margin-left: 20px;
+            border-left: 1px solid var(--neon-green);
+            padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <article>
+            <header>
+                <h1>Thoughts on thing</h1>
+            </header>
+            <div class="post-meta">
+                <p>Posted on 2021-01-01 | By: Author</p>
+            </div>
+            <div class="post-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo nec magna varius, a tincidunt nulla facilisis. Phasellus vehicula justo eget diam posuere sollicitudin eu tincidunt nulla. Integer vitae justo nec mi facilisis fermentum.</p>
+            </div>
+            <div class="post-navigation">
+                <a href="Blog_User.html">Back to Blog</a>
+                <a href="post3.html">Previous Post</a>
+                <a href="post1.html">Next Post</a>
+            </div>
+            <div class="like-button">
+                <button onclick="likePost()" id="likeButton">Like</button> <span id="like-count">0</span> Likes
+            </div>
+            <div class="comments-section">
+                <h3>Comments</h3>
+                <div id="comments">
+                    <!-- Comments will be dynamically added here -->
+                </div>
+                <div class="comment-form">
+                    <label for="comment-input"></label><textarea id="comment-input" placeholder="Add a comment..."></textarea>
+                    <button onclick="addComment()">Post Comment</button>
+                </div>
+            </div>
+        </article>
+    </div>
+
+    <script>
+    // The JavaScript remains the same as in the original code
+    let likeCount = 0;
+    let hasLiked = false;
+
+    function likePost() {
+        if (!hasLiked) {
+            likeCount++;
+            document.getElementById('like-count').innerText = likeCount;
+            hasLiked = true;
+            document.getElementById('likeButton').disabled = true;
+        }
+    }
+
+    function addComment() {
+        const commentInput = document.getElementById('comment-input');
+        const commentText = commentInput.value.trim();
+        if (commentText !== "") {
+            const commentDiv = createCommentElement(commentText);
+            document.getElementById('comments').appendChild(commentDiv);
+            commentInput.value = "";
+        }
+    }
+
+    function createCommentElement(text, isReply = false) {
+        const commentDiv = document.createElement('div');
+        commentDiv.classList.add('comment');
+        if (isReply) commentDiv.classList.add('reply');
+
+        const commentText = document.createElement('p');
+        commentText.textContent = text;
+        commentDiv.appendChild(commentText);
+
+        if (!isReply) {
+            const replyButton = document.createElement('button');
+            replyButton.textContent = 'Reply';
+            replyButton.classList.add('reply-button');
+            replyButton.onclick = function() {
+                const replyForm = createReplyForm(commentDiv);
+                commentDiv.appendChild(replyForm);
+                replyButton.style.display = 'none';
+            };
+            commentDiv.appendChild(replyButton);
+        }
+
+        const repliesDiv = document.createElement('div');
+        repliesDiv.classList.add('replies');
+        commentDiv.appendChild(repliesDiv);
+
+        return commentDiv;
+    }
+
+    function createReplyForm(parentComment) {
+        const replyForm = document.createElement('div');
+        replyForm.classList.add('reply-form');
+
+        const replyInput = document.createElement('textarea');
+        replyInput.placeholder = 'Write a reply...';
+        replyForm.appendChild(replyInput);
+
+        const replyButton = document.createElement('button');
+        replyButton.textContent = 'Post Reply';
+        replyButton.onclick = function() {
+            const replyText = replyInput.value.trim();
+            if (replyText !== "") {
+                const replyElement = createCommentElement(replyText, true);
+                parentComment.querySelector('.replies').appendChild(replyElement);
+                replyForm.remove();
+                parentComment.querySelector('.reply-button').style.display = 'inline-block';
+            }
+        };
+        replyForm.appendChild(replyButton);
+
+        return replyForm;
+    }
+    </script>
+</body>
+</html>
