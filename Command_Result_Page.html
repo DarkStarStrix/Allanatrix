@@ -11,7 +11,7 @@
             height: 100%;
             overflow: hidden;
             background-color: #000;
-            color: #0f0;
+            color: #f00; /* Change text color to red */
             font-family: 'Courier New', monospace;
         }
 
@@ -39,6 +39,7 @@
         #command-output {
             white-space: pre-wrap;
             word-wrap: break-word;
+            animation: glow 1s infinite alternate; /* Add glow animation */
         }
 
         #input-line {
@@ -48,19 +49,21 @@
         }
 
         .prompt {
-            color: #0f0;
+            color: #f00; /* Change prompt color to red */
             margin-right: 5px;
+            animation: glow 1s infinite alternate; /* Add glow animation */
         }
 
         #input {
             background-color: transparent;
             border: none;
-            color: #0f0;
+            color: #f00; /* Change input text color to red */
             font-family: 'Courier New', monospace;
             font-size: 16px;
             flex-grow: 1;
-            caret-color: #0f0;
+            caret-color: #f00; /* Change caret color to red */
             outline: none;
+            animation: glow 1s infinite alternate; /* Add glow animation */
         }
 
         ::-webkit-scrollbar {
@@ -72,23 +75,14 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #0f0;
+            background: #f00; /* Change scrollbar thumb color to red */
             border: 2px solid #000;
         }
 
-        @keyframes blink {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-
-
         @keyframes glow {
-            0% { text-shadow: 0 0 5px #0f0; }
-            50% { text-shadow: 0 0 20px #0f0; }
-            100% { text-shadow: 0 0 5px #0f0; }
+            0% { text-shadow: 0 0 5px #f00; }
+            100% { text-shadow: 0 0 20px #f00; }
         }
-
     </style>
 </head>
 <body>
@@ -126,7 +120,7 @@
                 ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                ctx.fillStyle = '#0f0';
+                ctx.fillStyle = '#0f0'; // Matrix rain color remains green
                 ctx.font = fontSize + 'px monospace';
 
                 for (let i = 0; i < drops.length; i++) {
@@ -167,45 +161,45 @@
             }
 
             function processCommand(command) {
-    const safeCommand = escapeHTML(command);
-    commandOutput.innerHTML += `>>>> ${safeCommand}\n`;
+                const safeCommand = escapeHTML(command);
+                commandOutput.innerHTML += `>>>> ${safeCommand}\n`;
 
-    switch(command.toLowerCase()) {
-        case 'stop':
-            window.location.href = 'index.html';
-            break;
-        case 'help':
-            commandOutput.innerHTML += 'Available commands: help, about, skills, projects, contact, clear, stop, glory to mankind\n';
-            break;
-        case 'about':
-            commandOutput.innerHTML += 'I am a technomancer, weaving code and magic into digital reality.\n';
-            break;
-        case 'skills':
-            commandOutput.innerHTML += 'My skills include: JavaScript, Python, Quantum Computing, and more. Linux, Operating systems, Rust, loyalty Marketing, Data Structures ' +
+                switch(command.toLowerCase()) {
+                    case 'stop':
+                        window.location.href = 'index.html';
+                        break;
+                    case 'help':
+                        commandOutput.innerHTML += 'Available commands: help, about, skills, projects, contact, clear, stop, glory to mankind\n';
+                        break;
+                    case 'about':
+                        commandOutput.innerHTML += 'I am a technomancer, weaving code and magic into digital reality.\n';
+                        break;
+                    case 'skills':
+                        commandOutput.innerHTML += 'My skills include: JavaScript, Python, Quantum Computing, Linux, Operating systems, Rust, loyalty Marketing, Data Structures ' +
                 ' Algorithms, Github/Github Actions, Automation, PQC, Cybersecurity, Encryption, RSA security, Fine Tuning, LLMs, Embedded systems, Network Engineering, Networking Design' +
                 'IOT, Logistics Management , Supply Chain Management, Software Development, Software Architecture, Customer Service, Retail, Sales, Applied Research, Cloud dev, ' +
                 'Computational Physics, Writing, Presentation skills, Digital transformation, IT, Communication, SOLID Software Dev, ML Engineering, Applied Quantum computing, Operations research' +
                 'Debate\n';
-            break;
-        case 'projects':
-            commandOutput.innerHTML += 'Some of my projects: QSolvers, Emergent Neural Nets, Math Programming \n';
-            break;
-        case 'contact':
-            commandOutput.innerHTML += 'Contact me at: allanw.mk@gmail.com\n';
-            break;
-        case 'clear':
-            commandOutput.innerHTML = '';
-            break;
-        case 'glory to mankind':
-            window.location.href = 'YoRHa_matrix.html';
-            break;
-        default:
-            commandOutput.innerHTML += `Command not recognized: ${safeCommand}\n`;
-    }
+                        break;
+                    case 'projects':
+                        commandOutput.innerHTML += 'Some of my projects: QSolvers, Emergent Neural Nets, Math Programming \n';
+                        break;
+                    case 'contact':
+                        commandOutput.innerHTML += 'Contact me at: allanw.mk@gmail.com\n';
+                        break;
+                    case 'clear':
+                        commandOutput.innerHTML = '';
+                        break;
+                    case 'glory to mankind':
+                        window.location.href = 'YoRHa_Matrix.html';
+                        break;
+                    default:
+                        commandOutput.innerHTML += `Command not recognized: ${safeCommand}\n`;
+                }
 
-    // Scroll to the bottom of the output
-    commandOutput.scrollTop = commandOutput.scrollHeight;
-}
+                // Scroll to the bottom of the output
+                commandOutput.scrollTop = commandOutput.scrollHeight;
+            }
 
             // Focus on input when the page loads
             input.focus();
