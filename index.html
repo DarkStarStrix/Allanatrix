@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="overflow-y: scroll; overflow-x: hidden;">
+<html lang="en" style="overflow-y: scroll; overflow-x: hidden;" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,296 +7,281 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Courier Prime', monospace;
-            background-color: #000;
-            color: #3afa02;
-            line-height: 1.6;
-        }
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier Prime', monospace;
+    background-color: #000;
+    color: #3afa02;
+    line-height: 1.6;
+}
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
 
-        h1, h2 {
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+h1, h2 {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
 
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
+h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
 
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            margin-top: 30px;
-        }
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
 
-        nav ul li {
-            margin: 0 15px;
-        }
+nav ul li {
+    margin: 0 15px;
+}
 
-        nav ul li a {
-            color: #07ec8c;
-            text-decoration: none;
-            font-size: 1.2rem;
-            padding: 5px 10px;
-            border: 1px solid #02f690;
-            transition: all 0.3s ease;
-        }
+nav ul li a {
+    color: #07ec8c;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 5px 10px;
+    border: 1px solid #02f690;
+    transition: all 0.3s ease;
+}
 
-        nav ul li a:hover {
-            background-color: #06ead8;
-            color: #000;
-        }
+nav ul li a:hover {
+    background-color: #06ead8;
+    color: #000;
+}
 
-        section {
-            margin-top: 50px;
-            border: 1px solid #03e5ee;
-            padding: 20px;
-            background-color: rgba(0, 255, 0, 0.05);
-        }
+section {
+    margin-top: 50px;
+    border: 1px solid #03e5ee;
+    padding: 20px;
+    background-color: rgba(0, 255, 0, 0.05);
+}
 
-        .glitch {
-            position: relative;
-            font-size: 2rem;
-            font-weight: bold;
-            color: #07a7ea;
-            letter-spacing: 3px;
-            margin-bottom: 1rem;
-        }
+.glitch {
+    position: relative;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #07a7ea;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+}
 
-        .glitch:before,
-        .glitch:after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-        }
+.glitch:before,
+.glitch:after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
 
-        .glitch:before {
-            left: 2px;
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim 5s infinite linear alternate-reverse;
-        }
+.glitch:before {
+    left: 2px;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim 5s infinite linear alternate-reverse;
+}
 
-        .glitch:after {
-            left: -2px;
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim2 5s infinite linear alternate-reverse;
-        }
+.glitch:after {
+    left: -2px;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
 
-        @keyframes glitch-anim {
-            0% { clip: rect(10px, 9999px, 28px, 0); }
-            5% { clip: rect(66px, 9999px, 98px, 0); }
-            10% { clip: rect(37px, 9999px, 23px, 0); }
-            15% { clip: rect(89px, 9999px, 76px, 0); }
-            20% { clip: rect(65px, 9999px, 57px, 0); }
-            25% { clip: rect(74px, 9999px, 94px, 0); }
-            30% { clip: rect(47px, 9999px, 9px, 0); }
-            35% { clip: rect(37px, 9999px, 45px, 0); }
-            40% { clip: rect(96px, 9999px, 84px, 0); }
-            45% { clip: rect(72px, 9999px, 43px, 0); }
-            50% { clip: rect(19px, 9999px, 15px, 0); }
-            55% { clip: rect(55px, 9999px, 65px, 0); }
-            60% { clip: rect(81px, 9999px, 4px, 0); }
-            65% { clip: rect(38px, 9999px, 49px, 0); }
-            70% { clip: rect(15px, 9999px, 43px, 0); }
-            75% { clip: rect(70px, 9999px, 69px, 0); }
-            80% { clip: rect(2px, 9999px, 14px, 0); }
-            85% { clip: rect(33px, 9999px, 59px, 0); }
-            90% { clip: rect(20px, 9999px, 46px, 0); }
-            95% { clip: rect(100px, 9999px, 86px, 0); }
-            100% { clip: rect(43px, 9999px, 77px, 0); }
-        }
+@keyframes glitch-anim {
+    0% { clip: rect(10px, 9999px, 28px, 0); }
+    5% { clip: rect(66px, 9999px, 98px, 0); }
+    10% { clip: rect(37px, 9999px, 23px, 0); }
+    15% { clip: rect(89px, 9999px, 76px, 0); }
+    20% { clip: rect(65px, 9999px, 57px, 0); }
+    25% { clip: rect(74px, 9999px, 94px, 0); }
+    30% { clip: rect(47px, 9999px, 9px, 0); }
+    35% { clip: rect(37px, 9999px, 45px, 0); }
+    40% { clip: rect(96px, 9999px, 84px, 0); }
+    45% { clip: rect(72px, 9999px, 43px, 0); }
+    50% { clip: rect(19px, 9999px, 15px, 0); }
+    55% { clip: rect(55px, 9999px, 65px, 0); }
+    60% { clip: rect(81px, 9999px, 4px, 0); }
+    65% { clip: rect(38px, 9999px, 49px, 0); }
+    70% { clip: rect(15px, 9999px, 43px, 0); }
+    75% { clip: rect(70px, 9999px, 69px, 0); }
+    80% { clip: rect(2px, 9999px, 14px, 0); }
+    85% { clip: rect(33px, 9999px, 59px, 0); }
+    90% { clip: rect(20px, 9999px, 46px, 0); }
+    95% { clip: rect(100px, 9999px, 86px, 0); }
+    100% { clip: rect(43px, 9999px, 77px, 0); }
+}
 
-        @keyframes glitch-anim2 {
-            0% { clip: rect(65px, 9999px, 36px, 0); }
-            5% { clip: rect(36px, 9999px, 4px, 0); }
-            10% { clip: rect(85px, 9999px, 66px, 0); }
-            15% { clip: rect(91px, 9999px, 91px, 0); }
-            20% { clip: rect(48px, 9999px, 38px, 0); }
-            25% { clip: rect(38px, 9999px, 22px, 0); }
-            30% { clip: rect(69px, 9999px, 54px, 0); }
-            35% { clip: rect(98px, 9999px, 71px, 0); }
-            40% { clip: rect(46px, 9999px, 34px, 0); }
-            45% { clip: rect(34px, 9999px, 43px, 0); }
-            50% { clip: rect(2px, 9999px, 80px, 0); }
-            55% { clip: rect(27px, 9999px, 65px, 0); }
-            60% { clip: rect(81px, 9999px, 4px, 0); }
-            65% { clip: rect(38px, 9999px, 49px, 0); }
-            70% { clip: rect(15px, 9999px, 43px, 0); }
-            75% { clip: rect(70px, 9999px, 69px, 0); }
-            80% { clip: rect(2px, 9999px, 14px, 0); }
-            85% { clip: rect(33px, 9999px, 59px, 0); }
-            90% { clip: rect(20px, 9999px, 46px, 0); }
-            95% { clip: rect(100px, 9999px, 86px, 0); }
-            100% { clip: rect(43px, 9999px, 77px, 0); }
-        }
+@keyframes glitch-anim2 {
+    0% { clip: rect(65px, 9999px, 36px, 0); }
+    5% { clip: rect(36px, 9999px, 4px, 0); }
+    10% { clip: rect(85px, 9999px, 66px, 0); }
+    15% { clip: rect(91px, 9999px, 91px, 0); }
+    20% { clip: rect(48px, 9999px, 38px, 0); }
+    25% { clip: rect(38px, 9999px, 22px, 0); }
+    30% { clip: rect(69px, 9999px, 54px, 0); }
+    35% { clip: rect(98px, 9999px, 71px, 0); }
+    40% { clip: rect(46px, 9999px, 34px, 0); }
+    45% { clip: rect(34px, 9999px, 43px, 0); }
+    50% { clip: rect(2px, 9999px, 80px, 0); }
+    55% { clip: rect(27px, 9999px, 65px, 0); }
+    60% { clip: rect(81px, 9999px, 4px, 0); }
+    65% { clip: rect(38px, 9999px, 49px, 0); }
+    70% { clip: rect(15px, 9999px, 43px, 0); }
+    75% { clip: rect(70px, 9999px, 69px, 0); }
+    80% { clip: rect(2px, 9999px, 14px, 0); }
+    85% { clip: rect(33px, 9999px, 59px, 0); }
+    90% { clip: rect(20px, 9999px, 46px, 0); }
+    95% { clip: rect(100px, 9999px, 86px, 0); }
+    100% { clip: rect(43px, 9999px, 77px, 0); }
+}
 
-        .content-box {
-            margin-top: 1rem;
-        }
+.content-box {
+    margin-top: 1rem;
+}
 
-        .content-box a {
-            color: #02f6a1;
-            text-decoration: none;
-            border-bottom: 1px solid #06ecb6;
-        }
+.content-box a {
+    color: #02f6a1;
+    text-decoration: none;
+    border-bottom: 1px solid #06ecb6;
+}
 
-        .content-box a:hover {
-            color: #fff;
-            border-bottom: 1px solid #fff;
-        }
+.content-box a:hover {
+    color: #fff;
+    border-bottom: 1px solid #fff;
+}
 
-        .background iframe {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            pointer-events: none;
-            opacity: 0.3;
-        }
+.background iframe {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    opacity: 0.3;
+}
 
-        .background p {
-            display: none;
-        }
+.background p {
+    display: none;
+}
 
-        #skills img {
-            transition: all 0.3s ease;
-        }
+#skills img {
+    transition: all 0.3s ease;
+}
 
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
+::-webkit-scrollbar {
+    width: 10px;
+}
 
-        ::-webkit-scrollbar-track {
-            background: #000;
-        }
+::-webkit-scrollbar-track {
+    background: #000;
+}
 
-        ::-webkit-scrollbar-thumb {
-            background: #0f0;
-            border-radius: 5px;
-        }
+::-webkit-scrollbar-thumb {
+    background: #0f0;
+    border-radius: 5px;
+}
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: #00ff00;
-        }
+::-webkit-scrollbar-thumb:hover {
+    background: #00ff00;
+}
 
-        * {
-            scrollbar-width: thin;
-            scrollbar-color: #0f0 #000;
-        }
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #0f0 #000;
+}
 
-        #terminal-section {
-            margin-top: 50px;
-            padding: 20px;
-        }
+#terminal-section {
+    margin-top: 50px;
+    padding: 20px;
+}
 
-        .prompt {
-            color: #00ff00;
-            margin-right: 5px;
-        }
+.prompt {
+    color: #00ff00;
+    margin-right: 5px;
+}
 
-        #terminal-line {
-            display: flex;
-            align-items: center;
-            font-family: 'Courier New', monospace;
-            font-size: 16px;
-            color: #0f0;
-        }
+#terminal-line {
+    display: flex;
+    align-items: center;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    color: #0f0;
+}
 
-        #input {
-            background-color: transparent;
-            border: none;
-            color: #0f0;
-            font-family: inherit;
-            font-size: inherit;
-            outline: none;
-            flex-grow: 1;
-        }
+#input {
+    background-color: transparent;
+    border: none;
+    color: #0f0;
+    font-family: inherit;
+    font-size: inherit;
+    outline: none;
+    flex-grow: 1;
+}
 
-        #input:focus {
-            outline: none;
-        }
+#input:focus {
+    outline: none;
+}
 
-        .back-to-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #02f690;
-            color: #000;
-            width: 50px;
-            height: 50px;
-            text-align: center;
-            line-height: 50px;
-            border-radius: 50%;
-            font-size: 20px;
-            text-decoration: none;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-        }
-
-        .skills-category {
-            margin-bottom: 20px;
-        }
-
-        .skills-category h3 {
-            color: #02f690;
-            margin-bottom: 10px;
-        }
-
-        .skills-icons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .back-link {
-            color: #07ec8c;
-            text-decoration: none;
-            font-size: 1.2rem;
-            padding: 5px 10px;
-            border: 1px solid #02f690;
-            transition: all 0.3s ease;
-        }
-        .back-to-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #02f690;
-            color: #000;
-            width: 50px;
-            height: 50px;
-            text-align: center;
-            line-height: 50px;
-            border-radius: 50%;
-            font-size: 20px;
-            text-decoration: none;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-        }
-
-        .back-to-top.show {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        #matrix-canvas-left, #matrix-canvas-right {
+.back-to-top {
     position: fixed;
-    top: 0; /* Adjust width as needed */
-    width: 200px;
+    bottom: 20px;
+    right: 20px;
+    background-color: #02f690;
+    color: #000;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    font-size: 20px;
+    text-decoration: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.skills-category {
+    margin-bottom: 20px;
+}
+
+.skills-category h3 {
+    color: #02f690;
+    margin-bottom: 10px;
+}
+
+.skills-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.back-link {
+    color: #07ec8c;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 5px 10px;
+    border: 1px solid #02f690;
+    transition: all 0.3s ease;
+}
+
+#matrix-canvas-left, #matrix-canvas-right {
+    position: fixed;
+    top: 0;
+    width: 200px; /* Adjust width as needed */
     height: 100%;
     z-index: -1; /* Ensure it stays behind other content */
     pointer-events: none; /* Allow clicks to pass through */
@@ -309,14 +294,6 @@
 
 #matrix-canvas-right {
     right: 0;
-}
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Courier Prime', monospace;
-    background-color: #000;
-    color: #0f0;
-    line-height: 1.6;
 }
 
 #scrolling-bar {
@@ -340,7 +317,7 @@ body {
 }
 
 @keyframes scroll {
-    0% { transform: translateX(100%); }
+    0% { transform: translateX(100vw); }
     100% { transform: translateX(-100%); }
 }
 
@@ -350,7 +327,7 @@ h1, h2 {
     letter-spacing: 2px;
     z-index: 1001; /* Ensure the title is above other content */
     position: relative; /* Ensure z-index takes effect */
-    margin-top: 60px; /* Add margin to ensure it's not hidden */
+    margin-top: 40px; /* Add margin to ensure it's not hidden */
 }
     </style>
 </head>
@@ -398,6 +375,7 @@ h1, h2 {
                         <li>My Oracle: <a href="https://github.com/stars/DarkStarStrix/lists/education-resources" id="Educational-Resources">View Projects</a></li>
                         <li>Neural Network Divination: <a href="https://github.com/stars/DarkStarStrix/lists/machine-learning" id="Machine-Learning">View Projects</a></li>
                         <li>Quantum Spell Wizardry: <a href="https://github.com/stars/DarkStarStrix/lists/applied-quantum-computing" id="Quantum-Computing-Portfolio">View Projects</a></li>
+                        <li>My projects summarized: <a href="Projects.html" id="Projects.html">Projects</a></li>
                     </ul>
                 </div>
             </section>
@@ -536,7 +514,7 @@ h1, h2 {
                 <h2 class="glitch" data-text="Contact">Contact</h2>
                 <div class="content-box">
                     <p>Summon me through the ethereal planes:</p>
-                    <p>Email: <a href="mailto:allanw@gmail.com">allanw.mk@gmail.com</a></p>
+                    <p>Email: allanw.mk@gmail.com</p>
                     <p>Twitter: <a href="https://x.com/AllanatrixQ">@AllantrixQ</a></p>
                     <p>GitHub: <a href="https://github.com/DarkStarStrix">github.com/Darkstalker</a></p>
                     <p>LinkedIn: <a href="https://www.linkedin.com/in/technomancertrix/">linkedin.com/in/Technomancertrix</a></p>
