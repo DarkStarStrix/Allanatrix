@@ -34,7 +34,7 @@ h1 {
 }
 
 nav ul {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
     display: flex;
     justify-content: center;
@@ -100,49 +100,11 @@ section {
 
 @keyframes glitch-anim {
     0% { clip: rect(10px, 9999px, 28px, 0); }
-    5% { clip: rect(66px, 9999px, 98px, 0); }
-    10% { clip: rect(37px, 9999px, 23px, 0); }
-    15% { clip: rect(89px, 9999px, 76px, 0); }
-    20% { clip: rect(65px, 9999px, 57px, 0); }
-    25% { clip: rect(74px, 9999px, 94px, 0); }
-    30% { clip: rect(47px, 9999px, 9px, 0); }
-    35% { clip: rect(37px, 9999px, 45px, 0); }
-    40% { clip: rect(96px, 9999px, 84px, 0); }
-    45% { clip: rect(72px, 9999px, 43px, 0); }
-    50% { clip: rect(19px, 9999px, 15px, 0); }
-    55% { clip: rect(55px, 9999px, 65px, 0); }
-    60% { clip: rect(81px, 9999px, 4px, 0); }
-    65% { clip: rect(38px, 9999px, 49px, 0); }
-    70% { clip: rect(15px, 9999px, 43px, 0); }
-    75% { clip: rect(70px, 9999px, 69px, 0); }
-    80% { clip: rect(2px, 9999px, 14px, 0); }
-    85% { clip: rect(33px, 9999px, 59px, 0); }
-    90% { clip: rect(20px, 9999px, 46px, 0); }
-    95% { clip: rect(100px, 9999px, 86px, 0); }
     100% { clip: rect(43px, 9999px, 77px, 0); }
 }
 
 @keyframes glitch-anim2 {
     0% { clip: rect(65px, 9999px, 36px, 0); }
-    5% { clip: rect(36px, 9999px, 4px, 0); }
-    10% { clip: rect(85px, 9999px, 66px, 0); }
-    15% { clip: rect(91px, 9999px, 91px, 0); }
-    20% { clip: rect(48px, 9999px, 38px, 0); }
-    25% { clip: rect(38px, 9999px, 22px, 0); }
-    30% { clip: rect(69px, 9999px, 54px, 0); }
-    35% { clip: rect(98px, 9999px, 71px, 0); }
-    40% { clip: rect(46px, 9999px, 34px, 0); }
-    45% { clip: rect(34px, 9999px, 43px, 0); }
-    50% { clip: rect(2px, 9999px, 80px, 0); }
-    55% { clip: rect(27px, 9999px, 65px, 0); }
-    60% { clip: rect(81px, 9999px, 4px, 0); }
-    65% { clip: rect(38px, 9999px, 49px, 0); }
-    70% { clip: rect(15px, 9999px, 43px, 0); }
-    75% { clip: rect(70px, 9999px, 69px, 0); }
-    80% { clip: rect(2px, 9999px, 14px, 0); }
-    85% { clip: rect(33px, 9999px, 59px, 0); }
-    90% { clip: rect(20px, 9999px, 46px, 0); }
-    95% { clip: rect(100px, 9999px, 86px, 0); }
     100% { clip: rect(43px, 9999px, 77px, 0); }
 }
 
@@ -167,10 +129,6 @@ section {
     object-fit: cover;
     pointer-events: none;
     opacity: 0.3;
-}
-
-.background p {
-    display: none;
 }
 
 #skills img {
@@ -227,10 +185,6 @@ section {
     flex-grow: 1;
 }
 
-#input:focus {
-    outline: none;
-}
-
 .back-to-top {
     position: fixed;
     bottom: 20px;
@@ -281,11 +235,11 @@ section {
 #matrix-canvas-left, #matrix-canvas-right {
     position: fixed;
     top: 0;
-    width: 200px; /* Adjust width as needed */
+    width: 200px;
     height: 100%;
-    z-index: -1; /* Ensure it stays behind other content */
-    pointer-events: none; /* Allow clicks to pass through */
-    opacity: 0.5; /* Subtle effect */
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.5;
 }
 
 #matrix-canvas-left {
@@ -298,22 +252,22 @@ section {
 
 #scrolling-bar {
     width: 100%;
-    background-color: #0f0; /* Green background for the bar */
-    color: #000; /* Black text color for contrast */
+    background-color: #0f0;
+    color: #000;
     padding: 10px 0;
     position: fixed;
     top: 0;
     left: 0;
     overflow: hidden;
     box-sizing: border-box;
-    z-index: 1002; /* Ensure the bar is above other content */
+    z-index: 1002;
 }
 
 #scrolling-text {
     display: inline-block;
     white-space: nowrap;
     animation: scroll 10s linear infinite;
-    font-family: 'Courier New', Courier, monospace; /* Pixel-style font */
+    font-family: 'Courier New', Courier, monospace;
 }
 
 @keyframes scroll {
@@ -325,9 +279,41 @@ h1, h2 {
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 2px;
-    z-index: 1001; /* Ensure the title is above other content */
-    position: relative; /* Ensure z-index takes effect */
-    margin-top: 40px; /* Add margin to ensure it's not hidden */
+    z-index: 1001;
+    position: relative;
+    margin-top: 40px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+img, video {
+    max-width: 100%;
+    height: auto;
+}
 }
     </style>
 </head>

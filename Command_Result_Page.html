@@ -96,114 +96,117 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const input = document.getElementById('input');
-            const commandOutput = document.getElementById('command-output');
-            const canvas = document.getElementById('matrix-rain');
-            const ctx = canvas.getContext('2d');
+    document.addEventListener('DOMContentLoaded', function() {
+        const input = document.getElementById('input');
+        const commandOutput = document.getElementById('command-output');
+        const canvas = document.getElementById('matrix-rain');
+        const ctx = canvas.getContext('2d');
 
-            // Set canvas size
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        // Set canvas size
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-            // Matrix rain effect
-            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%';
-            const fontSize = 10;
-            const columns = canvas.width / fontSize;
-            const drops = [];
+        // Matrix rain effect
+        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%';
+        const fontSize = 10;
+        const columns = canvas.width / fontSize;
+        const drops = [];
 
-            for (let i = 0; i < columns; i++) {
-                drops[i] = 1;
-            }
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
 
-            function draw() {
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                ctx.fillStyle = '#0f0'; // Matrix rain color remains green
-                ctx.font = fontSize + 'px monospace';
+            ctx.fillStyle = '#0f0'; // Matrix rain color remains green
+            ctx.font = fontSize + 'px monospace';
 
-                for (let i = 0; i < drops.length; i++) {
-                    const text = letters[Math.floor(Math.random() * letters.length)];
-                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                        drops[i] = 0;
-                    }
-                    drops[i]++;
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
                 }
+                drops[i]++;
             }
+        }
 
-            // Start matrix rain immediately
-            setInterval(draw, 33);
+        // Start matrix rain immediately
+        setInterval(draw, 33);
 
-            // Handle input
-            input.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    const command = this.textContent.trim();
-                    processCommand(command);
-                    this.textContent = '';
-                }
-            });
-
-            function escapeHTML(str) {
-                return str.replace(/[&<>"']/g, function(match) {
-                    const escapeMap = {
-                        '&': '&amp;',
-                        '<': '&lt;',
-                        '>': '&gt;',
-                        '"': '&quot;',
-                        "'": '&#39;'
-                    };
-                    return escapeMap[match];
-                });
+        // Handle input
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const command = this.textContent.trim();
+                processCommand(command);
+                this.textContent = '';
             }
-
-            function processCommand(command) {
-                const safeCommand = escapeHTML(command);
-                commandOutput.innerHTML += `>>>> ${safeCommand}\n`;
-
-                switch(command.toLowerCase()) {
-                    case 'stop':
-                        window.location.href = 'index.html';
-                        break;
-                    case 'help':
-                        commandOutput.innerHTML += 'Available commands: help, about, skills, projects, contact, clear, stop, glory to mankind\n';
-                        break;
-                    case 'about':
-                        commandOutput.innerHTML += 'I am a technomancer, weaving code and magic into digital reality.\n';
-                        break;
-                    case 'skills':
-                        commandOutput.innerHTML += 'My skills include: JavaScript, Python, Quantum Computing, Linux, Operating systems, Rust, loyalty Marketing, Data Structures ' +
-                ' Algorithms, Github/Github Actions, Automation, PQC, Cybersecurity, Encryption, RSA security, Fine Tuning, LLMs, Embedded systems, Network Engineering, Networking Design' +
-                'IOT, Logistics Management , Supply Chain Management, Software Development, Software Architecture, Customer Service, Retail, Sales, Applied Research, Cloud dev, ' +
-                'Computational Physics, Writing, Presentation skills, Digital transformation, IT, Communication, SOLID Software Dev, ML Engineering, Applied Quantum computing, Operations research' +
-                'Debate\n';
-                        break;
-                    case 'projects':
-                        commandOutput.innerHTML += 'Some of my projects: QSolvers, Emergent Neural Nets, Math Programming \n';
-                        break;
-                    case 'contact':
-                        commandOutput.innerHTML += 'Contact me at: allanw.mk@gmail.com\n';
-                        break;
-                    case 'clear':
-                        commandOutput.innerHTML = '';
-                        break;
-                    case 'glory to mankind':
-                        window.location.href = 'YoRHa_Matrix.html';
-                        break;
-                    default:
-                        commandOutput.innerHTML += `Command not recognized: ${safeCommand}\n`;
-                }
-
-                // Scroll to the bottom of the output
-                commandOutput.scrollTop = commandOutput.scrollHeight;
-            }
-
-            // Focus on input when the page loads
-            input.focus();
         });
-    </script>
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>"']/g, function(match) {
+                const escapeMap = {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#39;'
+                };
+                return escapeMap[match];
+            });
+        }
+
+        function processCommand(command) {
+            const safeCommand = escapeHTML(command);
+            commandOutput.innerHTML += `>>>> ${safeCommand}\n`;
+
+            switch(command.toLowerCase()) {
+                case 'stop':
+                    window.location.href = 'index.html';
+                    break;
+                case 'help':
+                    commandOutput.innerHTML += 'Available commands: help, about, skills, projects, contact, clear, stop, glory to mankind, neonnexus\n';
+                    break;
+                case 'about':
+                    commandOutput.innerHTML += 'I am a technomancer, weaving code and magic into digital reality.\n';
+                    break;
+                case 'skills':
+                    commandOutput.innerHTML += 'My skills include: JavaScript, Python, Quantum Computing, Linux, Operating systems, Rust, loyalty Marketing, Data Structures ' +
+            ' Algorithms, Github/Github Actions, Automation, PQC, Cybersecurity, Encryption, RSA security, Fine Tuning, LLMs, Embedded systems, Network Engineering, Networking Design' +
+            'IOT, Logistics Management , Supply Chain Management, Software Development, Software Architecture, Customer Service, Retail, Sales, Applied Research, Cloud dev, ' +
+            'Computational Physics, Writing, Presentation skills, Digital transformation, IT, Communication, SOLID Software Dev, ML Engineering, Applied Quantum computing, Operations research' +
+            'Debate\n';
+                    break;
+                case 'projects':
+                    commandOutput.innerHTML += 'Some of my projects: QSolvers, Emergent Neural Nets, Math Programming \n';
+                    break;
+                case 'contact':
+                    commandOutput.innerHTML += 'Contact me at: allanw.mk@gmail.com\n';
+                    break;
+                case 'clear':
+                    commandOutput.innerHTML = '';
+                    break;
+                case 'glory to mankind':
+                    window.location.href = 'YoRHa_Matrix.html';
+                    break;
+                case 'NeonNexus':
+                    window.location.href = 'Neon_Nexus.html';
+                    break;
+                default:
+                    commandOutput.innerHTML += `Command not recognized: ${safeCommand}\n`;
+            }
+
+            // Scroll to the bottom of the output
+            commandOutput.scrollTop = commandOutput.scrollHeight;
+        }
+
+        // Focus on input when the page loads
+        input.focus();
+    });
+</script>
 </body>
 </html>
