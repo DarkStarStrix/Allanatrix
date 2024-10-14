@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neon Nexus: A Cyberpunk Adventure</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
+
         body, html {
             background-color: #000;
             color: #0f0;
-            font-family: 'Courier New', monospace;
+            font-family: 'Courier Prime', monospace;
             line-height: 1.6;
             height: 100%;
             margin: 0;
@@ -102,139 +104,115 @@
         }
 
         function processCommand(command) {
-            if (command === 'look') {
-                updateGame(locations[gameState.currentLocation].description);
-            } else if (command.startsWith('go ')) {
-                const direction = command.split(' ')[1];
-                const exits = locations[gameState.currentLocation].exits;
-                if (exits[direction]) {
-                    gameState.currentLocation = exits[direction];
-                    updateGame(`You navigate ${direction}, your footsteps echoing in the urban canyon.`);
-                    updateGame(locations[gameState.currentLocation].description);
-                } else {
-                    updateGame("The path is blocked. The city's layout shifts like a digital mirage, but not in that direction.", 'error');
-                }
-            } else if (command === 'inventory') {
-                if (gameState.inventory.length === 0) {
-                    updateGame("Your pockets are as empty as a corpo's promises.", 'warning');
-                } else {
-                    updateGame("You're packing: " + gameState.inventory.join(", "), 'success');
-                }
-            } else if (command === 'talk') {
-                handleTalk();
-            } else if (command === 'hack') {
-                handleHack();
-            } else if (command === 'search') {
-                handleSearch();
-            } else if (command.startsWith('use ')) {
-                const item = command.split(' ')[1];
-                handleUse(item);
-            } else if (command === 'help') {
-                updateGame("Available commands: look, go [direction], inventory, talk, hack, search, use [item], help");
-            } else {
-                updateGame("Command not recognized. The neural interface glitches. Try 'help' for valid inputs.", 'error');
-            }
-        }
+            const safeCommand = escapeHTML(command);
+            commandOutput.innerHTML += `>>>> ${safeCommand}\n`;
 
-        function handleTalk() {
-            switch(gameState.currentLocation) {
-                case 'bar':
-                    if (!gameState.contactMet) {
-                        updateGame("The mysterious figure leans in, voice barely above a whisper: 'Looking for something, runner? There's a chip, hidden in the alley. It's got enough dirt to bury MegaCorp. Find it, bring it here, and we'll talk business.'");
-                        gameState.contactMet = true;
-                        gameState.streetCred += 5;
-                    } else if (gameState.hasInfoChip) {
-                        updateGame("'You got the goods? Let's see it.' The figure's cyber-eyes scan the chip. 'Impressive. You've just made some powerful friends... and enemies.'");
-                        gameState.inventory = gameState.inventory.filter(item => item !== 'info chip');
-                        gameState.rebelAlly = true;
-                        gameState.streetCred += 10;
-                        updateGame("A new path opens. The hackers' den to the north welcomes you.", 'success');
-                        locations.bar.exits.north = 'hackerDen';
-                    } else {
-                        updateGame("'Time's ticking, runner. That chip won't find itself.'");
-                    }
+            switch(command.toLowerCase()) {
+                case 'stop':
+                    window.location.href = 'index.html';
                     break;
-                case 'hackerDen':
-                    updateGame("The rebel leader grins, her teeth gleaming with LED implants. 'Welcome to the resistance, runner. Ready to bring the system crashing down?'");
+                case 'help':
+                    commandOutput.innerHTML += 'Available commands: help, about, skills, projects, contact, clear, stop, glory to mankind, neonnexus\n';
                     break;
-                case 'corporateHQ':
-                    updateGame("A holographic secretary materializes: 'Welcome to MegaCorp. How may we optimize your existence today?'");
+                case 'about':
+                    commandOutput.innerHTML += 'I am a technomancer, weaving code and magic into digital reality.\n';
+                    break;
+                case 'skills':
+                    commandOutput.innerHTML += 'My skills include: JavaScript, Python, Quantum Computing, Linux, Operating systems, Rust, loyalty Marketing, Data Structures ' +
+        ' Algorithms, Github/Github Actions, Automation, PQC, Cybersecurity, Encryption, RSA security, Fine Tuning, LLMs, Embedded systems, Network Engineering, Networking Design' +
+        'IOT, Logistics Management , Supply Chain Management, Software Development, Software Architecture, Customer Service, Retail, Sales, Applied Research, Cloud dev, ' +
+        'Computational Physics, Writing, Presentation skills, Digital transformation, IT, Communication, SOLID Software Dev, ML Engineering, Applied Quantum computing, Operations research' +
+        'Debate\n';
+                    break;
+                case 'projects':
+                    commandOutput.innerHTML += 'Some of my projects: QSolvers, Emergent Neural Nets, Math Programming \n';
+                    break;
+                case 'contact':
+                    commandOutput.innerHTML += 'Contact me at: allanw.mk@gmail.com\n';
+                    break;
+                case 'clear':
+                    commandOutput.innerHTML = '';
+                    break;
+                case 'glory to mankind':
+                    window.location.href = 'YoRHa_Matrix.html';
+                    break;
+                case 'neonnexus':
+                    window.location.href = 'Neon_Nexus.html';
                     break;
                 default:
-                    updateGame("There's no one here to talk to but the ghosts in the machine.", 'warning');
+                    commandOutput.innerHTML += `Command not recognized: ${safeCommand}\n`;
             }
+
+            // Scroll to the bottom of the output
+            commandOutput.scrollTop = commandOutput.scrollHeight;
         }
 
-        function handleHack() {
-            if (gameState.currentLocation === 'alley' && !locations.alley.exits.north) {
-                updateGame("You jack into the door's security system. Your neural implants fire on all cylinders as you navigate the ICE...", 'warning');
-                if (Math.random() > 0.5) {
-                    updateGame("Access granted. The door slides open with a pneumatic hiss.", 'success');
-                    locations.alley.exits.north = 'hackerDen';
-                    gameState.streetCred += 15;
-                } else {
-                    updateGame("Your hack is deflected! Alarms blare in the distance. Time to ghost!", 'error');
-                    gameState.streetCred -= 5;
-                }
-            } else if (gameState.currentLocation === 'street' && !locations.street.exits.east) {
-                updateGame("You attempt to breach MegaCorp's external firewalls...", 'warning');
-                if (gameState.streetCred > 20) {
-                    updateGame("You're in! A backdoor to MegaCorp HQ reveals itself.", 'success');
-                    locations.street.exits.east = 'corporateHQ';
-                } else {
-                    updateGame("The ICE is too strong. Your neural pathways burn with the backlash.", 'error');
-                    gameState.streetCred -= 5;
-                }
-            } else {
-                updateGame("There's nothing to hack here... yet.", 'warning');
-            }
+        function escapeHTML(str) {
+            return str.replace(/[&<>"']/g, function(match) {
+                const escapeMap = {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#39;'
+                };
+                return escapeMap[match];
+            });
         }
 
-        function handleSearch() {
-            if (gameState.currentLocation === 'alley' && !gameState.hasInfoChip) {
-                updateGame("You dig through the digital detritus, your cyber-enhanced senses on high alert...");
-                if (Math.random() > 0.3) {
-                    updateGame("Jackpot! A data chip, almost invisible among the trash. This must be what the contact wants.", 'success');
-                    gameState.inventory.push("info chip");
-                    gameState.hasInfoChip = true;
-                    gameState.streetCred += 5;
-                } else {
-                    updateGame("Nothing but junk and broken dreams this time.", 'warning');
-                }
-            } else {
-                updateGame("Your search turns up nothing of value. The city keeps its secrets... for now.", 'warning');
-            }
-        }
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('input');
+            const commandOutput = document.getElementById('command-output');
+            const canvas = document.getElementById('matrix-rain');
+            const ctx = canvas.getContext('2d');
 
-        function handleUse(item) {
-            if (item === 'chip' && gameState.hasInfoChip) {
-                if (gameState.currentLocation === 'bar') {
-                    updateGame("You hand over the chip. The figure's eyes light up - literally. 'This is it. The key to our revolution.'");
-                    gameState.inventory = gameState.inventory.filter(i => i !== 'info chip');
-                    gameState.rebelAlly = true;
-                    gameState.streetCred += 20;
-                    updateGame("A new path opens. The hackers' den to the north welcomes you.", 'success');
-                    locations.bar.exits.north = 'hackerDen';
-                } else if (gameState.currentLocation === 'corporateHQ') {
-                    updateGame("You insert the chip into a terminal. Alarms blare! But then... silence. A voice: 'Welcome to the inner circle.'");
-                    gameState.inventory = gameState.inventory.filter(i => i !== 'info chip');
-                    gameState.corporateAlly = true;
-                    gameState.streetCred += 20;
-                } else {
-                    updateGame("This isn't the right place to use that... yet.", 'warning');
-                }
-            } else {
-                updateGame("You don't have that item, or it can't be used here.", 'error');
-            }
-        }
+            // Set canvas size
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
 
-        document.getElementById('user-input').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                const command = this.value.toLowerCase();
-                updateGame(`> ${command}`);
-                processCommand(command);
-                this.value = '';
+            // Matrix rain effect
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%';
+            const fontSize = 10;
+            const columns = canvas.width / fontSize;
+            const drops = [];
+
+            for (let i = 0; i < columns; i++) {
+                drops[i] = 1;
             }
+
+            function draw() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = '#0f0'; // Matrix rain color remains green
+                ctx.font = fontSize + 'px monospace';
+
+                for (let i = 0; i < drops.length; i++) {
+                    const text = letters[Math.floor(Math.random() * letters.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+
+            // Start matrix rain immediately
+            setInterval(draw, 33);
+
+            // Handle input
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const command = this.textContent.trim();
+                    processCommand(command);
+                    this.textContent = '';
+                }
+            });
+
+            // Focus on input when the page loads
+            input.focus();
         });
 
         // Initialize the game
