@@ -88,24 +88,32 @@ section {
 
 .glitch:before {
     left: 2px;
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim 5s infinite linear alternate-reverse;
+    clip: rect(0, 900px, 0, 0);
+    animation: glitch-anim 2s infinite linear alternate-reverse;
 }
 
 .glitch:after {
     left: -2px;
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim2 5s infinite linear alternate-reverse;
+    clip: rect(0, 900px, 0, 0);
+    animation: glitch-anim2 2s infinite linear alternate-reverse;
 }
 
 @keyframes glitch-anim {
     0% { clip: rect(10px, 9999px, 28px, 0); }
-    100% { clip: rect(43px, 9999px, 77px, 0); }
+    20% { clip: rect(43px, 9999px, 77px, 0); }
+    40% { clip: rect(20px, 9999px, 50px, 0); }
+    60% { clip: rect(30px, 9999px, 60px, 0); }
+    80% { clip: rect(40px, 9999px, 70px, 0); }
+    100% { clip: rect(50px, 9999px, 80px, 0); }
 }
 
 @keyframes glitch-anim2 {
     0% { clip: rect(65px, 9999px, 36px, 0); }
-    100% { clip: rect(43px, 9999px, 77px, 0); }
+    20% { clip: rect(43px, 9999px, 77px, 0); }
+    40% { clip: rect(20px, 9999px, 50px, 0); }
+    60% { clip: rect(30px, 9999px, 60px, 0); }
+    80% { clip: rect(40px, 9999px, 70px, 0); }
+    100% { clip: rect(50px, 9999px, 80px, 0); }
 }
 
 .content-box {
@@ -310,10 +318,10 @@ h1, h2 {
         margin: 10px 0;
     }
 
-img, video {
-    max-width: 100%;
-    height: auto;
-}
+    .skills-icons img {
+        width: 30px;
+        height: 30px;
+    }
 }
     </style>
 </head>
