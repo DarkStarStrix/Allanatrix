@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html lang="en" style="overflow-y: scroll; overflow-x: hidden;" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
@@ -323,6 +324,69 @@ h1, h2 {
         height: 30px;
     }
 }
+/* Professional Mode Styles */
+body.professional-mode {
+    background-color: #000;
+    color: #fff;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+body.professional-mode a {
+    color: #fff;
+    border-color: #fff;
+    transition: color 0.5s ease, border-color 0.5s ease;
+}
+
+body.professional-mode .glitch:before,
+body.professional-mode .glitch:after {
+    display: none;
+}
+
+body.professional-mode .container,
+body.professional-mode .content-box,
+body.professional-mode .skills-category {
+    background-color: #111;
+    border: 1px solid #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.5s ease, border 0.5s ease, box-shadow 0.5s ease;
+}
+
+body.professional-mode .skills-icons img {
+    filter: none;
+}
+
+/* Button Styles */
+#professional-mode-btn {
+    background-color: #000;
+    color: #07ec8c;
+    font-size: 1.2rem;
+    padding: 5px 10px;
+    border: 1px solid #02f690;
+    transition: all 0.3s ease;
+}
+
+#professional-mode-btn:hover {
+    background-color: #06ead8;
+    color: #000;
+}
+.skills-explained {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: rgba(0, 255, 0, 0.05);
+    border: 1px solid #03e5ee;
+    border-radius: 5px;
+}
+
+.skills-explained ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.skills-explained li {
+    margin-bottom: 10px;
+}
     </style>
 </head>
 <body>
@@ -342,6 +406,8 @@ h1, h2 {
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="#Blog">Blog</a></li>
+                <li><a href="#terminal-section">Terminal</a></li>
+                <li><button id="professional-mode-btn" class="back-link">Professional Mode</button></li>
             </ul>
         </nav>
         <main>
@@ -376,6 +442,12 @@ h1, h2 {
             <section id="skills">
                 <h2 class="glitch" data-text="Arcane Skills">Arcane Skills</h2>
                 <div class="skills-category">
+                    <h3>Skills Explained</h3>
+                    <div class="skills-explained">
+                        <p>I have a few skill sets from backend engineering to fullstack development and example of how I can do backend engineering is through my books application
+                        Where I was learning FASTAPI and developed an application that used FASTAPI to book keep which has CRUD functionality (Create, read, update, and delete)
+                        Which is critical to building backend apps though I was not able to fully ship due to compute costs you can go to my projects section to learn more  </p>
+
                     <h3>Backend Technologies</h3>
                     <div class="skills-icons">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="41" alt="python logo" />
@@ -385,7 +457,12 @@ h1, h2 {
                         <img src="https://skillicons.dev/icons?i=fastapi" height="41" alt="fastapi logo" />
                     </div>
                 </div>
+                    </div>
                 <div class="skills-category">
+                    <div class="skills-explained">
+                        <p>In this skill set it's about machine learning and data science training models and analyzing data and some ML infrastructure I also do some high level research
+                        Into new model types and specialize into quantizing models efficient training methods for more info about my research check my projects section </p>
+
                     <h3>Machine Learning & Data Science</h3>
                     <div class="skills-icons">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" height="41" alt="tensorflow logo" />
@@ -394,8 +471,14 @@ h1, h2 {
                         <img src="https://github.com/DarkStarStrix/DarkStarStrix/assets/108637439/85af4120-e870-4944-b825-c6d68a5d1fcb" height="41" alt="Pandas"/>
                     </div>
                 </div>
+                </div>
                 <div class="skills-container">
     <div class="skills-category">
+        <div class ="skills-explained">
+                        <p>I have experience with various programming languages. My primary language is Python, which I use extensively for machine learning and backend development due to its rapid prototyping capabilities.
+                            My second language is Rust, which I appreciate for its modern memory management, although its async handling and verbosity can be challenging.
+                            I also have experience with C and C++, which I use mainly for low-level memory management and CUDA kernels, respectively. Additionally, I have worked with C#, R, Embedded C, Elixir, and Zig, and I am continuously learning and improving my skills in these languages.
+                        </p>
         <h3>Programming Languages</h3>
         <div class="skills-icons">
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="41" alt="javascript logo" />
@@ -410,8 +493,12 @@ h1, h2 {
             <img src="https://skillicons.dev/icons?i=zig" height="41" alt="zig" />
         </div>
     </div>
+    </div>
 
     <div class="skills-category">
+        <div class="skills-explained">
+                        <p>Web development is a skill set that I have been developing for a while now. I have experience with HTML, CSS, and JavaScript, which I use to create responsive and interactive web applications. I have also worked with AngularJS and Flask, which I use for frontend and backend development, respectively. Additionally, I have experience with FastAPI, which I use for creating RESTful APIs, and I am continuously learning and improving my skills in these technologies.
+                        </p>
         <h3>Web Development</h3>
         <div class="skills-icons">
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" height="41" alt="html5 logo" />
@@ -421,10 +508,14 @@ h1, h2 {
             <img src="https://skillicons.dev/icons?i=fastapi" height="41" alt="fastapi logo" />
         </div>
     </div>
+    </div>
 
                     
     <div class="skills-category">
-        <h3>DevOps & Cloud Services</h3>
+        <div class="skills-explained">
+                        <p>DevOps and cloud services are skill sets that I have been developing for a while now. I have experience with Docker, Azure, AWS, DigitalOcean, Vercel, GitHub Actions, and Terraform, which I use to create and manage cloud infrastructure. I have also worked with Kubernetes, which I use for container orchestration, also terraform which is an infrastructure as code and I am continuously learning and improving my skills in these technologies.
+                        </p>
+        <h3>DevOps & Cloud Services Infrastructure as code</h3>
         <div class="skills-icons">
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" height="41" alt="docker logo" />
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" height="41" alt="azure logo" />
@@ -432,10 +523,16 @@ h1, h2 {
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/digitalocean/digitalocean-original.svg" height="41" alt="digitalocean logo" />
             <img src="https://skillicons.dev/icons?i=vercel" height="41" alt="vercel logo" />
             <img src="https://skillicons.dev/icons?i=githubactions" height="41" alt="githubactions" />
+            <img src="https://skillicons.dev/icons?i=terraform" height="41" alt="terraform" />
         </div>
+    </div>
     </div>
 
     <div class="skills-category">
+        <div class="skills-explained">
+                        <p>Version control and collaboration are skill sets that I have been developing for a while now. I have experience with Git, GitHub, and Slack, which I use to manage and collaborate on projects. I have also worked with Jira, which I use for project management, and I am continuously learning and improving my skills in these technologies.
+                        </p>
+
         <h3>Version Control & Collaboration</h3>
         <div class="skills-icons">
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" height="41" alt="git logo" />
@@ -443,8 +540,12 @@ h1, h2 {
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/slack/slack-original.svg" height="41" alt="slack logo" />
         </div>
     </div>
+    </div>
 
     <div class="skills-category">
+        <div class="skills-explained">
+                        <p>Development tools and IDEs are skill sets that I have been developing for a while now. I have experience with PyCharm, IntelliJ IDEA, Atom, NPM, Webpack, and Zed, which I use to develop and manage projects. I have also worked with Apache Kafka, Pytest, Stack Overflow, ChatGPT, Writerside, and LaTeX, and I am continuously learning and improving my skills in these technologies.
+                        </p>
         <h3>Development Tools & IDEs</h3>
         <div class="skills-icons">
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pycharm/pycharm-original.svg" height="41" alt="pycharm logo" />
@@ -455,8 +556,13 @@ h1, h2 {
             <img src="zed.jpg" alt="Zed_dev" width="41" height="41">
         </div>
     </div>
+    </div>
 
     <div class="skills-category">
+        <div class="skills-explained">
+                        <p>Operating systems and environments are skill sets that I have been developing for a while now. I have experience with Linux, Arch Linux, Windows, Bash, and PowerShell, which I use to develop and manage projects. I have also worked with Qiskit, QuTiP, Flutter, Raspberry Pi, and Arduino, and I am continuously learning and improving my skills in these technologies.
+                        </p>
+
         <h3>Operating Systems & Environment</h3>
         <div class="skills-icons">
             <img src="https://skillicons.dev/icons?i=linux" height="41" alt="linux" />
@@ -466,31 +572,47 @@ h1, h2 {
             <img src="https://skillicons.dev/icons?i=powershell" height="41" alt="powershell" />
         </div>
     </div>
+        </div>
 
     <div class="skills-category">
+        <div class="skills-explained">
+                        <p>Quantum computing is a skill set that I have been developing for a while now. I have experience with Qiskit and QuTiP, which I use to develop and manage quantum computing projects. I have a broad and specialized knowledge of quantum computing, from everything chemistry to finance but I mostly specialize in quantum optimization and quantum machine learning.
+                        </p>
         <h3>Quantum Computing</h3>
         <div class="skills-icons">
             <img src="https://github.com/DarkStarStrix/DarkStarStrix/assets/108637439/9a92eb92-0292-4c22-ba0f-ff278cea5df6" height="41" alt="Qiskit"/>
             <img src="https://github.com/DarkStarStrix/DarkStarStrix/assets/108637439/5337bf3a-5d17-4481-a618-652e3f78770b" height="41" alt="QuTIP"/>
         </div>
     </div>
+    </div>
 
     <div class="skills-category">
+        <div class="skills-explained">
+                        <p>Mobile development is a skill set that I have been developing for a while now. I have experience with Flutter, which I use to develop and manage mobile applications.
+                        </p>
         <h3>Mobile Development</h3>
         <div class="skills-icons">
             <img src="https://skillicons.dev/icons?i=flutter" height="41" alt="flutter logo" />
         </div>
     </div>
+    </div>
 
     <div class="skills-category">
+        <div class="skills-explained">
+                        <p>IoT and embedded systems are skill sets that I have been developing for a while now. I have experience with Raspberry Pi and Arduino, which I use to develop and manage IoT and embedded systems projects.
+                        </p>
         <h3>IoT & Embedded Systems</h3>
         <div class="skills-icons">
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg" height="41" alt="raspberrypi logo" />
             <img src="https://skillicons.dev/icons?i=arduino" height="41" alt="arduino logo" />
         </div>
     </div>
+        </div>
 
     <div class="skills-category">
+        <div class="skills-explained">
+                        <p>Other tools are skill sets that I have been developing for a while now. I have experience with Apache Kafka, Pytest, Stack Overflow, ChatGPT, Writerside, and LaTeX, which I use to develop and manage projects.
+                        </p>
         <h3>Other Tools</h3>
         <div class="skills-icons">
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg" height="41" alt="apache kafka logo" />
@@ -502,6 +624,7 @@ h1, h2 {
             <img src="https://skillicons.dev/icons?i=pkl" height="41" alt="pkl" />
         </div>
     </div>
+</div>
 </div>
             </section>
             <section id="contact">
@@ -527,57 +650,72 @@ h1, h2 {
         </main>
     </div>
     <a href="#" class="back-to-top">↑</a>
-        <a href="#" class="back-to-top">↑</a>
     <script>
+        // Fetch the latest blog post title and update the scrolling text
         document.addEventListener('DOMContentLoaded', function() {
-            const input = document.getElementById('input');
-            const terminalLine = document.getElementById('terminal-line');
-            const backToTop = document.querySelector('.back-to-top');
+    const input = document.getElementById('input');
+    const terminalLine = document.getElementById('terminal-line');
+    const backToTop = document.querySelector('.back-to-top');
 
-            // Terminal functionality
-            terminalLine.addEventListener('click', function() {
-                input.focus();
-            });
+    // Terminal functionality
+    terminalLine.addEventListener('click', function() {
+        input.focus();
+    });
 
-            input.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    const command = this.textContent.trim().toLowerCase();
+    input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            const command = this.textContent.trim().toLowerCase();
 
-                    if (command === 'enter') {
-                        window.location.href = 'Command_Result_Page.html';
-                    } else {
-                        this.textContent = '';
-                    }
-                }
-            });
+            if (command === 'enter') {
+                window.location.href = 'Command_Result_Page.html';
+            } else {
+                this.textContent = '';
+            }
+        }
+    });
 
-            input.addEventListener('input', function() {
-                const range = document.createRange();
-                const sel = window.getSelection();
-                range.setStart(input.childNodes[0], input.textContent.length);
-                range.collapse(true);
-                sel.removeAllRanges();
-                sel.addRange(range);
-            });
+    input.addEventListener('input', function() {
+        const range = document.createRange();
+        const sel = window.getSelection();
+        range.setStart(input.childNodes[0], input.textContent.length);
+        range.collapse(true);
+        sel.removeAllRanges();
+        sel.addRange(range);
+    });
 
-            // Back to top functionality
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 100) {
-                    backToTop.classList.add('show');
-                } else {
-                    backToTop.classList.remove('show');
-                }
-            });
+    // Back to top functionality
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 100) {
+            backToTop.classList.add('show');
+        } else {
+            backToTop.classList.remove('show');
+        }
+    });
 
-            backToTop.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
+    backToTop.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
-            // Initial focus on terminal input
+    // Check if an element is in viewport
+    function isInViewport(element) {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+    // Delay initial focus on terminal input if in viewport
+    setTimeout(() => {
+        if (isInViewport(input)) {
             input.focus();
-        });
+        }
+    }, 100);
+});
         document.addEventListener('DOMContentLoaded', function() {
     const canvasLeft = document.getElementById('matrix-canvas-left');
     const ctxLeft = canvasLeft.getContext('2d');
@@ -632,6 +770,21 @@ h1, h2 {
                 }
             })
             .catch(error => console.error('Error fetching posts:', error));
+
+        // Toggle professional mode
+        document.addEventListener('DOMContentLoaded', function() {
+    const professionalModeBtn = document.getElementById('professional-mode-btn');
+    const body = document.body;
+    const matrixCanvases = document.querySelectorAll('#matrix-canvas-left, #matrix-canvas-right');
+
+    professionalModeBtn.addEventListener('click', function() {
+        body.classList.toggle('professional-mode');
+        matrixCanvases.forEach(canvas => {
+            canvas.style.display = body.classList.contains('professional-mode') ? 'none' : 'block';
+        });
+        professionalModeBtn.textContent = body.classList.contains('professional-mode') ? 'Original Mode' : 'Professional Mode';
+    });
+});
     </script>
 </body>
 </html>
