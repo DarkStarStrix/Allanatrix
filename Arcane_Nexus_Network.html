@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Arcane Nexus - Cyberpunk DAG</title>
+  <style>
+    /* Global styles */
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+    }
+
+    /* Container with a futuristic, animated background */
+    .network-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at center, #0d0d0d, #000);
+      overflow: hidden;
+    }
+
+    /* Subtle animated stars / grid overlay */
+    .network-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><defs><radialGradient id="grad" cx="50%" cy="50%" r="50%"><stop offset="0%" style="stop-color:%23fff;stop-opacity:0.2" /><stop offset="100%" style="stop-color:%23000;stop-opacity:0" /></radialGradient></defs><rect width="800" height="600" fill="url(%23grad)" /></svg>') repeat;
+      animation: moveBackground 20s linear infinite;
+      opacity: 0.2;
+      pointer-events: none;
+    }
+    @keyframes moveBackground {
+      from { transform: translate(0,0); }
+      to { transform: translate(-50%, -50%); }
+    }
+
+    /* Header text with neon glow */
+    .header {
+      position: absolute;
+      top: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 0 10px #3b82f6, 0 0 20px #8b5cf6;
+      z-index: 10;
+    }
+
+    /* Legend */
+    .legend {
+      position: absolute;
+      top: 80px;
+      left: 20px;
+      color: #fff;
+      z-index: 10;
+    }
+    .legend div {
+      margin-bottom: 10px;
+    }
+    .legend .indicator {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    /* SVG layer for DAG edges */
+    .network-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Cyberpunk card style */
+    .card {
+      position: absolute;
+      width: 150px;
+      background: #000;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 10px;
+      color: #fff;
+      z-index: 5;
+      overflow: visible;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px 5px rgba(59, 130, 246, 0.5);
+    }
+
+    /* Tooltip box that pops up on hover */
+    .tooltip-box {
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      transform: translate(10px, -50%);
+      background: #222;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #000;
+      opacity: 0;
+      transition: opacity 0.3s, transform 0.3s;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 20;
+    }
+    .card:hover .tooltip-box {
+      opacity: 1;
+      transform: translate(0, -50%);
+    }
+
+    /* Neon edge glow effect (applied on click and randomly) */
+    .edge-glow {
+      box-shadow: 0 0 15px 2px #3b82f6;
+      border-color: #3b82f6;
+    }
+
+    /* Light-up effect when updated */
+    .card.update-glow {
+      animation: updateGlow 1s ease-in-out;
+    }
+    @keyframes updateGlow {
+      0% { box-shadow: 0 0 15px 5px rgba(59, 130, 246, 0.5); }
+      100% { box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.2); }
+    }
+
+    /* Status indicator in the card */
+    .card .indicator {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .status-done {
+      background-color: #22c55e;
+    }
+    .status-maintenance {
+      background-color: #ef4444;
+    }
+    .status-development {
+      background-color: #3b82f6;
+    }
+
+    .card h3 {
+      margin: 0 0 8px 0;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    .stats {
+      font-size: 0.8rem;
+    }
+    .stats div {
+      margin-bottom: 4px;
+    }
+
+    /* Styling for SVG edges (lines) */
+    line.edge {
+      stroke: #4a5568;
+      stroke-width: 2;
+      marker-end: url(#arrowhead);
+      filter: drop-shadow(0 0 4px #3b82f6);
+    }
+
+    /* Animation for updated edges */
+    @keyframes edgeUpdateGlow {
+      0% { stroke: #3b82f6; }
+      50% { stroke: #8b5cf6; }
+      100% { stroke: #3b82f6; }
+    }
+
+    .edge.update-glow {
+      animation: edgeUpdateGlow 1s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <div class="network-container" id="networkContainer">
+    <div class="header">Arcane Nexus</div>
+    <div class="legend">
+      <div><span class="indicator status-done"></span>Stable</div>
+      <div><span class="indicator status-maintenance"></span>Active Issues</div>
+      <div><span class="indicator status-development"></span>In Development</div>
+    </div>
+    <svg class="network-svg" id="networkSVG"></svg>
+  </div>
+  <script>
+    async function fetchRepos() {
+      const response = await fetch('/api/pinned-repos');
+      return await response.json();
+    }
+
+    function calculateNodePositions(repos, containerWidth, containerHeight) {
+      const positions = {};
+      repos.forEach(repo => {
+        const x = Math.random() * (containerWidth - 150);
+        const y = Math.random() * (containerHeight - 100);
+        positions[repo.id] = { x, y };
+      });
+      return positions;
+    }
+
+    async function renderNetwork() {
+      const repos = await fetchRepos();
+      const container = document.getElementById('networkContainer');
+      const svg = document.getElementById('networkSVG');
+      const containerWidth = container.clientWidth;
+      const containerHeight = container.clientHeight;
+
+      svg.innerHTML = '';
+      container.querySelectorAll('.card').forEach(card => card.remove());
+
+      const positions = calculateNodePositions(repos, containerWidth, containerHeight);
+
+      const svgNS = "http://www.w3.org/2000/svg";
+      const defs = document.createElementNS(svgNS, "defs");
+
+      const marker = document.createElementNS(svgNS, "marker");
+      marker.setAttribute("id", "arrowhead");
+      marker.setAttribute("markerWidth", "10");
+      marker.setAttribute("markerHeight", "7");
+      marker.setAttribute("refX", "9");
+      marker.setAttribute("refY", "3.5");
+      marker.setAttribute("orient", "auto");
+      const polygon = document.createElementNS(svgNS, "polygon");
+      polygon.setAttribute("points", "0 0, 10 3.5, 0 7");
+      polygon.setAttribute("fill", "#3b82f6");
+      marker.appendChild(polygon);
+      defs.appendChild(marker);
+
+      svg.appendChild(defs);
+
+      repos.forEach(repo => {
+        const startPos = positions[repo.id];
+        repo.dependencies.forEach(depId => {
+          const endPos = positions[depId];
+          if (endPos) {
+            const line = document.createElementNS(svgNS, "line");
+            const startX = startPos.x + 75;
+            const startY = startPos.y + 50;
+            const endX = endPos.x + 75;
+            const endY = endPos.y + 50;
+            line.setAttribute("x1", startX);
+            line.setAttribute("y1", startY);
+            line.setAttribute("x2", endX);
+            line.setAttribute("y2", endY);
+            line.setAttribute("class", "edge");
+            line.setAttribute("marker-end", "url(#arrowhead)");
+            svg.appendChild(line);
+          }
+        });
+      });
+
+      repos.forEach(repo => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.style.left = positions[repo.id].x + 'px';
+        card.style.top = positions[repo.id].y + 'px';
+        card.setAttribute('data-repo-id', repo.id);
+
+        const tooltip = document.createElement('div');
+        tooltip.className = 'tooltip-box';
+        tooltip.innerHTML = `
+          <p><strong>${repo.name}</strong></p>
+          <p>Commits: ${repo.commits}</p>
+          <p>Stars: ${repo.stars}</p>
+          <p>Forks: ${repo.forks}</p>
+        `;
+        card.appendChild(tooltip);
+
+        card.addEventListener('click', (e) => {
+          e.stopPropagation();
+          updateRepo(repo.id);
+        });
+
+        const indicator = document.createElement('div');
+        indicator.className = 'indicator ' +
+          (repo.status === 'done' ? 'status-done' :
+           repo.status === 'maintenance' ? 'status-maintenance' :
+           'status-development');
+        card.appendChild(indicator);
+
+        const name = document.createElement('h3');
+        name.textContent = repo.name;
+        card.appendChild(name);
+
+        const stats = document.createElement('div');
+        stats.className = 'stats';
+        const commitDiv = document.createElement('div');
+        commitDiv.innerHTML = '🔧 ' + repo.commits;
+        const starDiv = document.createElement('div');
+        starDiv.innerHTML = '⭐ ' + repo.stars;
+        const forkDiv = document.createElement('div');
+        forkDiv.innerHTML = '🍴 ' + repo.forks;
+        stats.appendChild(commitDiv);
+        stats.appendChild(starDiv);
+        stats.appendChild(forkDiv);
+        card.appendChild(stats);
+
+        container.appendChild(card);
+      });
+    }
+
+    function updateRepo(repoId) {
+      // Simulate an update
+      renderNetwork();
+      const card = document.querySelector(`.card[data-repo-id="${repoId}"]`);
+      if (card) {
+        card.classList.add('update-glow');
+        setTimeout(() => {
+          card.classList.remove('update-glow');
+        }, 1000);
+      }
+    }
+
+    renderNetwork();
+    window.addEventListener('resize', renderNetwork);
+  </script>
+</body>
+</html>

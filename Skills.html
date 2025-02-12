@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Skills - Technomancer</title>
+    <style>
+        :root {
+            --primary: #10B981;
+            --background: #111827;
+            --text: #E5E7EB;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, sans-serif;
+            background: var(--background);
+            color: var(--text);
+        }
+
+        nav {
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #374151;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 0 1rem;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            color: var(--text);
+            opacity: 0.9;
+        }
+
+        .skill-category {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--primary);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .skill-icons img {
+            height: 2.5rem;
+            filter: grayscale(1) brightness(2);
+            transition: filter 0.3s;
+        }
+
+        .skill-icons img:hover {
+            filter: none;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .back-link {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--background);
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <h1>Technomancer</h1>
+    </nav>
+
+    <div class="container">
+        <div class="intro">
+            <h1>Turning Vision Into Reality</h1>
+            <p class="tagline">Transforming ambitious technical projects into practical, scalable software solutions</p>
+        </div>
+
+        <div class="skill-category">
+            <h2>Backend Development</h2>
+            <p>Specialized in building robust backend systems with CRUD functionality and API development. Experience with FASTAPI, Node.js, Django, and Flask.</p>
+            <div class="skill-icons">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="python">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="nodejs">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" alt="django">
+                <img src="https://skillicons.dev/icons?i=flask" alt="flask">
+                <img src="https://skillicons.dev/icons?i=fastapi" alt="fastapi">
+            </div>
+        </div>
+
+        <div class="skill-category">
+            <h2>Machine Learning & AI</h2>
+            <p>Deep expertise in model training, quantization, and ML infrastructure. Research focuses on efficient training methods and novel model architectures.</p>
+            <div class="skill-icons">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="tensorflow">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="pytorch">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" alt="numpy">
+            </div>
+        </div>
+
+        <div class="skill-category">
+            <h2>Quantum Computing</h2>
+            <p>Specialized in quantum optimization and quantum machine learning. Experience with Qiskit and QuTiP for developing quantum algorithms.</p>
+            <div class="skill-icons">
+                <img src="https://github.com/DarkStarStrix/DarkStarStrix/assets/108637439/9a92eb92-0292-4c22-ba0f-ff278cea5df6" alt="Qiskit">
+                <img src="https://github.com/DarkStarStrix/DarkStarStrix/assets/108637439/5337bf3a-5d17-4481-a618-652e3f78770b" alt="QuTIP">
+            </div>
+        </div>
+
+        <div class="skill-category">
+            <h2>DevOps & Cloud</h2>
+            <p>Comprehensive experience with cloud infrastructure and DevOps practices using Docker, AWS, Azure, and Terraform.</p>
+            <div class="skill-icons">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="docker">
+                <img src="https://skillicons.dev/icons?i=aws" alt="aws">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="azure">
+                <img src="https://skillicons.dev/icons?i=terraform" alt="terraform">
+            </div>
+        </div>
+
+        <div class="skill-category">
+            <h2>Programming Languages</h2>
+            <p>Proficient in Python, Rust, C/C++, and various other languages. Focus on performance-critical applications and systems programming.</p>
+            <div class="skill-icons">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="python">
+                <img src="https://skillicons.dev/icons?i=rust" alt="rust">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="cpp">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="c">
+            </div>
+        </div>
+
+        <a href="Portfolio.html" class="back-link">Back to Home</a>
+    </div>
+</body>
+</html>
