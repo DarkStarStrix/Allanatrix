@@ -1,0 +1,37 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
+const Home = () => {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get('https://panzsnnwaxkvpuqtqcfk.supabase.co/rest/v1/posts', {
+          headers: {
+            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBhbnpzbm53YXhrdnB1cXRxY2ZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk1MDA1OTgsImV4cCI6MjA1NTA3NjU5OH0.QWVvyKQjw4mPqCtu2STRigbaN8n6-sLUJn9iuRqDx74',
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBhbnpzbm53YXhrdnB1cXRxY2ZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk1MDA1OTgsImV4cCI6MjA1NTA3NjU5OH0.QWVvyKQjw4mPqCtu2STRigbaN8n6-sLUJn9iuRqDx74'
+          }
+        });
+        setPosts(response.data);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+  return (
+    <div>
+      {posts.map((post) => (
+        <div key={post.id}>
+          <h2>{post.title}</h2>
+          <p>{post.content.substring(0, 100)}...</p>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default Home;
