@@ -83,11 +83,24 @@
         let commandHistory = [];
         let historyIndex = -1;
 
+        function escapeHTML(str) {
+            return str.replace(/[&<>"']/g, function(match) {
+                const escapeMap = {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#39;'
+                };
+                return escapeMap[match];
+            });
+        }
+
         function processCommand(command) {
             const terminalContent = document.getElementById('terminal');
             const commandLine = document.createElement('div');
             commandLine.className = 'terminal-line';
-            commandLine.innerHTML = `<span class="prompt">PS C:\\></span> ${command}`;
+            commandLine.innerHTML = `<span class="prompt">PS C:\\></span> ${escapeHTML(command)}`;
             terminalContent.insertBefore(commandLine, terminalContent.lastElementChild);
 
             let response;
@@ -123,7 +136,7 @@
 
             const responseLine = document.createElement('div');
             responseLine.className = 'terminal-line response';
-            responseLine.innerHTML = `<span class="prompt"></span> ${response}`;
+            responseLine.innerHTML = `<span class="prompt"></span> ${escapeHTML(response)}`;
             terminalContent.insertBefore(responseLine, terminalContent.lastElementChild);
 
             terminalContent.scrollTop = terminalContent.scrollHeight;
