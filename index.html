@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Technomancer Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Base Theme Colors */
+            --primary: #9D00FF;
+            --secondary: #00ff9d;
+            --accent: #39ff14;
+            --background: #0a0a0f;
+            --surface: #1a1a1a;
+            --text: #e0fee0;
+            --text-secondary: #b8b8ff;
+            --purple-glow: rgba(157, 0, 255, 0.4);
+            --green-glow: rgba(0, 255, 157, 0.4);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        nav {
+            background: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(12px);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(157, 0, 255, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.75rem;
+            font-weight: 600;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px var(--purple-glow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .button {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid;
+            border-image: var(--gradient) 1;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Share Tech Mono', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button:hover {
+            box-shadow: 0 0 15px var(--purple-glow);
+            color: var(--secondary);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            text-align: center;
+            background: rgba(26, 26, 26, 0.7);
+            padding: 3rem;
+            border-radius: 8px;
+            border: 1px solid rgba(157, 0, 255, 0.2);
+            backdrop-filter: blur(8px);
+        }
+
+        .hero h1 {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px var(--purple-glow);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            border: 1px solid;
+            border-image: var(--gradient) 1;
+            font-family: 'Share Tech Mono', monospace;
+            background: transparent;
+        }
+
+        .social-links a:hover {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            box-shadow: 0 0 15px var(--purple-glow);
+        }
+
+        .mode-toggle {
+            background: transparent;
+            border: 2px solid;
+            border-image: var(--gradient) 1;
+            color: var(--text);
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Share Tech Mono', monospace;
+            transition: all 0.3s ease;
+        }
+
+        .mode-toggle:hover {
+            box-shadow: 0 0 15px var(--purple-glow);
+            color: var(--secondary);
+        }
+
+        footer {
+            background: rgba(26, 26, 26, 0.9);
+            padding: 1rem;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid rgba(157, 0, 255, 0.2);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--text-secondary);
+        }
+
+        /* Hover Effects */
+        .hover-glow:hover {
+            text-shadow: 0 0 10px var(--purple-glow),
+                         0 0 20px var(--green-glow);
+        }
+
+        /* Gradient Border */
+        .gradient-border {
+            position: relative;
+            background: var(--surface);
+            padding: 3px;
+        }
+
+        .gradient-border::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient);
+            z-index: -1;
+            border-radius: 6px;
+        }
+        /* Add to your existing styles */
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+.cyberpunk-mode {
+    position: relative;
+}
+
+.cyberpunk-mode .hero-content {
+    border-color: var(--secondary);
+    box-shadow: 0 0 20px var(--green-glow);
+}
+
+.cyberpunk-mode .button,
+.cyberpunk-mode .mode-toggle {
+    border-color: var(--secondary);
+}
+
+.cyberpunk-mode .nav-links a::before {
+    background: var(--secondary);
+}
+
+.cyberpunk-mode .logo {
+    color: var(--secondary);
+    text-shadow: 0 0 10px var(--green-glow);
+}
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <h1 class="logo hover-glow">Technomancer</h1>
+            <div class="nav-links">
+                <a href="Story.html">About</a>
+                <a href="Projects.html">Projects</a>
+                <a href="Skills.html">Skills</a>
+                <a href="/blog">Blog</a>
+                <button class="button" onclick="toggleTerminal()">Terminal</button>
+                <button class="mode-toggle" id="mode-toggle">Cyberpunk Mode</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="hero">
+        <div class="hero-content">
+            <h1 class="hover-glow">Building Tomorrow's Systems Today</h1>
+            <p>Transforming ambitious ideas into scalable, efficient software solutions</p>
+            <div class="social-links">
+                <a href="https://github.com/DarkStarStrix" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/technomancertrix/" target="_blank">LinkedIn</a>
+                <a href="https://x.com/AllanatrixQ" target="_blank">Twitter</a>
+                <a href="mailto:allanw.mk@gmail.com">Email</a>
+            </div>
+        </div>
+    </main>
+    <script>
+// Matrix Rain Effect
+class MatrixRain {
+    constructor() {
+        this.canvas = document.createElement('canvas');
+        this.canvas.id = 'matrix-rain';
+        this.canvas.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        `;
+        document.body.prepend(this.canvas);
+
+        this.ctx = this.canvas.getContext('2d');
+        this.characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%';
+        this.fontSize = 14;
+        this.drops = [];
+
+        this.resize();
+        window.addEventListener('resize', () => this.resize());
+    }
+
+    resize() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+        this.columns = Math.floor(this.canvas.width / this.fontSize);
+        this.drops = Array(this.columns).fill(1);
+    }
+
+    draw() {
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+        this.ctx.fillStyle = '#00ff9d';
+        this.ctx.font = `${this.fontSize}px monospace`;
+
+        for (let i = 0; i < this.drops.length; i++) {
+            const char = this.characters[Math.floor(Math.random() * this.characters.length)];
+            this.ctx.fillText(char, i * this.fontSize, this.drops[i] * this.fontSize);
+
+            if (this.drops[i] * this.fontSize > this.canvas.height && Math.random() > 0.975) {
+                this.drops[i] = 0;
+            }
+            this.drops[i]++;
+        }
+    }
+
+    start() {
+        this.canvas.style.opacity = '0.3';
+        if (!this.animationFrame) {
+            const animate = () => {
+                this.draw();
+                this.animationFrame = requestAnimationFrame(animate);
+            };
+            animate();
+        }
+    }
+
+    stop() {
+        this.canvas.style.opacity = '0';
+        if (this.animationFrame) {
+            cancelAnimationFrame(this.animationFrame);
+            this.animationFrame = null;
+        }
+    }
+}
+
+// Cyberpunk Mode Controller
+class CyberpunkMode {
+    constructor() {
+        this.isEnabled = false;
+        this.matrixRain = new MatrixRain();
+        this.setupEventListeners();
+        this.originalStyles = {};
+        this.saveOriginalStyles();
+    }
+
+    saveOriginalStyles() {
+        const root = document.documentElement;
+        const computedStyle = getComputedStyle(root);
+
+        // Save original CSS variables
+        this.originalStyles.cssVars = {
+            '--primary': computedStyle.getPropertyValue('--primary'),
+            '--secondary': computedStyle.getPropertyValue('--secondary'),
+            '--accent': computedStyle.getPropertyValue('--accent'),
+            '--text': computedStyle.getPropertyValue('--text'),
+            '--text-secondary': computedStyle.getPropertyValue('--text-secondary')
+        };
+    }
+
+    setupEventListeners() {
+        const toggleButton = document.getElementById('mode-toggle');
+        toggleButton.addEventListener('click', () => this.toggle());
+    }
+
+    toggle() {
+        this.isEnabled = !this.isEnabled;
+
+        if (this.isEnabled) {
+            this.enable();
+        } else {
+            this.disable();
+        }
+    }
+
+    enable() {
+        const root = document.documentElement;
+
+        // Apply cyberpunk styles
+        root.style.setProperty('--primary', '#00ff9d');
+        root.style.setProperty('--secondary', '#39ff14');
+        root.style.setProperty('--accent', '#9D00FF');
+        root.style.setProperty('--text', '#e0fee0');
+        root.style.setProperty('--text-secondary', '#7fff7f');
+
+        // Add cyberpunk effects
+        document.body.classList.add('cyberpunk-mode');
+        this.matrixRain.start();
+
+        // Update button text
+        document.getElementById('mode-toggle').textContent = 'Normal Mode';
+    }
+
+    disable() {
+        const root = document.documentElement;
+
+        // Restore original styles
+        Object.entries(this.originalStyles.cssVars).forEach(([property, value]) => {
+            root.style.setProperty(property, value);
+        });
+
+        // Remove cyberpunk effects
+        document.body.classList.remove('cyberpunk-mode');
+        this.matrixRain.stop();
+
+        // Update button text
+        document.getElementById('mode-toggle').textContent = 'Cyberpunk Mode';
+    }
+}
+
+// Terminal Controller
+class TerminalController {
+    constructor() {
+        this.setupEventListeners();
+    }
+
+    setupEventListeners() {
+        document.querySelector('.button').addEventListener('click', () => this.openTerminal());
+    }
+
+    openTerminal() {
+        window.location.href = 'Terminal.html';
+    }
+}
+
+// Initialize everything when the DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const cyberpunkMode = new CyberpunkMode();
+    const terminalController = new TerminalController();
+
+    // Add glitch effect to titles
+    const glitchElements = document.querySelectorAll('.hover-glow');
+    glitchElements.forEach(element => {
+        element.addEventListener('mouseover', () => {
+            element.style.animation = 'glitch 0.3s infinite';
+        });
+        element.addEventListener('mouseout', () => {
+            element.style.animation = '';
+        });
+    });
+});
+        class BlogRouter {
+            constructor() {
+                this.blogPath = '/my-blog/src/app';
+            }
+
+            redirectToBlog() {
+                window.location.href = this.blogPath;
+            }
+        }
+</script>
+
+    <footer>
+        <p>DarkStarStrix © 2025</p>
+    </footer>
+</body>
+</html>

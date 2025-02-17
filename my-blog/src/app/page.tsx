@@ -2,6 +2,7 @@
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import BlogList from './components/BlogList'
+import BackButton from './components/BackButton'
 
 export default async function Page() {
   const cookieStore = cookies()
@@ -46,6 +47,7 @@ export default async function Page() {
 
   return (
     <main className="container mx-auto px-4 py-8">
+    <BackButton />
       <h1 className="text-4xl font-bold mb-8">Blog Posts</h1>
       <BlogList posts={posts || []} />
     </main>

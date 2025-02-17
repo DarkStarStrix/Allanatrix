@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Technomancer Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6D28D9;
+            --primary-dark: #5B21B6;
+            --accent: #10B981;
+            --background: #0F172A;
+            --surface: #1E293B;
+            --text: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --neon-glow: rgba(109, 40, 217, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        nav {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(12px);
+            padding: 1.25rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .terminal-btn {
+            background: var(--primary);
+            color: var(--text);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px var(--neon-glow);
+        }
+
+        .terminal-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px -1px var(--neon-glow);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            background: var(--surface);
+        }
+
+        .social-links a:hover {
+            color: var(--text);
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background: var(--surface);
+            padding: 1.5rem;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cyberpunk-mode {
+            position: relative;
+        }
+
+        .cyberpunk-mode::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                45deg,
+                rgba(109, 40, 217, 0.1),
+                rgba(16, 185, 129, 0.1)
+            );
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .mode-toggle {
+            background: var(--surface);
+            border: none;
+            color: var(--text);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mode-toggle:hover {
+            background: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <h1 class="logo">Technomancer</h1>
+            <div class="nav-links">
+                <a href="Story.html">About</a>
+                <a href="Projects.html">Projects</a>
+                <a href="Skills.html">Skills</a>
+                <a href="/blog">Blog</a>
+                <button class="terminal-btn" onclick="toggleTerminal()">Terminal</button>
+                <button class="mode-toggle" id="cyberpunk-mode-btn">Toggle Mode</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="hero">
+        <div class="hero-content">
+            <h1>Building Tomorrow's Systems Today</h1>
+            <p>Transforming ambitious ideas into scalable, efficient software solutions</p>
+            <div class="social-links">
+                <a href="https://github.com/DarkStarStrix" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/technomancertrix/" target="_blank">LinkedIn</a>
+                <a href="https://x.com/AllanatrixQ" target="_blank">Twitter</a>
+                <a href="mailto:allanw.mk@gmail.com">Email</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>DarkStarStrix © 2025</p>
+    </footer>
+
+    <script>
+        // Your existing JavaScript remains the same
+    </script>
+</body>
+</html>

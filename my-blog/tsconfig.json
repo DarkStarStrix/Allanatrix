@@ -52,5 +52,10 @@
     "node_modules",
     ".next",
     "out"
-  ]
+  ],
+    "references": [
+        {
+        "path": "./tsconfig.json"
+        }
+    ]
 }
