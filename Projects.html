@@ -2,90 +2,298 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Technomancer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #10B981;
-            --background: #111827;
-            --text: #E5E7EB;
+            --primary: #9D00FF;
+            --secondary: #00ff9d;
+            --accent: #39ff14;
+            --background: #0a0a0f;
+            --surface: #1a1a1a;
+            --text: #e0fee0;
+            --text-secondary: #b8b8ff;
+            --purple-glow: rgba(157, 0, 255, 0.4);
+            --green-glow: rgba(0, 255, 157, 0.4);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --shadow-color: rgba(157, 0, 255, 0.2);
+            --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition-normal);
         }
 
         body {
-            margin: 0;
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', sans-serif;
             background: var(--background);
             color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(157, 0, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 157, 0.05) 0%, transparent 50%);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(26, 26, 26, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            border-radius: 4px;
         }
 
         nav {
-            padding: 1rem;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(12px);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(157, 0, 255, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #374151;
+        }
+
+        .logo {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.75rem;
+            font-weight: 600;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px var(--purple-glow);
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
         }
 
         .container {
-            max-width: 800px;
-            margin: 4rem auto;
-            padding: 0 1rem;
+            max-width: 1000px;
+            margin: 6rem auto 4rem;
+            padding: 0 2rem;
         }
 
         h1 {
-            font-size: 2rem;
-            color: var(--primary);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 2.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px var(--purple-glow);
             margin-bottom: 2rem;
+            text-align: center;
         }
 
         h2 {
-            color: var(--primary);
+            font-family: 'Share Tech Mono', monospace;
             font-size: 1.5rem;
-            margin: 1.5rem 0;
+            color: var(--secondary);
+            margin: 1.5rem 0 1rem;
         }
 
         .project-category {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid var(--primary);
+            background: rgba(26, 26, 26, 0.7);
+            border: 1px solid rgba(157, 0, 255, 0.2);
             padding: 2rem;
-            border-radius: 0.5rem;
+            border-radius: 8px;
             margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: var(--transition-normal);
+        }
+
+        .project-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3),
+                        0 0 15px var(--purple-glow);
+        }
+
+        .project-category h1 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
         }
 
         p {
+            color: var(--text-secondary);
             margin-bottom: 1rem;
             line-height: 1.6;
         }
 
         .github-link {
-            display: inline-block;
-            background: var(--primary);
-            color: var(--background);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(157, 0, 255, 0.1);
+            color: var(--text);
             text-decoration: none;
             padding: 0.75rem 1.5rem;
-            border-radius: 0.375rem;
+            border: 1px solid rgba(157, 0, 255, 0.5);
+            border-radius: 4px;
+            font-family: 'Share Tech Mono', monospace;
             margin: 1rem 0;
-            transition: opacity 0.2 s;
+            transition: var(--transition-fast);
         }
 
         .github-link:hover {
-            opacity: 0.9;
+            background: var(--gradient);
+            color: var(--background);
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(157, 0, 255, 0.4);
         }
 
         .back-link {
-            display: inline-block;
-            background: var(--primary);
-            color: var(--background);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(157, 0, 255, 0.1);
+            color: var(--text);
             text-decoration: none;
             padding: 0.75rem 1.5rem;
-            border-radius: 0.375rem;
+            border: 1px solid rgba(157, 0, 255, 0.5);
+            border-radius: 4px;
+            font-family: 'Share Tech Mono', monospace;
             margin-top: 2rem;
+            transition: var(--transition-fast);
+        }
+
+        .back-link:hover {
+            background: var(--gradient);
+            color: var(--background);
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(157, 0, 255, 0.4);
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: float 10s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh); }
+            100% { transform: translateY(-100vh); }
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                margin: 5rem auto 2rem;
+                padding: 0 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+            }
         }
     </style>
 </head>
 <body>
     <nav>
-        <h1>Technomancer</h1>
+        <div class="nav-container">
+            <h1 class="logo">Technomancer</h1>
+            <div class="nav-links">
+                <a href="Story.html">About</a>
+                <a href="Projects.html">Projects</a>
+                <a href="Skills.html">Skills</a>
+                <a href="https://dev.to/darkstalker">Blog</a>
+                <a href="Terminal.html">Terminal</a>
+                <a href="index.html">Home</a>
+            </div>
+        </div>
     </nav>
+
+    <div class="particles" id="particles"></div>
 
     <div class="container">
         <h1>Projects</h1>
@@ -93,13 +301,13 @@
 
         <div class="project-category">
             <h1>Quantum Computing</h1>
-            <h2>QSolvers (Experimental Project)</h2>
+            <h2>QSolvers</h2>
             <p>Developed a quantum solver library focused on applied problems in chemistry and finance using IBM's Qiskit.</p>
             <p>Achievements: 11,000 lines of bug-free code, six research papers published, proof-of-concepts for optimization challenges like VRP.</p>
-            <p>Was able to develop independently but was not able to ship to pip and get the VRP app up due to upstream errors in qiskit and dependency issues</p>
+            <p>Developed independently but faced challenges shipping to PyPI due to upstream errors in Qiskit and dependency issues.</p>
             <a href="https://github.com/DarkStarStrix/QSolvers" class="github-link">GitHub Repository</a>
 
-            <h2>Bosonic (High Level Theoretical Physics research Project)</h2>
+            <h2>Bosonic</h2>
             <p>Explored Bose-Einstein condensates and non-Abelian anyons as substrates for quantum computation using QuTiP.</p>
             <p>Achievements: Refined code simulating quantum phenomena, deep theoretical work in condensed matter physics, requiring chip design knowledge.</p>
             <a href="https://github.com/DarkStarStrix/Bosonic" class="github-link">GitHub Repository</a>
@@ -107,47 +315,42 @@
 
         <div class="project-category">
             <h1>Machine Learning & AI</h1>
-            <h2>Emergent Neural Networks (High Level AI Research Project)</h2>
+            <h2>Emergent Neural Networks</h2>
             <p>Created a multi-objective optimization model balancing accuracy, stability, and reliability in AI systems.</p>
             <p>Achievements: Complete framework available on GitHub with accompanying code, data, and white papers.</p>
-            <a href="https://github.com/DarkStarStrix/Emergent-Nerual-Networks" class="github-link">GitHub Repository</a>
+            <a href="https://github.com/DarkStarStrix/Emergent-Neural-Networks" class="github-link">GitHub Repository</a>
 
-            <h2>Thermodynamic Diffusion Models (Working on it)</h2>
+            <h2>Thermodynamic Diffusion Models</h2>
             <p>Developed statistical mechanics models to apply diffusion processes to areas like medical imaging.</p>
             <p>Achievements: Proof-of-concept completed, pending further scaling.</p>
 
-            <h2>DataVolt (Data Infrastructure project)</h2>
-            <p>Developed a data engineering infrastructure to simplify data pipelines and a comprehensive repo for </p>
-            <p>anything data engineering was able to make a workflow that streamlined the process of making data pipelines </p>
-            <p>80% to 90% faster </p>
+            <h2>DataVolt</h2>
+            <p>Developed a data engineering infrastructure to simplify data pipelines, streamlining the process by 80-90%.</p>
             <a href="https://github.com/DarkStarStrix/DataVolt" class="github-link">GitHub Repository</a>
 
-            <h2>Auto_api (ML infrastructure project)</h2>
-            <p>A simplified machine learning automation framework that handles the complexities of ML workflows through configuration.
-            <p>The project provides an easy-to-use interface for training machine learning models while automatically managing optimization, visualization, and training processes.</p>
-            <p>Was able to automate 80% of the ML training process</p>
-            <a href="https://github.com/DarkStarStrix/Auto_Api" class="github-link">GitHub Repository</a>
+            <h2>AutoAPI</h2>
+            <p>A simplified machine learning automation framework that handles ML workflows through configuration, automating 80% of the training process.</p>
+            <a href="https://github.com/DarkStarStrix/AutoAPI" class="github-link">GitHub Repository</a>
         </div>
 
         <div class="project-category">
             <h1>Operations Research & Optimization</h1>
-            <h2>Pathfinder (Data Structures and Algorithms project)</h2>
+            <h2>Pathfinder</h2>
             <p>Built and visualized the A* algorithm to simulate maze flooding for optimization.</p>
-            <p>Achievements: Successfully programmed and visualized optimization processes, demonstrating real-world problem-solving with the A* flood method.</p>
+            <p>Achievements: Successfully programmed and visualized optimization processes, demonstrating real-world problem-solving.</p>
             <a href="https://github.com/DarkStarStrix/PathFinder" class="github-link">GitHub Repository</a>
 
-            <h2>Math Programming & Operations Research Models (operation's Research project)</h2>
-            <p>Coded a variety of models from linear programming to dynamic VRP to showcase algorithmic knowledge.</p>
+            <h2>Math Programming & Operations Research Models</h2>
+            <p>Coded models from linear programming to dynamic VRP to showcase algorithmic knowledge.</p>
             <p>Achievements: Full documentation and coded models demonstrating advanced optimization techniques.</p>
             <a href="https://github.com/DarkStarStrix/Math-Programming-Models" class="github-link">GitHub Repository</a>
         </div>
 
         <div class="project-category">
             <h1>Software & Backend Engineering</h1>
-
             <h2>Books Application</h2>
-            <p>Developed a full-stack book application using React, Fast-API, and MongoDB.</p>
-            <p>Deployed on render but faced challenges with cloud compute costs.</p>
+            <p>Developed a full-stack book application using React, FastAPI, and MongoDB.</p>
+            <p>Deployed on Render but faced challenges with cloud compute costs.</p>
             <a href="https://github.com/DarkStarStrix/Books" class="github-link">GitHub Repository</a>
         </div>
 
@@ -157,21 +360,30 @@
             <p>Led the team to the top 10 globally at age 16, showcasing leadership and critical thinking.</p>
 
             <h2>NASA Space Apps Hackathon</h2>
-            <p>In this hackathon, I Led a technical team to ship an application that sonifies space images.</p>
-            <p>Similarly to my Jane street and world scholars experience, I was able to lead a team to a high ranking</p>
-            <p>We were able to coordinate and have a functioning app on GitHub</p>
+            <p>Led a technical team to ship an application that sonifies space images, achieving a high ranking.</p>
 
             <h2>Penny Lane Quantum Hackathon</h2>
             <p>Solo participation in quantum computing competition, focusing on community collaboration.</p>
-            <p>This shows my ability to adapt to any situation and still participate </p>
 
-            <h2>Jane street </h2>
-            <p>Participated in a Kaggle competition using a dataset from Jane Street.</p>
-            <p>Coordinated a team from Iran, Sweden, and the USA to ship machine learning models.</p>
-            <p>Placed 1000th out of 3000 teams despite joining late, showcasing strong teamwork and leadership.</p>
+            <h2>Jane Street</h2>
+            <p>Participated in a Kaggle competition, coordinating a global team to place 1000th out of 3000 despite joining late.</p>
         </div>
+
         <a href="index.html" class="back-link">Back to Home</a>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                particle.style.animationDelay = `${Math.random() * 10}s`;
+                particlesContainer.appendChild(particle);
+            }
+        });
+    </script>
 </body>
 </html>
-

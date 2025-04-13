@@ -1,269 +1,340 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Terminal</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal - Technomancer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap');
+        :root {
+            --primary: #9D00FF;
+            --secondary: #00ff9d;
+            --accent: #39ff14;
+            --background: #0a0a0f;
+            --surface: #1a1a1a;
+            --text: #e0fee0;
+            --text-secondary: #b8b8ff;
+            --purple-glow: rgba(157, 0, 255, 0.4);
+            --green-glow: rgba(0, 255, 157, 0.4);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --shadow-color: rgba(157, 0, 255, 0.2);
+            --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition-normal);
+        }
 
-      body {
-        font-family: 'Fira Code', monospace;
-        background-color: #0a0a0a;
-        color: #00ff00;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        padding: 20px;
-      }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(157, 0, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 157, 0.05) 0%, transparent 50%);
+        }
 
-      .terminal {
-        width: 100%;
-        max-width: 900px;
-        height: 600px;
-        background-color: rgba(0, 0, 0, 0.9);
-        border: 1px solid #00ff00;
-        border-radius: 8px;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
-      }
+        .terminal {
+            width: 100%;
+            max-width: 900px;
+            height: 600px;
+            background: rgba(26, 26, 26, 0.7);
+            border: 1px solid rgba(157, 0, 255, 0.2);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2), 0 0 20px var(--purple-glow);
+        }
 
-      .terminal-header {
-        background: linear-gradient(90deg, #ff00ff, #00ffff);
-        padding: 8px 16px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
+        .terminal-header {
+            background: var(--gradient);
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-      .terminal-button {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-      }
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
 
-      .close { background-color: #ff5f56; }
-      .minimize { background-color: #ffbd2e; }
-      .maximize { background-color: #27c93f; }
+        .close { background-color: #ef4444; }
+        .minimize { background-color: #facc15; }
+        .maximize { background-color: var(--secondary); }
 
-      .terminal-content {
-        padding: 16px;
-        height: calc(100% - 30px);
-        overflow-y: auto;
-        font-size: 14px;
-        display: flex;
-        flex-direction: column;
-      }
+        .terminal-content {
+            padding: 16px;
+            height: calc(100% - 30px);
+            overflow-y: auto;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--text-secondary);
+        }
 
-      .terminal-line {
-        display: flex;
-        margin-bottom: 8px;
-      }
+        .terminal-line {
+            display: flex;
+            margin-bottom: 8px;
+        }
 
-      .prompt {
-        color: #00ff00;
-        margin-right: 8px;
-        white-space: nowrap;
-      }
+        .prompt {
+            color: var(--secondary);
+            margin-right: 8px;
+            white-space: nowrap;
+        }
 
-      .input-wrapper {
-        position: relative;
-        flex: 1;
-        display: flex;
-        align-items: center;
-      }
+        .input-wrapper {
+            position: relative;
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
 
-      .terminal-input {
-        background: transparent;
-        border: none;
-        color: #00ff00;
-        font-family: inherit;
-        font-size: inherit;
-        width: 100%;
-        outline: none;
-        padding: 0;
-        margin: 0;
-      }
+        .terminal-input {
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: inherit;
+            width: 100%;
+            outline: none;
+            padding: 0;
+            margin: 0;
+        }
 
-      .response {
-        color: #00ffff;
-        white-space: pre-line;
-      }
+        .terminal-input:focus {
+            box-shadow: 0 0 10px var(--purple-glow);
+        }
 
-      /* Custom Scrollbar */
-      .terminal-content::-webkit-scrollbar {
-        width: 8px;
-      }
+        .response {
+            color: var(--text-secondary);
+            white-space: pre-line;
+        }
 
-      .terminal-content::-webkit-scrollbar-track {
-        background: #1a1a1a;
-      }
+        .terminal-content::-webkit-scrollbar {
+            width: 8px;
+        }
 
-      .terminal-content::-webkit-scrollbar-thumb {
-        background: #00ff00;
-        border-radius: 4px;
-      }
+        .terminal-content::-webkit-scrollbar-track {
+            background: var(--surface);
+        }
+
+        .terminal-content::-webkit-scrollbar-thumb {
+            background: var(--gradient);
+            border-radius: 4px;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: float 10s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh); }
+            100% { transform: translateY(-100vh); }
+        }
+
+        @media screen and (max-width: 768px) {
+            .terminal {
+                height: 500px;
+            }
+
+            .terminal-content {
+                font-size: 12px;
+            }
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
     <div class="terminal">
-      <div class="terminal-header">
-        <div class="terminal-button close"></div>
-        <div class="terminal-button minimize"></div>
-        <div class="terminal-button maximize"></div>
-      </div>
-      <div class="terminal-content" id="terminal-content"></div>
+        <div class="terminal-header">
+            <div class="terminal-button close"></div>
+            <div class="terminal-button minimize"></div>
+            <div class="terminal-button maximize"></div>
+        </div>
+        <div class="terminal-content" id="terminal-content"></div>
     </div>
 
     <script>
-      class Terminal {
-        constructor() {
-          this.content = document.getElementById("terminal-content");
-          this.commandHistory = [];
-          this.historyIndex = -1;
-          this.commands = {
-            help: "Available commands: help, about, projects, skills, contact, clear, back",
-            about:
-              "I am a systems engineer specializing in quantum computing and artificial intelligence.",
-            projects: [
-              "Current Projects:",
-              "• AutoML - Automated Machine Learning Pipeline",
-              "• DataVault - Secure Data Storage Solution",
-              "• Pathfinder - AI-powered Navigation System",
-              "• QSolvers - Quantum Algorithm Library",
-            ].join("\n"),
-            skills: [
-              "Technical Skills:",
-              "• Artificial Intelligence & Machine Learning",
-              "• Quantum Computing",
-              "• Data Engineering",
-              "• Network Security",
-              "• Systems Architecture",
-            ].join("\n"),
-            contact: "Email: allanw.mk@gmail.com | GitHub: @DarkStarStrix",
-            clear: () => this.clearTerminal(),
-            back: () => (window.location.href = "index.html"),
-          };
+        class Terminal {
+            constructor() {
+                this.content = document.getElementById("terminal-content");
+                this.commandHistory = [];
+                this.historyIndex = -1;
+                this.commands = {
+                    help: [
+                        "Available commands:",
+                        "  help - Show this message",
+                        "  about - Open About page",
+                        "  projects - Open Projects page",
+                        "  skills - Open Skills page",
+                        "  home - Open Home page",
+                        "  nexus - Launch Arcane Nexus visualization",
+                        "  contact - Show contact info",
+                        "  clear - Clear the terminal"
+                    ].join("\n"),
+                    about: () => window.location.href = "Story.html",
+                    projects: () => window.location.href = "Projects.html",
+                    skills: () => window.location.href = "Skills.html",
+                    home: () => window.location.href = "index.html",
+                    nexus: () => {
+                        this.displayResponse("Initializing Arcane Nexus...");
+                        window.open("Arcane.html", "_blank");
+                    },
+                    contact: "Email: allanw.mk@gmail.com | GitHub: @DarkStarStrix | Blog: https://dev.to/darkstalker",
+                    clear: () => this.clearTerminal()
+                };
 
-          this.initializeTerminal();
-        }
-
-        initializeTerminal() {
-          this.displayWelcomeMessage();
-          this.createNewLine();
-          document.addEventListener("click", () => this.focusLastInput());
-        }
-
-        displayWelcomeMessage() {
-          const welcome = [
-            "Welcome to the Terminal",
-            "Type 'help' to see available commands",
-            "",
-          ].join("\n");
-          this.displayResponse(welcome);
-        }
-
-        createNewLine() {
-          const line = document.createElement("div");
-          line.className = "terminal-line";
-          line.innerHTML = `
-            <span class="prompt">PS C:\\></span>
-            <div class="input-wrapper">
-              <input type="text" class="terminal-input" autocomplete="off">
-            </div>
-          `;
-
-          this.content.appendChild(line);
-          const input = line.querySelector(".terminal-input");
-          input.addEventListener("keydown", (e) => this.handleInput(e));
-          input.focus();
-          this.content.scrollTop = this.content.scrollHeight;
-          return input;
-        }
-
-        handleInput(e) {
-          const input = e.target;
-
-          if (e.key === "Enter") {
-            e.preventDefault();
-            const command = input.value.trim();
-            if (command) {
-              this.commandHistory.push(command);
-              this.historyIndex = this.commandHistory.length;
-              this.executeCommand(command);
+                this.initializeTerminal();
             }
-            input.disabled = true;
-            this.createNewLine();
-          } else if (e.key === "ArrowUp") {
-            e.preventDefault();
-            this.navigateHistory("up", input);
-          } else if (e.key === "ArrowDown") {
-            e.preventDefault();
-            this.navigateHistory("down", input);
-          }
+
+            initializeTerminal() {
+                this.displayWelcomeMessage();
+                this.createNewLine();
+                document.addEventListener("click", () => this.focusLastInput());
+            }
+
+            displayWelcomeMessage() {
+                const welcome = [
+                    "Welcome to Technomancer Terminal",
+                    "Type 'help' to see available commands",
+                    ""
+                ].join("\n");
+                this.displayResponse(welcome);
+            }
+
+            createNewLine() {
+                const line = document.createElement("div");
+                line.className = "terminal-line";
+                line.innerHTML = `
+                    <span class="prompt">PS C:\\></span>
+                    <div class="input-wrapper">
+                        <input type="text" class="terminal-input" autocomplete="off">
+                    </div>
+                `;
+
+                this.content.appendChild(line);
+                const input = line.querySelector(".terminal-input");
+                input.addEventListener("keydown", (e) => this.handleInput(e));
+                input.focus();
+                this.content.scrollTop = this.content.scrollHeight;
+                return input;
+            }
+
+            handleInput(e) {
+                const input = e.target;
+
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    const command = input.value.trim();
+                    if (command) {
+                        this.commandHistory.push(command);
+                        this.historyIndex = this.commandHistory.length;
+                        this.executeCommand(command);
+                    }
+                    input.disabled = true;
+                    this.createNewLine();
+                } else if (e.key === "ArrowUp") {
+                    e.preventDefault();
+                    this.navigateHistory("up", input);
+                } else if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    this.navigateHistory("down", input);
+                }
+            }
+
+            navigateHistory(direction, input) {
+                if (direction === "up" && this.historyIndex > 0) {
+                    this.historyIndex--;
+                    input.value = this.commandHistory[this.historyIndex];
+                } else if (
+                    direction === "down" &&
+                    this.historyIndex < this.commandHistory.length - 1
+                ) {
+                    this.historyIndex++;
+                    input.value = this.commandHistory[this.historyIndex];
+                } else if (direction === "down") {
+                    this.historyIndex = this.commandHistory.length;
+                    input.value = "";
+                }
+            }
+
+            executeCommand(cmd) {
+                const command = cmd.toLowerCase();
+                if (typeof this.commands[command] === "function") {
+                    this.commands[command]();
+                } else if (this.commands[command]) {
+                    this.displayResponse(this.commands[command]);
+                } else {
+                    this.displayResponse(
+                        `Command not recognized. Type "help" for available commands.`
+                    );
+                }
+            }
+
+            displayResponse(text) {
+                const response = document.createElement("div");
+                response.className = "terminal-line response";
+                response.textContent = text;
+                this.content.appendChild(response);
+                this.content.scrollTop = this.content.scrollHeight;
+            }
+
+            clearTerminal() {
+                this.content.innerHTML = "";
+                this.createNewLine();
+            }
+
+            focusLastInput() {
+                const lastInput = this.content.querySelector(".terminal-input:last-of-type");
+                if (lastInput) lastInput.focus();
+            }
         }
 
-        navigateHistory(direction, input) {
-          if (direction === "up" && this.historyIndex > 0) {
-            this.historyIndex--;
-            input.value = this.commandHistory[this.historyIndex];
-          } else if (
-            direction === "down" &&
-            this.historyIndex < this.commandHistory.length - 1
-          ) {
-            this.historyIndex++;
-            input.value = this.commandHistory[this.historyIndex];
-          } else if (direction === "down") {
-            this.historyIndex = this.commandHistory.length;
-            input.value = "";
-          }
-        }
+        // Initialize the terminal
+        document.addEventListener("DOMContentLoaded", () => {
+            new Terminal();
 
-        executeCommand(cmd) {
-          const command = cmd.toLowerCase();
-          if (typeof this.commands[command] === "function") {
-            this.commands[command]();
-          } else if (this.commands[command]) {
-            this.displayResponse(this.commands[command]);
-          } else {
-            this.displayResponse(
-              `Command not recognized. Type "help" for available commands.`
-            );
-          }
-        }
-
-        displayResponse(text) {
-          const response = document.createElement("div");
-          response.className = "terminal-line response";
-          response.textContent = text;
-          this.content.appendChild(response);
-          this.content.scrollTop = this.content.scrollHeight;
-        }
-
-        clearTerminal() {
-          this.content.innerHTML = "";
-          this.createNewLine();
-        }
-
-        focusLastInput() {
-          const lastInput = this.content.querySelector(".terminal-input:last-of-type");
-          if (lastInput) lastInput.focus();
-        }
-      }
-
-      // Initialize the terminal
-      document.addEventListener("DOMContentLoaded", () => {
-        new Terminal();
-      });
+            // Particle effect
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                particle.style.animationDelay = `${Math.random() * 10}s`;
+                particlesContainer.appendChild(particle);
+            }
+        });
     </script>
-  </body>
+</body>
 </html>

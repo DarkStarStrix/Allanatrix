@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Technomancer Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
@@ -17,13 +18,19 @@
             --purple-glow: rgba(157, 0, 255, 0.4);
             --green-glow: rgba(0, 255, 157, 0.4);
             --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --shadow-color: rgba(157, 0, 255, 0.2);
+
+            /* Transitions */
+            --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: all 0.3s ease;
+            transition: var(--transition-normal);
         }
 
         body {
@@ -32,10 +39,27 @@
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(157, 0, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 157, 0.05) 0%, transparent 50%);
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(26, 26, 26, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            border-radius: 4px;
         }
 
         nav {
-            background: rgba(10, 10, 15, 0.9);
+            background: rgba(10, 10, 15, 0.8);
             backdrop-filter: blur(12px);
             padding: 1rem 2rem;
             position: fixed;
@@ -43,6 +67,7 @@
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid rgba(157, 0, 255, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
         .nav-container {
@@ -61,6 +86,26 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 10px var(--purple-glow);
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3 s ease;
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
         }
 
         .nav-links {
@@ -77,6 +122,7 @@
             padding: 0.5rem 1rem;
             border-radius: 4px;
             position: relative;
+            overflow: hidden;
         }
 
         .nav-links a::before {
@@ -99,7 +145,7 @@
         }
 
         .button {
-            background: transparent;
+            background: rgba(157, 0, 255, 0.1);
             color: var(--text);
             border: 2px solid;
             border-image: var(--gradient) 1;
@@ -110,11 +156,29 @@
             font-family: 'Share Tech Mono', monospace;
             position: relative;
             overflow: hidden;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 5px var(--purple-glow);
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(157, 0, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .button:hover::before {
+            left: 100%;
         }
 
         .button:hover {
             box-shadow: 0 0 15px var(--purple-glow);
             color: var(--secondary);
+            transform: translateY(-2px);
         }
 
         .hero {
@@ -122,18 +186,29 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0 2rem;
+            padding: 2rem;
             position: relative;
+            margin-top: 1rem;
         }
 
         .hero-content {
             max-width: 800px;
             text-align: center;
             background: rgba(26, 26, 26, 0.7);
-            padding: 3rem;
+            padding: 2rem; /* Reduced from 3rem for a cleaner look */
             border-radius: 8px;
             border: 1px solid rgba(157, 0, 255, 0.2);
             backdrop-filter: blur(8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2),
+                         0 0 20px rgba(157, 0, 255, 0.2);
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .hero-content:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3),
+                         0 0 30px rgba(157, 0, 255, 0.3);
         }
 
         .hero h1 {
@@ -146,12 +221,50 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 10px var(--purple-glow);
+            position: relative;
+        }
+
+        .hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
         }
 
         .hero p {
             font-size: 1.25rem;
             color: var(--text-secondary);
             margin-bottom: 2rem;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tagline {
+            display: block;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--secondary);
+        }
+
+        .subtitle {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.25rem;
+            opacity: 0.8;
+            max-width: 80%;
+            margin: 0 auto 2rem;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: bold;
         }
 
         .social-links {
@@ -162,27 +275,54 @@
             flex-wrap: wrap;
         }
 
-        .social-links a {
+        .social-link {
             color: var(--text);
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: var(--transition-fast);
             padding: 0.75rem 1.5rem;
             border-radius: 4px;
-            border: 1px solid;
-            border-image: var(--gradient) 1;
+            border: 1px solid rgba(157, 0, 255, 0.5);
             font-family: 'Share Tech Mono', monospace;
-            background: transparent;
+            background: rgba(26, 26, 26, 0.7);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 5px rgba(157, 0, 255, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .social-links a:hover {
+        .social-link svg {
+            height: 1.25rem;
+            width: 1.25rem;
+            fill: currentColor;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(157, 0, 255, 0.2), transparent);
+            transition: var(--transition-slow);
+        }
+
+        .social-link:hover::before {
+            left: 100%;
+        }
+
+        .social-link:hover {
             background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            box-shadow: 0 0 15px var(--purple-glow);
+            color: var(--background);
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(157, 0, 255, 0.4);
         }
 
         .mode-toggle {
-            background: transparent;
+            background: rgba(26, 26, 26, 0.7);
             border: 2px solid;
             border-image: var(--gradient) 1;
             color: var(--text);
@@ -190,304 +330,565 @@
             border-radius: 4px;
             cursor: pointer;
             font-family: 'Share Tech Mono', monospace;
-            transition: all 0.3s ease;
+            transition: var(--transition-normal);
+            box-shadow: 0 0 5px var(--purple-glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mode-toggle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 157, 0.2), transparent);
+            transition: var(--transition-slow);
+        }
+
+        .mode-toggle:hover::before {
+            left: 100%;
         }
 
         .mode-toggle:hover {
-            box-shadow: 0 0 15px var(--purple-glow);
+            box-shadow: 0 0 15px var(--green-glow);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .featured-projects {
+            padding: 4rem 2rem;
+            background: rgba(10, 10, 15, 0.8);
+            margin-top: 2rem;
+        }
+
+        .featured-projects h2 {
+            text-align: center;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .featured-projects h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: rgba(26, 26, 26, 0.7);
+            border: 1px solid rgba(157, 0, 255, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition-normal);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3),
+                        0 0 15px var(--purple-glow);
+            border-color: var(--primary);
+        }
+
+        .project-image {
+            height: 180px;
+            background: linear-gradient(135deg, rgba(157, 0, 255, 0.2), rgba(0, 255, 157, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .project-image svg {
+            width: 80px;
+            height: 80px;
+            fill: var(--text);
+            opacity: 0.8;
+            transition: var(--transition-normal);
+        }
+
+        .project-card:hover .project-image svg {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-title {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.25rem;
             color: var(--secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .project-link {
+            color: var(--text);
+            text-decoration: none;
+            font-family: 'Share Tech Mono', monospace;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(157, 0, 255, 0.5);
+            border-radius: 4px;
+            transition: var(--transition-fast);
+            margin-top: auto;
+            width: fit-content;
+            background: rgba(157, 0, 255, 0.1);
+        }
+
+        .project-link:hover {
+            background: var(--gradient);
+            color: var(--background);
+            border-color: transparent;
+        }
+
+        .skills-section {
+            padding: 4rem 2rem;
+            background: rgba(26, 26, 26, 0.3);
+        }
+
+        .skills-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skills-heading {
+            text-align: center;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--secondary);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .skills-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: rgba(26, 26, 26, 0.7);
+            border: 1px solid rgba(157, 0, 255, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: var(--transition-normal);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2),
+                        0 0 15px var(--purple-glow);
+            border-color: var(--primary);
+        }
+
+        .skill-category h3 {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(157, 0, 255, 0.2);
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .skill-list li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-family: 'Share Tech Mono', monospace;
         }
 
         footer {
-            background: rgba(26, 26, 26, 0.9);
-            padding: 1rem;
+            background: rgba(10, 10, 15, 0.9);
+            padding: 1.5rem;
             text-align: center;
-            position: fixed;
-            bottom: 0;
+            position: relative;
             width: 100%;
             border-top: 1px solid rgba(157, 0, 255, 0.2);
             backdrop-filter: blur(8px);
-            z-index: 1000;
+            z-index: 10;
             font-family: 'Share Tech Mono', monospace;
             color: var(--text-secondary);
+            margin-top: 2rem;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.2);
         }
 
-        /* Hover Effects */
-        .hover-glow:hover {
-            text-shadow: 0 0 10px var(--purple-glow),
-                         0 0 20px var(--green-glow);
+        /* Glitch effect */
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); text-shadow: 0 0 15px var(--purple-glow); }
+            40% { transform: translate(-2px, -2px); text-shadow: 0 0 15px var(--green-glow); }
+            60% { transform: translate(2px, 2px); text-shadow: 0 0 15px var(--purple-glow); }
+            80% { transform: translate(2px, -2px); text-shadow: 0 0 15px var(--green-glow); }
+            100% { transform: translate(0); }
         }
 
-        /* Gradient Border */
-        .gradient-border {
-            position: relative;
-            background: var(--surface);
-            padding: 3px;
+        .glitch-hover:hover {
+            animation: glitch 0.3s infinite;
         }
 
-        .gradient-border::after {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: var(--gradient);
-            z-index: -1;
-            border-radius: 6px;
-        }
-        /* Add to your existing styles */
-@keyframes glitch {
-    0% { transform: translate(0); }
-    20% { transform: translate(-2px, 2px); }
-    40% { transform: translate(-2px, -2px); }
-    60% { transform: translate(2px, 2px); }
-    80% { transform: translate(2px, -2px); }
-    100% { transform: translate(0); }
-}
-
-.cyberpunk-mode {
-    position: relative;
-}
-
-.cyberpunk-mode .hero-content {
-    border-color: var(--secondary);
-    box-shadow: 0 0 20px var(--green-glow);
-}
-
-.cyberpunk-mode .button,
-.cyberpunk-mode .mode-toggle {
-    border-color: var(--secondary);
-}
-
-.cyberpunk-mode .nav-links a::before {
-    background: var(--secondary);
-}
-
-.cyberpunk-mode .logo {
-    color: var(--secondary);
-    text-shadow: 0 0 10px var(--green-glow);
-}
-
-    </style>
-</head>
-<body>
-    <nav>
-        <div class="nav-container">
-            <h1 class="logo hover-glow">Technomancer</h1>
-            <div class="nav-links">
-                <a href="Story.html">About</a>
-                <a href="Projects.html">Projects</a>
-                <a href="Skills.html">Skills</a>
-                <a href="https://dev.to/darkstalker">Blog</a>
-                <button class="button" onclick="toggleTerminal()">Terminal</button>
-                <button class="mode-toggle" id="mode-toggle">Cyberpunk Mode</button>
-            </div>
-        </div>
-    </nav>
-
-    <main class="hero">
-        <div class="hero-content">
-            <h1 class="hover-glow">Building Tomorrow's Systems Today</h1>
-            <p>Transforming ambitious ideas into scalable, efficient software solutions</p>
-            <div class="social-links">
-                <a href="https://github.com/DarkStarStrix" target="_blank">GitHub</a>
-                <a href="https://www.linkedin.com/in/technomancertrix/" target="_blank">LinkedIn</a>
-                <a href="https://x.com/AllanatrixQ" target="_blank">Twitter</a>
-                <a href="mailto:allanw.mk@gmail.com">Email</a>
-            </div>
-        </div>
-    </main>
-    <script>
-// Matrix Rain Effect
-class MatrixRain {
-    constructor() {
-        this.canvas = document.createElement('canvas');
-        this.canvas.id = 'matrix-rain';
-        this.canvas.style.cssText = `
+        /* Particle background */
+        .particles {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        `;
-        document.body.prepend(this.canvas);
-
-        this.ctx = this.canvas.getContext('2d');
-        this.characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%';
-        this.fontSize = 14;
-        this.drops = [];
-
-        this.resize();
-        window.addEventListener('resize', () => this.resize());
-    }
-
-    resize() {
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
-        this.columns = Math.floor(this.canvas.width / this.fontSize);
-        this.drops = Array(this.columns).fill(1);
-    }
-
-    draw() {
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-
-        this.ctx.fillStyle = '#00ff9d';
-        this.ctx.font = `${this.fontSize}px monospace`;
-
-        for (let i = 0; i < this.drops.length; i++) {
-            const char = this.characters[Math.floor(Math.random() * this.characters.length)];
-            this.ctx.fillText(char, i * this.fontSize, this.drops[i] * this.fontSize);
-
-            if (this.drops[i] * this.fontSize > this.canvas.height && Math.random() > 0.975) {
-                this.drops[i] = 0;
-            }
-            this.drops[i]++;
+            opacity: 0.5; /* Increased from 0.3 for better visibility */
         }
-    }
 
-    start() {
-        this.canvas.style.opacity = '0.3';
-        if (!this.animationFrame) {
-            const animate = () => {
-                this.draw();
-                this.animationFrame = requestAnimationFrame(animate);
-            };
-            animate();
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: float 10s infinite linear;
         }
-    }
 
-    stop() {
-        this.canvas.style.opacity = '0';
-        if (this.animationFrame) {
-            cancelAnimationFrame(this.animationFrame);
-            this.animationFrame = null;
+        @keyframes float {
+            0% { transform: translateY(100vh); }
+            100% { transform: translateY(-100vh); }
         }
-    }
-}
 
-// Cyberpunk Mode Controller
-class CyberpunkMode {
-    constructor() {
-        this.isEnabled = false;
-        this.matrixRain = new MatrixRain();
-        this.setupEventListeners();
-        this.originalStyles = {};
-        this.saveOriginalStyles();
-    }
-
-    saveOriginalStyles() {
-        const root = document.documentElement;
-        const computedStyle = getComputedStyle(root);
-
-        // Save original CSS variables
-        this.originalStyles.cssVars = {
-            '--primary': computedStyle.getPropertyValue('--primary'),
-            '--secondary': computedStyle.getPropertyValue('--secondary'),
-            '--accent': computedStyle.getPropertyValue('--accent'),
-            '--text': computedStyle.getPropertyValue('--text'),
-            '--text-secondary': computedStyle.getPropertyValue('--text-secondary')
-        };
-    }
-
-    setupEventListeners() {
-        const toggleButton = document.getElementById('mode-toggle');
-        toggleButton.addEventListener('click', () => this.toggle());
-    }
-
-    toggle() {
-        this.isEnabled = !this.isEnabled;
-
-        if (this.isEnabled) {
-            this.enable();
-        } else {
-            this.disable();
-        }
-    }
-
-    enable() {
-        const root = document.documentElement;
-
-        // Apply cyberpunk styles
-        root.style.setProperty('--primary', '#00ff9d');
-        root.style.setProperty('--secondary', '#39ff14');
-        root.style.setProperty('--accent', '#9D00FF');
-        root.style.setProperty('--text', '#e0fee0');
-        root.style.setProperty('--text-secondary', '#7fff7f');
-
-        // Add cyberpunk effects
-        document.body.classList.add('cyberpunk-mode');
-        this.matrixRain.start();
-
-        // Update button text
-        document.getElementById('mode-toggle').textContent = 'Normal Mode';
-    }
-
-    disable() {
-        const root = document.documentElement;
-
-        // Restore original styles
-        Object.entries(this.originalStyles.cssVars).forEach(([property, value]) => {
-            root.style.setProperty(property, value);
-        });
-
-        // Remove cyberpunk effects
-        document.body.classList.remove('cyberpunk-mode');
-        this.matrixRain.stop();
-
-        // Update button text
-        document.getElementById('mode-toggle').textContent = 'Cyberpunk Mode';
-    }
-}
-
-// Terminal Controller
-class TerminalController {
-    constructor() {
-        this.setupEventListeners();
-    }
-
-    setupEventListeners() {
-        document.querySelector('.button').addEventListener('click', () => this.openTerminal());
-    }
-
-    openTerminal() {
-        window.location.href = 'Terminal.html';
-    }
-}
-
-// Initialize everything when the DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    const cyberpunkMode = new CyberpunkMode();
-    const terminalController = new TerminalController();
-
-    // Add glitch effect to titles
-    const glitchElements = document.querySelectorAll('.hover-glow');
-    glitchElements.forEach(element => {
-        element.addEventListener('mouseover', () => {
-            element.style.animation = 'glitch 0.3s infinite';
-        });
-        element.addEventListener('mouseout', () => {
-            element.style.animation = '';
-        });
-    });
-});
-        class BlogRouter {
-            constructor() {
-                this.blogPath = '/my-blog/src/app';
+        /* Media queries */
+        @media screen and (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
             }
 
-            redirectToBlog() {
-                window.location.href = this.blogPath;
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .hero-content {
+                padding: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+
+            .projects-grid, .skills-grid {
+                grid-template-columns: 1fr;
             }
         }
-</script>
+
+        /* Cyberpunk Mode specific styles */
+        .cyberpunk-mode {
+            --primary: #00ff9d;
+            --secondary: #39ff14;
+            --accent: #9D00FF;
+            --purple-glow: rgba(0, 255, 157, 0.4);
+            --green-glow: rgba(57, 255, 20, 0.4);
+            --shadow-color: rgba(0, 255, 157, 0.2);
+        }
+
+        .cyberpunk-mode .hero-content {
+            border-color: var(--secondary);
+            box-shadow: 0 0 20px var(--green-glow);
+        }
+
+        .cyberpunk-mode .button,
+        .cyberpunk-mode .mode-toggle {
+            border-color: var(--secondary);
+        }
+
+        .cyberpunk-mode .project-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3),
+                        0 0 15px var(--green-glow);
+            border-color: var(--secondary);
+        }
+
+        .cyberpunk-mode .skill-category:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2),
+                        0 0 15px var(--green-glow);
+            border-color: var(--secondary);
+        }
+
+        .cyberpunk-mode .particle {
+            background: var(--secondary) !important;
+        }
+
+        .cyberpunk-mode .skill-list li::before {
+            color: var(--secondary);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <h1 class="logo glitch-hover">Technomancer</h1>
+            <div class="nav-links">
+                <a href="Story.html">About</a>
+                <a href="Projects.html">Projects</a>
+                <a href="Skills.html">Skills</a>
+                <a href="https://dev.to/darkstalker">Blog</a>
+                <button class="button" onclick="window.location.href='Terminal.html'">Terminal_</button>
+                <button class="mode-toggle" id="mode-toggle">Cyberpunk Mode</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="particles" id="particles"></div>
+    <canvas id="matrixRain" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; display: none;"></canvas>
+
+    <main class="hero">
+        <div class="hero-content">
+            <span class="tagline glitch-hover">Machine Learning Engineer & Systems Architect</span>
+            <h1 class="glitch-hover">Building Tomorrow's Systems Today</h1>
+            <p class="subtitle">Transforming ambitious <span class="highlight">technical ideas</span> into scalable, efficient <span class="highlight">software solutions</span></p>
+            <p>Independent machine learning engineer and systems architect specializing in quantum computing, AI infrastructure, and scientific computing. Building advanced models and tools across biology, physics, and materials science.</p>
+            <div class="social-links">
+                <a href="https://github.com/DarkStarStrix" target="_blank" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/technomancertrix/" target="_blank" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/></svg>
+                    LinkedIn
+                </a>
+                <a href="https://x.com/AllanatrixQ" target="_blank" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    Twitter
+                </a>
+                <a href="mailto:allanw.mk@gmail.com" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
+                    Email
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <section class="featured-projects">
+        <h2>Featured Projects</h2>
+        <div class="projects-grid">
+            <!-- AutoAPI -->
+            <div class="project-card">
+                <div class="project-image">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 10.935v2.131l-8 3.947v-2.23l5.64-2.783-5.64-2.79v-2.223l8 3.948zm-16 3.848l-5.64-2.783 5.64-2.79v-2.223l-8 3.948v2.131l8 3.947v-2.23zm7.047-10.783h-2.078l-4.011 16h2.073l4.016-16z"/></svg>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">AutoAPI</h3>
+                    <p class="project-description">A simplified machine learning automation framework that handles the complexities of ML workflows through configuration. The project provides an easy-to-use interface for training machine learning models while automatically managing optimization, visualization, and training processes.</p>
+                    <a href="https://github.com/DarkStarStrix/Auto_Api" target="_blank" class="project-link">View on GitHub</a>
+                </div>
+            </div>
+
+            <!-- DataVolt -->
+            <div class="project-card">
+                <div class="project-image">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 10.935v2.131l-8 3.947v-2.23l5.64-2.783-5.64-2.79v-2.223l8 3.948zm-16 3.848l-5.64-2.783 5.64-2.79v-2.223l-8 3.948v2.131l8 3.947v-2.23zm7.047-10.783h-2.078l-4.011 16h2.073l4.016-16z"/></svg>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">DataVolt</h3>
+                    <p class="project-description">DataVolt is an enterprise-grade framework for building and maintaining scalable data engineering pipelines. It provides a comprehensive suite of tools for data ingestion, transformation, and processing, enabling organizations to standardize their data operations and speed up development cycles.</p>
+                    <a href="https://github.com/DarkStarStrix/DataVolt" target="_blank" class="project-link">View on GitHub</a>
+                </div>
+            </div>
+
+            <!-- Lambda_Zero -->
+            <div class="project-card">
+                <div class="project-image">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 10.935v2.131l-8 3.947v-2.23l5.64-2.783-5.64-2.79v-2.223l8 3.948zm-16 3.848l-5.64-2.783 5.64-2.79v-2.223l-8 3.948v2.131l8 3.947v-2.23zm7.047-10.783h-2.078l-4.011 16h2.073l4.016-16z"/></svg>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Lambda_Zero</h3>
+                    <p class="project-description">Lambda_Zero is a unified platform for scientific machine learning, providing the newest Nexa models for predictions in biology (protein structure), astrophysics (stellar properties), and material science (material properties). Access these models via a simple REST API, with results returned in JSON format including predictions and confidence scores (0-100%).</p>
+                    <a href="https://github.com/DarkStarStrix/Lambda_Zero" target="_blank" class="project-link">View on GitHub</a>
+                </div>
+            </div>
+
+            <!-- PyC -->
+            <div class="project-card">
+                <div class="project-image">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 10.935v2.131l-8 3.947v-2.23l5.64-2.783-5.64-2.79v-2.223l8 3.948zm-16 3.848l-5.64-2.783 5.64-2.79v-2.223l-8 3.948v2.131l8 3.947v-2.23zm7.047-10.783h-2.078l-4.011 16h2.073l4.016-16z"/></svg>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">PyC</h3>
+                    <p class="project-description">PyC compiler toolchain, explaining its architecture, file roles, features, and potential use cases. PyC aims to compile Python adult-like code into machine code using LLVM, with experimental CUDA integration for GPU acceleration.</p>
+                    <a href="https://github.com/DarkStarStrix/PyC" target="_blank" class="project-link">View on GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="skills-section">
+        <h2 class="skills-heading">Skills</h2>
+        <div class="skills-container">
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <ul class="skill-list">
+                        <li>Python</li>
+                        <li>Julia</li>
+                        <li>C++</li>
+                        <li>Rust</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Machine Learning Frameworks</h3>
+                    <ul class="skill-list">
+                        <li>TensorFlow</li>
+                        <li>PyTorch</li>
+                        <li>JAX</li>
+                        <li>Scikit-learn</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Quantum Computing</h3>
+                    <ul class="skill-list">
+                        <li>Qiskit</li>
+                        <li>Cirq</li>
+                        <li>Pennylane</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Scientific Computing</h3>
+                    <ul class="skill-list">
+                        <li>NumPy</li>
+                        <li>SciPy</li>
+                        <li>SymPy</li>
+                        <li>Matplotlib</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer>
-        <p>DarkStarStrix © 2025</p>
+        <p>© 2025 Technomancer. All rights reserved.</p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mode toggle with matrix rain
+            const modeToggle = document.getElementById('mode-toggle');
+            let matrixInterval;
+            modeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('cyberpunk-mode');
+                const isCyberpunk = document.body.classList.contains('cyberpunk-mode');
+                const matrixCanvas = document.getElementById('matrixRain');
+                if (isCyberpunk) {
+                    matrixCanvas.style.display = 'block';
+                    matrixInterval = startMatrixRain();
+                } else {
+                    matrixCanvas.style.display = 'none';
+                    if (matrixInterval) {
+                        clearInterval(matrixInterval);
+                    }
+                }
+            });
+
+            // Matrix rain effect
+            function startMatrixRain() {
+                const canvas = document.getElementById('matrixRain');
+                const ctx = canvas.getContext('2d');
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%';
+                const fontSize = 16;
+                const columns = canvas.width / fontSize;
+                const drops = Array(Math.floor(columns)).fill(1);
+
+                function draw() {
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.fillStyle = '#0F0'; // Green matrix color
+                    ctx.font = `${fontSize}px monospace`;
+                    drops.forEach((y, index) => {
+                        const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                        ctx.fillText(text, index * fontSize, y * fontSize);
+                        if (y * fontSize > canvas.height && Math.random() > 0.975) {
+                            drops[index] = 0;
+                        }
+                        drops[index]++;
+                    });
+                }
+                return setInterval(draw, 33);
+            }
+
+            // Particles
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                particle.style.animationDelay = `${Math.random() * 10}s`;
+                particlesContainer.appendChild(particle);
+            }
+
+            // Handle window resize for matrix rain
+            window.addEventListener('resize', function() {
+                const canvas = document.getElementById('matrixRain');
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        });
+    </script>
 </body>
 </html>
