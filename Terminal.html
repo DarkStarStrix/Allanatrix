@@ -162,7 +162,7 @@
             100% { transform: translateY(-100vh); }
         }
 
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 768 px) {
             .terminal {
                 height: 500px;
             }
@@ -199,6 +199,7 @@
                         "  skills - Open Skills page",
                         "  home - Open Home page",
                         "  nexus - Launch Arcane Nexus visualization",
+                        "  rpg - Display RPG character card",
                         "  contact - Show contact info",
                         "  clear - Clear the terminal"
                     ].join("\n"),
@@ -209,6 +210,10 @@
                     nexus: () => {
                         this.displayResponse("Initializing Arcane Nexus...");
                         window.open("Arcane.html", "_blank");
+                    },
+                    rpg: () => {
+                        this.displayResponse("Displaying RPG Character Card...");
+                        window.open("RPG.html", "_blank");
                     },
                     contact: "Email: allanw.mk@gmail.com | GitHub: @DarkStarStrix | Blog: https://dev.to/darkstalker",
                     clear: () => this.clearTerminal()
