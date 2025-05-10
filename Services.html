@@ -1,492 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technomancer Services</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #9D00FF;
-            --secondary: #00ff9d;
-            --background: #0a0a0f;
-            --text: #e0fee0;
-            --text-secondary: #b8b8ff;
-            --purple-glow: rgba(157, 0, 255, 0.4);
-            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
-            --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--background);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        nav {
-            background: rgba(10, 10, 15, 0.8);
-            padding: 1rem 2rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(157, 0, 255, 0.2);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 1.75rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            transition: var(--transition-normal);
-        }
-
-        .nav-links a.active {
-            color: var(--secondary);
-            border-bottom: 2px solid var(--secondary);
-        }
-
-        .button {
-            background: rgba(157, 0, 255, 0.1);
-            color: var(--text);
-            border: 2px solid;
-            border-image: var(--gradient) 1;
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: 'Share Tech Mono', monospace;
-            transition: var(--transition-normal);
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .button:hover {
-            color: var(--secondary);
-            box-shadow: 0 0 10px var(--purple-glow);
-        }
-
-        .hero {
-            min-height: 60vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            margin-top: 5rem;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            text-align: center;
-            background: rgba(26, 26, 26, 0.7);
-            padding: 2rem;
-            border-radius: 8px;
-            border: 1px solid rgba(157, 0, 255, 0.2);
-        }
-
-        .hero h1 {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 2.5rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-        }
-
-        .hero ul {
-            list-style: none;
-            padding: 0;
-            max-width: 600px;
-            margin: 1rem auto 0;
-        }
-
-        .hero li {
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
-            position: relative;
-            color: var(--text-secondary);
-            text-align: left;
-        }
-
-        .hero li::before {
-            content: '>';
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-        }
-
-        section {
-            padding: 3rem 2rem;
-            text-align: center;
-        }
-
-        section h2 {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 2rem;
-            color: var(--secondary);
-            margin-bottom: 1rem;
-        }
-
-        section p {
-            max-width: 800px;
-            margin: 0 auto 1rem;
-            color: var(--text-secondary);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat (auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .service-card {
-            background: rgba(26, 26, 26, 0.7);
-            border: 1px solid rgba(157, 0, 255, 0.2);
-            border-radius: 8px;
-            padding: 1.5rem;
-            transition: var(--transition-normal);
-        }
-
-        .service-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 0 10px var(--purple-glow);
-        }
-
-        .service-card h3 {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 1.25rem;
-            color: var(--secondary);
-            margin-bottom: 0.75rem;
-        }
-
-        .service-card ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .service-card li {
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
-            position: relative;
-            color: var(--text-secondary);
-        }
-
-        .service-card li::before {
-            content: '>';
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-        }
-
-        .how-i-work ul, .philosophy ul {
-            list-style: none;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 0;
-        }
-
-        .how-i-work li, .philosophy li {
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
-            position: relative;
-            color: var(--text-secondary);
-            text-align: left;
-        }
-
-        .how-i-work li::before, .philosophy li::before {
-            content: '>';
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-        }
-
-        .pricing table, .license-tech table {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            border-collapse: collapse;
-            background: rgba(26, 26, 26, 0.7);
-            border: 1px solid rgba(157, 0, 255, 0.2);
-        }
-
-        .pricing th, .pricing td, .license-tech th, .license-tech td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid rgba(157, 0, 255, 0.2);
-        }
-
-        .pricing th, .license-tech th {
-            color: var(--secondary);
-        }
-
-        .pricing td, .license-tech td {
-            color: var(--text-secondary);
-        }
-
-        .pricing p, .license-tech p {
-            margin-top: 1rem;
-            color: var(--text-secondary);
-            font-style: italic;
-        }
-
-        .contact form {
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .contact input, .contact textarea {
-            background: rgba(26, 26, 26, 0.7);
-            border: 1px solid rgba(157, 0, 255, 0.2);
-            color: var(--text);
-            padding: 0.75rem;
-            border-radius: 4px;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .contact input:focus, .contact textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .contact textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        footer {
-            background: rgba(10, 10, 15, 0.9);
-            padding: 1.5rem;
-            text-align: center;
-            color: var(--text-secondary);
-            font-family: 'Share Tech Mono', monospace;
-        }
-
-        @media screen and (max-width: 768px) {
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .pricing table, .license-tech table {
-                font-size: 0.9rem;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technomancer Consulting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #9D00FF;
+      --secondary: #00ff9d;
+      --background: #0a0a0f;
+      --text: #e0fee0;
+      --text-secondary: #b8b8ff;
+      --purple-glow: rgba(157, 0, 255, 0.4);
+      --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+      --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    nav {
+      background: rgba(10, 10, 15, 0.8);
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(157, 0, 255, 0.2);
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1.75rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      transition: var(--transition-normal);
+    }
+    .nav-links a.active {
+      color: var(--secondary);
+      border-bottom: 2px solid var(--secondary);
+    }
+    .button {
+      background: rgba(157, 0, 255, 0.1);
+      color: var(--text);
+      border: 2px solid;
+      border-image: var(--gradient) 1;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Share Tech Mono', monospace;
+      transition: var(--transition-normal);
+      text-decoration: none;
+      display: inline-block;
+    }
+    .button:hover {
+      color: var(--secondary);
+      box-shadow: 0 0 10px var(--purple-glow);
+    }
+    .hero {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      margin-top: 5rem;
+    }
+    .hero-content {
+      max-width: 800px;
+      text-align: center;
+      background: rgba(26, 26, 26, 0.7);
+      padding: 2rem;
+      border-radius: 8px;
+      border: 1px solid rgba(157, 0, 255, 0.2);
+    }
+    .hero h1 {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 2.5rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    section {
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    section h2 {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 2rem;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+    }
+    section h3 {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1.5rem;
+      color: var(--secondary);
+      margin: 1.5rem 0 0.5rem;
+    }
+    section p {
+      max-width: 800px;
+      margin: 0 auto 1rem;
+      color: var(--text-secondary);
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto 1rem;
+      max-width: 800px;
+      text-align: left;
+    }
+    ul li {
+      margin-bottom: 0.5rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    ul li::before {
+      content: '\>';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+    }
+    .tier, .protocol, .process {
+      text-align: left;
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      border: 1px solid rgba(157, 0, 255, 0.2);
+      border-radius: 8px;
+      background: rgba(26,26,26,0.7);
+    }
+    form {
+      max-width: 600px;
+      margin: 2rem auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    form label {
+      display: block;
+      text-align: left;
+      color: var(--text);
+      font-weight: 500;
+    }
+    form input,
+    form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid rgba(157, 0, 255, 0.2);
+      background: rgba(26,26,26,0.7);
+      color: var(--text);
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+    }
+    form input:focus,
+    form textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    footer {
+      background: rgba(10, 10, 15, 0.9);
+      padding: 1.5rem;
+      text-align: center;
+      color: var(--text-secondary);
+      font-family: 'Share Tech Mono', monospace;
+    }
+    @media screen and (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-container">
-            <h1 class="logo">Technomancer</h1>
-            <div class="nav-links">
-                <a href="Story.html">About</a>
-                <a href="Projects.html">Projects</a>
-                <a href="Skills.html">Skills</a>
-                <a href="Services.html" class="active">Services</a>
-                <a href="https://dev.to/darkstalker">Blog</a>
-                <button class="button" onclick="window.location.href='Terminal.html'">Terminal_</button>
-                <button class="mode-toggle" id="mode-toggle">Cyberpunk Mode</button>
-            </div>
-        </div>
-    </nav>
-
-    <main class="hero">
-        <div class="hero-content">
-            <h1>AI-First Scientific Infrastructure</h1>
-            <p>I build compilers, models, and systems for scalable, transparent scientific discovery, solving inefficiencies and complexity.</p>
-            <ul>
-                <li>Inefficient ML pipelines slowing research</li>
-                <li>Non-reproducible, opaque research outputs</li>
-                <li>Complex GPU/CPU infrastructure scaling</li>
-                <li>Costly, inflexible proprietary systems</li>
-            </ul>
-        </div>
-    </main>
-
-    <section class="services-section">
-        <h2>What I Offer</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <h3>ML & Scientific Models</h3>
-                <ul>
-                    <li>Custom models for biology, physics, materials</li>
-                    <li>Optimized for inference, real-world data</li>
-                </ul>
-            </div>
-            <div class="service-card">
-                <h3>Compilers & Toolchains</h3>
-                <ul>
-                    <li>LLVM, CUDA, C/C++ pipelines</li>
-                    <li>Post-quantization optimization</li>
-                </ul>
-            </div>
-            <div class="service-card">
-                <h3>Inference Architecture</h3>
-                <ul>
-                    <li>APIs: AutoAPI, LambdaZero, Pisces</li>
-                    <li>Scalable, GPU/CPU-optimized systems</li>
-                </ul>
-            </div>
-            <div class="service-card">
-                <h3>Research Collaboration</h3>
-                <ul>
-                    <li>Methodology, ghostwriting, codebases</li>
-                    <li>Reproducible, documented pipelines</li>
-                </ul>
-            </div>
-            <div class="service-card">
-                <h3>Private Teaching</h3>
-                <ul>
-                    <li>Scientific ML, compilers, LLMs</li>
-                    <li>Paid, remote sessions only</li>
-                </ul>
-            </div>
-            <div class="service-card">
-                <h3>CSE++ Journal</h3>
-                <ul>
-                    <li>Open-access, decentralized publication platform</li>
-                    <li>Focus on scientific ML, optimization, and systems engineering</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section class="how-i-work">
-        <h2>How I Work</h2>
-        <ul>
-            <li>Remote, async, documented projects</li>
-            <li>Auditable, production-grade tools</li>
-            <li>NDA-compliant collaboration</li>
-            <li>Deliverables: code, notebooks, diagrams</li>
-        </ul>
-    </section>
-
-    <section class="pricing">
-        <h2>Pricing</h2>
-        <table>
-            <tr>
-                <th>Service</th>
-                <th>Rate</th>
-            </tr>
-            <tr>
-                <td>Consulting</td>
-                <td>$100/hr</td>
-            </tr>
-            <tr>
-                <td>Projects</td>
-                <td>$2,000–$5,000+</td>
-            </tr>
-            <tr>
-                <td>Teaching</td>
-                <td>$300/hr</td>
-            </tr>
-            <tr>
-                <td>Workshops</td>
-                <td>$1,500+/session</td>
-            </tr>
-            <tr>
-                <td>Technical Talks</td>
-                <td>$1,000+</td>
-            </tr>
-        </table>
-        <p>Rates vary based on complexity and scope.</p>
-    </section>
-
-    <section class="testimonials">
-        <h2>Testimonials</h2>
-        <p>Optimized LLM inference by 40%, built scalable SciML systems, and delivered auditable compilers.</p>
-        <p>“Technomancer’s tools brought clarity and speed to our ML pipeline.” — Anonymous Dev</p>
-    </section>
-
-    <section class="license-tech">
-        <h2>License My Tech</h2>
-        <p>License tested systems: PisC Compiler, NEXA Models, LambdaZero, AutoAPI.</p>
-        <table>
-            <tr>
-                <th>Tier</th>
-                <th>Use Case</th>
-            </tr>
-            <tr>
-                <td>Personal</td>
-                <td>Indie, OSS, experimental</td>
-            </tr>
-            <tr>
-                <td>Commercial</td>
-                <td>API/Model production</td>
-            </tr>
-            <tr>
-                <td>Academic</td>
-                <td>Lab use, research</td>
-            </tr>
-        </table>
-        <p>Contact me to discuss licensing.</p>
-    </section>
-
-    <section class="teaching">
-        <h2>Teaching</h2>
-        <p>Private, paid workshops on Scientific ML, compilers, and LLMs, delivered remotely.</p>
-        <p>Contact me to schedule a session.</p>
-    </section>
-
-    <section class="contact">
-        <h2>Contact</h2>
-        <p>Reach out to discuss your project. Discretion guaranteed.</p>
-        <form action="https://formspree.io/f/your-form-id" method="POST">
-            <input type="text" name="name" placeholder="Name" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <textarea name="message" placeholder="Your Message" required></textarea>
-            <button type="submit" class="button">Send Message</button>
-        </form>
-    </section>
-
-    <section class="philosophy">
-        <h2>Philosophy</h2>
-        <p>Science should be decentralized, auditable, and open to builders.</p>
-        <ul>
-            <li>Research is for workers, not just credentialed</li>
-            <li>Papers, repos, blogs build knowledge engine</li>
-            <li>No gatekeeping, no institutional walls</li>
-            <li>Effort unlocks open results</li>
-        </ul>
-    </section>
-
-    <footer>
-        <p>© 2025 Technomancer. All rights reserved.</p>
-    </footer>
+  <nav>
+    <div class="nav-container">
+      <h1 class="logo">Technomancer</h1>
+      <div class="nav-links">
+        <a href="Story.html">About</a>
+        <a href="Projects.html">Projects</a>
+        <a href="Skills.html">Skills</a>
+        <a href="Services.html">Services</a>
+        <a href="Consulting.html" class="active">Consulting</a>
+        <a href="https://dev.to/darkstalker">Blog</a>
+        <button class="button" onclick="window.location.href='Terminal.html'">Terminal\_</button>
+      </div>
+    </div>
+  </nav>
+  <main class="hero">
+    <div class="hero-content">
+      <h1>Allan Wandia — Consulting</h1>
+      <p>High value consulting that is clear, fair and logically priced. I work with clients to diagnose challenges, position solutions, and scope projects to deliver what matters most to you.</p>
+    </div>
+  </main>
+  <section>
+    <h2>Tiered Consulting Structure</h2>
+    <div class="tier">
+      <h3>Tier 1: Hourly / Tactical Engagements</h3>
+      <p><strong>$100/hr – Research/Modeling Advisory</strong><br>
+      You receive targeted guidance, strategic feedback and technical input (up to 5 hours per session).</p>
+      <p><strong>$150/hr – System Design or Inference Optimization</strong><br>
+      Quick diagnosis, system design and bottleneck resolution with actionable recommendations
+          (3–5 hour blocks with documented summaries).</p>
+    </div>
+    <div class="tier">
+      <h3>Tier 2: Scoped Projects (Value-Based)</h3>
+      <p><strong>$2,000–$5,000 – Micro Projects</strong><br>
+      A model or pipeline tailored to your needs with a 2–3-week delivery, review report and optional handoff.</p>
+      <p><strong>$5,000–$15,000 – Full Stack R&amp;D Buildout's</strong><br>
+      Comprehensive system build outs
+          integrating optimized training flows and team workflows with complete documentation and deployment support.</p>
+      <p><strong>Quote-Based – Experimental or High-Complexity Work</strong><br>
+      Advanced solutions including hybrid stacks and custom tooling,
+          with timelines and deliverables defined collaboratively.</p>
+    </div>
+    <div class="tier">
+      <h3>Tier 3: Education + Internal Enablement</h3>
+      <p><strong>$1,500 – Internal Workshop (1–2 hrs)</strong><br>
+      Interactive sessions to walk through tools and systems, complete with Q&amp;A and live demos.</p>
+      <p><strong>$3,000 – Half-Day Workshop (3–4 hrs)</strong><br>
+      Deep-dive sessions covering technical architecture, model theory and operational techniques,
+          with supporting materials provided.</p>
+      <p><strong>$5,000 – Custom Team Enablement</strong><br>
+      Tailored training and enablement sessions followed by a one-week follow-up to ensure successful adoption.</p>
+    </div>
+    <div class="tier">
+      <h3>Tier 4: Licensing &amp; Integration</h3>
+      <p><strong>Per-project licensing (custom quote)</strong><br>
+      Flexible licensing solutions for embedding core technologies like LambdaZero, PyC and Nexa models.</p>
+      <p><strong>Enterprise Support (custom quote)</strong><br>
+      Ongoing technical support, system tuning and feature enhancements based on your organizational needs.</p>
+    </div>
+  </section>
+  <section class="process">
+    <h2>Your Consulting Process</h2>
+    <div class="protocol">
+      <h3>Step 1: Share Your Needs</h3>
+      <p>You begin by sharing the challenges or objectives your team faces. This includes scope, urgency, and the impact of addressing the issue.</p>
+    </div>
+    <div class="protocol">
+      <h3>Step 2: Receive a Tailored Plan</h3>
+      <p>Based on your input, I provide a clear proposal outlining deliverables, timelines, and investment. You see the value in terms of saved time, reduced risk and a tangible outcome.</p>
+    </div>
+    <div class="protocol">
+      <h3>Step 3: Engage and Achieve Results</h3>
+      <p>Once you confirm the plan, work begins immediately with milestone reviews so you always know what to expect and how your project is advancing.</p>
+    </div>
+  </section>
+  <section class="protocol">
+    <h2>Engagement Protocol</h2>
+    <ul>
+      <li>Book an exploratory call to discuss your needs</li>
+      <li>Receive a scope breakdown and customized pricing</li>
+      <li>Review and sign the contract to kick off the project</li>
+      <li>Maintain full transparency and IP ownership as agreed</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Contact Me</h2>
+    <form action="https://formspree.io/f/mdkgdrgp" method="POST">
+      <label>
+        Your email:
+        <input type="email" name="email">
+      </label>
+      <label>
+        Your message:
+        <textarea name="message"></textarea>
+      </label>
+      <!-- your other form fields go here -->
+      <button type="submit">Send</button>
+    </form>
+  </section>
+  <footer>
+    <p>2025 Technomancer. All rights reserved.</p>
+  </footer>
 </body>
 </html>
