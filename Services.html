@@ -3,29 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Technomancer Consulting</title>
+  <title>LambdaZero Arc — Scientific Data as a Service (DaaS)</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #9D00FF;
       --secondary: #00ff9d;
       --background: #0a0a0f;
+      --card-bg: #181824;
       --text: #e0fee0;
       --text-secondary: #b8b8ff;
-      --purple-glow: rgba(157, 0, 255, 0.4);
+      --purple-glow: rgba(157, 0, 255, 0.15);
       --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
       --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --border-radius: 12px;
+      --shadow: 0 2px 15px rgba(0,0,0,0.15);
     }
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', sans-serif;
       background: var(--background);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.7;
+      min-height: 100vh;
     }
     nav {
       background: rgba(10, 10, 15, 0.8);
@@ -84,18 +84,18 @@
       box-shadow: 0 0 10px var(--purple-glow);
     }
     .hero {
-      min-height: 60vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      margin-top: 5rem;
+      background: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url('hero-bg.jpg');
+      background-size: cover;
+      color: white;
+      padding: 100px 0 40px 0;
+      text-align: center;
+      margin-top: 64px;
     }
     .hero-content {
       max-width: 800px;
-      text-align: center;
+      margin: 0 auto;
+      padding: 0 20px;
       background: rgba(26, 26, 26, 0.7);
-      padding: 2rem;
       border-radius: 8px;
       border: 1px solid rgba(157, 0, 255, 0.2);
     }
@@ -106,67 +106,119 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
+      color: var(--primary);
+    }
+    main {
+      max-width: 900px;
+      margin: 40px auto 40px auto;
+      padding: 24px;
     }
     section {
-      padding: 3rem 2rem;
-      text-align: center;
+      margin-bottom: 2.5rem;
     }
-    section h2 {
+    h2 {
       font-family: 'Share Tech Mono', monospace;
-      font-size: 2rem;
-      color: var(--secondary);
+      font-size: 1.6rem;
+      margin-top: 2.5rem;
       margin-bottom: 1rem;
-    }
-    section h3 {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 1.5rem;
       color: var(--secondary);
-      margin: 1.5rem 0 0.5rem;
+      text-align: left;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    section p {
-      max-width: 800px;
-      margin: 0 auto 1rem;
+    h1, h2 {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p, em {
       color: var(--text-secondary);
+      margin-bottom: 1.2rem;
+      font-size: 1.08rem;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid rgba(157, 0, 255, 0.15);
+      margin: 2.5rem 0;
     }
     ul {
       list-style: none;
       padding: 0;
-      margin: 0 auto 1rem;
+      margin: 0 0 1.5rem 0;
       max-width: 800px;
-      text-align: left;
     }
     ul li {
-      margin-bottom: 0.5rem;
-      padding-left: 1.5rem;
+      margin-bottom: 0.7rem;
+      padding-left: 1.7rem;
       position: relative;
+      color: var(--text);
     }
     ul li::before {
-      content: '\>';
+      content: "•";
       position: absolute;
       left: 0;
       color: var(--primary);
+      font-size: 1.2em;
+      top: 0.1em;
     }
-    .tier, .protocol, .process {
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 2rem 0 1.5rem 0;
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    th, td {
+      padding: 1.1rem 1rem;
       text-align: left;
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 1rem;
-      border: 1px solid rgba(157, 0, 255, 0.2);
-      border-radius: 8px;
-      background: rgba(26,26,26,0.7);
+      border-bottom: 1px solid rgba(157, 0, 255, 0.10);
+      color: var(--text);
+      font-size: 1.05rem;
+    }
+    th {
+      background: var(--primary);
+      color: #fff;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1.08rem;
+      letter-spacing: 0.03em;
+      border-bottom: 2px solid var(--secondary);
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    code {
+      background: rgba(157, 0, 255, 0.10);
+      color: var(--primary);
+      padding: 0.18em 0.45em;
+      border-radius: 4px;
+      font-size: 0.98em;
+    }
+    /* Contact form styles */
+    .contact-section {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 2rem 1.5rem;
+      max-width: 600px;
+      margin: 2.5rem auto 0 auto;
+    }
+    .contact-section h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
     }
     form {
-      max-width: 600px;
-      margin: 2rem auto;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 1.2rem;
     }
     form label {
-      display: block;
-      text-align: left;
       color: var(--text);
       font-weight: 500;
+      margin-bottom: 0.3rem;
     }
     form input,
     form textarea {
@@ -177,22 +229,52 @@
       color: var(--text);
       border-radius: 4px;
       font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      resize: vertical;
+      transition: border 0.2s;
     }
     form input:focus,
     form textarea:focus {
       outline: none;
       border-color: var(--primary);
     }
-    footer {
-      background: rgba(10, 10, 15, 0.9);
-      padding: 1.5rem;
-      text-align: center;
-      color: var(--text-secondary);
-      font-family: 'Share Tech Mono', monospace;
+    form button[type="submit"] {
+      align-self: flex-end;
+      margin-top: 0.5rem;
     }
-    @media screen and (max-width: 768px) {
+    @media (max-width: 900px) {
+      main {
+        padding: 10px;
+      }
+      table, th, td {
+        font-size: 0.98em;
+      }
       .hero h1 {
         font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.2rem;
+      }
+    }
+    @media (max-width: 600px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+      }
+      th, td {
+        padding: 0.7rem 0.5rem;
+      }
+      th {
+        border-bottom: none;
+      }
+      tr {
+        margin-bottom: 1.2rem;
+        background: var(--card-bg);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+      }
+      .contact-section {
+        padding: 1rem 0.5rem;
       }
     }
   </style>
@@ -200,104 +282,165 @@
 <body>
   <nav>
     <div class="nav-container">
-      <h1 class="logo">Technomancer</h1>
+      <h1 class="logo">LambdaZero</h1>
       <div class="nav-links">
         <a href="Story.html">About</a>
         <a href="Projects.html">Projects</a>
         <a href="Skills.html">Skills</a>
-        <a href="Services.html">Services</a>
-        <a href="Consulting.html" class="active">Consulting</a>
+        <a href="Services.html" class="active">Services</a>
         <a href="https://dev.to/darkstalker">Blog</a>
         <button class="button" onclick="window.location.href='Terminal.html'">Terminal\_</button>
       </div>
     </div>
   </nav>
-  <main class="hero">
+  <div class="hero">
     <div class="hero-content">
-      <h1>Allan Wandia — Consulting</h1>
-      <p>High value consulting that is clear, fair and logically priced. I work with clients to diagnose challenges, position solutions, and scope projects to deliver what matters most to you.</p>
+      <h1>LambdaZero Arc — Scientific Data as a Service (DaaS)</h1>
+      <p>
+        High-performance in-silico datasets and expert consulting for bio + materials science.<br>
+        Powered by LambdaZero Arc, a lightweight, containerized scientific inference engine used by researchers, engineers, and emerging biotech companies.
+      </p>
     </div>
+  </div>
+  <main>
+    <section>
+      <h2>You Get</h2>
+      <ul>
+        <li>High-quality, simulation-ready <code>.csv</code> protein structure datasets</li>
+        <li><code>README.md</code> with schema + usage</li>
+        <li>Optional consulting and licensing</li>
+        <li>Blazing fast generation (&lt;10ms per 1K predictions)</li>
+        <li>Request-based extension at any tier</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Dataset Access Tiers</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Tier</th>
+            <th>Samples Included</th>
+            <th>Description</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Free</strong></td>
+            <td>100 samples</td>
+            <td>Evaluation tier — try the system with basic metadata</td>
+            <td>$0</td>
+          </tr>
+          <tr>
+            <td><strong>Extended</strong></td>
+            <td>10,000 samples</td>
+            <td>Core dataset + metadata for small-scale R&amp;D</td>
+            <td>$49</td>
+          </tr>
+          <tr>
+            <td><strong>Lab</strong></td>
+            <td>100,000+ samples</td>
+            <td>Full-scale dataset + enhanced metadata + export options</td>
+            <td>$199</td>
+          </tr>
+        </tbody>
+      </table>
+      <p><em>Custom formats and feature flags available by request after purchase.</em></p>
+    </section>
+    <section>
+      <h2>Consulting &amp; Licensing</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Tier</th>
+            <th>Includes</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Free</strong></td>
+            <td>Intake + eligibility review</td>
+            <td>$0</td>
+          </tr>
+          <tr>
+            <td><strong>Extended</strong></td>
+            <td>1-hour consult and tailored use case review</td>
+            <td>$300</td>
+          </tr>
+          <tr>
+            <td><strong>Lab</strong></td>
+            <td>Three sessions and custom integration plan + infra advising</td>
+            <td>$900</td>
+          </tr>
+        </tbody>
+      </table>
+      <p><em>Consulting covers dataset tailoring, engine integration, research direction, and model architecture.</em></p>
+    </section>
+    <section>
+      <h2>Bundled Packages</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Bundle</th>
+            <th>Includes</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Extended Bundle</strong></td>
+            <td>10K dataset + 1-hour consult</td>
+            <td>$325</td>
+          </tr>
+          <tr>
+            <td><strong>Lab Bundle</strong></td>
+            <td>100K dataset + 3 consults + licensing chat</td>
+            <td>$1050</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Who This Is For</h2>
+      <ul>
+        <li>AI researchers need lightweight scientific data</li>
+        <li>Biotech teams accelerating R&amp;D with in-silico models</li>
+        <li>Founders prototyping scientific apps without wet lab drag</li>
+        <li>Engineers need flexible, hosted datasets with expert support</li>
+      </ul>
+    </section>
+    <section>
+      <h2>System Highlights</h2>
+      <ul>
+        <li>&lt;10ms latency per 1K samples</li>
+        <li>Deployed on Raspberry Pi, servers, or local machines</li>
+        <li>Containerized, license-ready, designed for a scale</li>
+        <li>Already in use by three enterprise partners</li>
+      </ul>
+    </section>
+    <section>
+      <h2>License</h2>
+      <ul>
+        <li>Free and Extended: Non-commercial attribution required</li>
+        <li>Lab: Commercial R&amp;D use included</li>
+        <li>Full deployment rights via additional licensing agreement</li>
+      </ul>
+    </section>
+    <section class="contact-section">
+      <h2>Contact</h2>
+      <form action="https://formspree.io/f/mdkgdrgp" method="POST">
+        <label>
+          Your email:
+          <input type="email" name="email" required>
+        </label>
+        <label>
+          Your message:
+          <textarea name="message" required></textarea>
+        </label>
+        <button type="submit" class="button">Send</button>
+      </form>
+    </section>
   </main>
-  <section>
-    <h2>Tiered Consulting Structure</h2>
-    <div class="tier">
-      <h3>Tier 1: Hourly / Tactical Engagements</h3>
-      <p><strong>$100/hr – Research/Modeling Advisory</strong><br>
-      You receive targeted guidance, strategic feedback and technical input (up to 5 hours per session).</p>
-      <p><strong>$150/hr – System Design or Inference Optimization</strong><br>
-      Quick diagnosis, system design and bottleneck resolution with actionable recommendations
-          (3–5 hour blocks with documented summaries).</p>
-    </div>
-    <div class="tier">
-      <h3>Tier 2: Scoped Projects (Value-Based)</h3>
-      <p><strong>$2,000–$5,000 – Micro Projects</strong><br>
-      A model or pipeline tailored to your needs with a 2–3-week delivery, review report and optional handoff.</p>
-      <p><strong>$5,000–$15,000 – Full Stack R&amp;D Buildout's</strong><br>
-      Comprehensive system build outs
-          integrating optimized training flows and team workflows with complete documentation and deployment support.</p>
-      <p><strong>Quote-Based – Experimental or High-Complexity Work</strong><br>
-      Advanced solutions including hybrid stacks and custom tooling,
-          with timelines and deliverables defined collaboratively.</p>
-    </div>
-    <div class="tier">
-      <h3>Tier 3: Education + Internal Enablement</h3>
-      <p><strong>$1,500 – Internal Workshop (1–2 hrs)</strong><br>
-      Interactive sessions to walk through tools and systems, complete with Q&amp;A and live demos.</p>
-      <p><strong>$3,000 – Half-Day Workshop (3–4 hrs)</strong><br>
-      Deep-dive sessions covering technical architecture, model theory and operational techniques,
-          with supporting materials provided.</p>
-      <p><strong>$5,000 – Custom Team Enablement</strong><br>
-      Tailored training and enablement sessions followed by a one-week follow-up to ensure successful adoption.</p>
-    </div>
-    <div class="tier">
-      <h3>Tier 4: Licensing &amp; Integration</h3>
-      <p><strong>Per-project licensing (custom quote)</strong><br>
-      Flexible licensing solutions for embedding core technologies like LambdaZero, PyC and Nexa models.</p>
-      <p><strong>Enterprise Support (custom quote)</strong><br>
-      Ongoing technical support, system tuning and feature enhancements based on your organizational needs.</p>
-    </div>
-  </section>
-  <section class="process">
-    <h2>Your Consulting Process</h2>
-    <div class="protocol">
-      <h3>Step 1: Share Your Needs</h3>
-      <p>You begin by sharing the challenges or objectives your team faces. This includes scope, urgency, and the impact of addressing the issue.</p>
-    </div>
-    <div class="protocol">
-      <h3>Step 2: Receive a Tailored Plan</h3>
-      <p>Based on your input, I provide a clear proposal outlining deliverables, timelines, and investment. You see the value in terms of saved time, reduced risk and a tangible outcome.</p>
-    </div>
-    <div class="protocol">
-      <h3>Step 3: Engage and Achieve Results</h3>
-      <p>Once you confirm the plan, work begins immediately with milestone reviews so you always know what to expect and how your project is advancing.</p>
-    </div>
-  </section>
-  <section class="protocol">
-    <h2>Engagement Protocol</h2>
-    <ul>
-      <li>Book an exploratory call to discuss your needs</li>
-      <li>Receive a scope breakdown and customized pricing</li>
-      <li>Review and sign the contract to kick off the project</li>
-      <li>Maintain full transparency and IP ownership as agreed</li>
-    </ul>
-  </section>
-  <section>
-    <h2>Contact Me</h2>
-    <form action="https://formspree.io/f/mdkgdrgp" method="POST">
-      <label>
-        Your email:
-        <input type="email" name="email">
-      </label>
-      <label>
-        Your message:
-        <textarea name="message"></textarea>
-      </label>
-      <!-- your other form fields go here -->
-      <button type="submit">Send</button>
-    </form>
-  </section>
-  <footer>
-    <p>2025 Technomancer. All rights reserved.</p>
-  </footer>
 </body>
 </html>
