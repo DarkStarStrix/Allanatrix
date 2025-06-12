@@ -296,6 +296,8 @@
             height: 1.25rem;
             width: 1.25rem;
             fill: currentColor;
+            display: inline-block;
+            vertical-align: middle;
         }
 
         .social-link::before {
@@ -676,6 +678,132 @@
         .cyberpunk-mode .skill-list li::before {
             color: var(--secondary);
         }
+
+        .changelog-section {
+            background: none;
+            border: none;
+            box-shadow: none;
+            margin: 7rem auto 2rem auto;
+            max-width: 700px;
+            padding: 0 0 2rem 0;
+            position: relative;
+        }
+        .changelog-title {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 2.5rem;
+            text-align: center;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px var(--purple-glow);
+        }
+        .timeline-outer {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            position: relative;
+            min-height: 0;
+        }
+        .timeline-line {
+            position: relative;
+            width: 36px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            opacity: 0.25;
+            border-radius: 8px;
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 22px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 12px / 6px;
+            border: 3px solid var(--background);
+            box-shadow: 0 0 0 2px var(--surface);
+            transform: translate(-50%, 0);
+            z-index: 2;
+        }
+        .timeline-list {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin-left: 1.5rem;
+        }
+        .timeline-entry {
+            background: none;
+            border: none;
+            border-radius: 0;
+            padding: 0.5rem 0 0.5rem 0;
+            color: var(--text-secondary);
+            font-family: 'Share Tech Mono', monospace;
+            box-shadow: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            position: relative;
+            min-height: 60px;
+            justify-content: center;
+        }
+        .timeline-label {
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 0.1rem;
+        }
+        .timeline-tags {
+            margin-top: 0.2rem;
+        }
+        .timeline-tag {
+            background: var(--surface);
+            color: var(--secondary);
+            border-radius: 4px;
+            font-size: 0.78rem;
+            padding: 0.18rem 0.55rem;
+            font-family: 'Share Tech Mono', monospace;
+            border: 1px solid rgba(157,0,255,0.15);
+            vertical-align: middle;
+            margin-right: 0.3rem;
+        }
+        .timeline-github {
+            border-left: none;
+            box-shadow: none;
+        }
+        .timeline-fallback {
+            color: #ff4e4e;
+            font-style: italic;
+        }
+        @media screen and (max-width: 900px) {
+            .timeline-outer {
+                flex-direction: column;
+            }
+            .timeline-line {
+                width: 24px;
+            }
+            .timeline-dot {
+                width: 16px;
+                height: 8px;
+            }
+            .timeline-list {
+                margin-left: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -708,6 +836,14 @@
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                     GitHub
                 </a>
+                <a href="https://huggingface.co/Allanatrix" target="_blank" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#FFD21F"/><ellipse cx="10.5" cy="15.5" rx="2.5" ry="3.5" fill="#fff"/><ellipse cx="21.5" cy="15.5" rx="2.5" ry="3.5" fill="#fff"/><ellipse cx="10.5" cy="15.5" rx="1.2" ry="2" fill="#333"/><ellipse cx="21.5" cy="15.5" rx="1.2" ry="2" fill="#333"/><path d="M8 21c2.5 2.5 13.5 2.5 16 0" stroke="#333" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+                    HuggingFace
+                </a>
+                <a href="https://www.kaggle.com/allanwandia" target="_blank" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#20BEFF"/><path d="M22.5 10.5l-9 11m0-11l9 11" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                    Kaggle
+                </a>
                 <a href="https://www.linkedin.com/in/technomancertrix/" target="_blank" class="social-link">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/></svg>
                     LinkedIn
@@ -723,6 +859,50 @@
             </div>
         </div>
     </main>
+
+    <!-- Changelog Section (above features, no box, integrated look, single oblong dot on line) -->
+    <section class="changelog-section">
+        <h2 class="changelog-title glitch-hover">Changelog</h2>
+        <div class="timeline-outer">
+            <div class="timeline-line" style="height:100%;">
+                <!-- One oblong dot, vertically centered with the first entry -->
+                <div class="timeline-dot" id="main-timeline-dot"></div>
+            </div>
+            <div class="timeline-list" id="timeline-list">
+                <div class="timeline-entry timeline-github">
+                    <span class="timeline-label">Latest GitHub Activity:</span>
+                    <span id="github-activity">Loading latest activity...</span>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">auto</span>
+                    </div>
+                </div>
+                <div class="timeline-entry">
+                    <span class="timeline-label">2025-06-12</span>
+                    Drafted PR spec for <strong>LLMKit Prompt Experimentation Suite</strong>. Planning initial commit.
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">llmkit</span>
+                        <span class="timeline-tag">draft</span>
+                    </div>
+                </div>
+                <div class="timeline-entry">
+                    <span class="timeline-label">2025-06-11</span>
+                    🚀 Shipped <strong>Tokenizer Radio</strong> to HF Spaces with Stripe integration & Loom demo.
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">release</span>
+                        <span class="timeline-tag">huggingface</span>
+                    </div>
+                </div>
+                <div class="timeline-entry">
+                    <span class="timeline-label">2025-06-10</span>
+                    Refactored DataVault's tokenizer vault module. Added async stream queue handler.
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">datavault</span>
+                        <span class="timeline-tag">bugfix</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section class="featured-projects">
         <h2>Featured Projects</h2>
@@ -913,6 +1093,36 @@
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
             });
+
+            // Center the oblong dot with the first timeline entry
+            const dot = document.getElementById('main-timeline-dot');
+            const firstEntry = document.querySelector('.timeline-list .timeline-entry');
+            const line = document.querySelector('.timeline-line');
+            function alignDot() {
+                if (firstEntry && dot && line) {
+                    const entryRect = firstEntry.getBoundingClientRect();
+                    const lineRect = line.getBoundingClientRect();
+                    // Calculate vertical center of first entry relative to the timeline-line
+                    const offset = (firstEntry.offsetTop + firstEntry.offsetHeight / 2) - (dot.offsetHeight / 2);
+                    dot.style.top = offset + 'px';
+                }
+            }
+            alignDot();
+            window.addEventListener('resize', alignDot);
+
+            // Fetch latest GitHub activity for changelog
+            fetch('/api/github-activity')
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.json();
+                })
+                .then(data => {
+                    const activity = data && data.activity ? data.activity : null;
+                    document.getElementById('github-activity').textContent = activity || 'No recent activity found.';
+                })
+                .catch(() => {
+                    document.getElementById('github-activity').textContent = 'Could not load GitHub activity.';
+                });
         });
     </script>
 </body>
