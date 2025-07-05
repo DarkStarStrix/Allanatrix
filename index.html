@@ -100,7 +100,7 @@
             background: var(--gradient);
             transform: scaleX(0);
             transform-origin: right;
-            transition: transform 0.3 s ease;
+            transition: transform 0.3s ease;
         }
 
         .logo:hover::after {
@@ -195,7 +195,7 @@
             max-width: 800px;
             text-align: center;
             background: rgba(26, 26, 26, 0.7);
-            padding: 2rem; /* Reduced from 3rem for a cleaner look */
+            padding: 2rem;
             border-radius: 8px;
             border: 1px solid rgba(157, 0, 255, 0.2);
             backdrop-filter: blur(8px);
@@ -357,6 +357,170 @@
             box-shadow: 0 0 15px var(--green-glow);
             color: var(--accent);
             transform: translateY(-2px);
+        }
+
+        .changelog-section {
+            padding: 4rem 2rem;
+            background: rgba(10, 10, 15, 0.6);
+            border-top: 1px solid rgba(157, 0, 255, 0.1);
+            border-bottom: 1px solid rgba(157, 0, 255, 0.1);
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .changelog-title {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .changelog-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient);
+        }
+
+        .refresh-button {
+            background: rgba(26, 26, 26, 0.7);
+            border: 1px solid rgba(157, 0, 255, 0.5);
+            color: var(--text);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Share Tech Mono', monospace;
+            transition: var(--transition-normal);
+            box-shadow: 0 0 5px var(--purple-glow);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            margin: 0 auto 2rem auto;
+        }
+
+        .refresh-button svg {
+            width: 1rem;
+            height: 1rem;
+            fill: currentColor;
+        }
+
+        .refresh-button:hover {
+            background: var(--gradient);
+            color: var(--background);
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        .changelog-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline-wrapper {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            background: rgba(26, 26, 26, 0.7);
+            border: 1px solid rgba(157, 0, 255, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: var(--transition-normal);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3),
+                        0 0 15px var(--purple-glow);
+            border-color: var(--primary);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 1.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border: 3px solid var(--background);
+            border-radius: 50%;
+            box-shadow: 0 0 0 2px var(--surface);
+        }
+
+        .timeline-date {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .timeline-title {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--secondary);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .timeline-tag {
+            background: rgba(157, 0, 255, 0.1);
+            color: var(--secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-family: 'Share Tech Mono', monospace;
+            border: 1px solid rgba(157, 0, 255, 0.3);
+        }
+
+        .github-activity {
+            border-left: 3px solid var(--accent);
+            background: rgba(57, 255, 20, 0.05);
+        }
+
+        .github-activity::before {
+            background: var(--accent);
         }
 
         .featured-projects {
@@ -560,17 +724,14 @@
         }
 
         footer {
-            background: rgba(10, 10, 15, 0.9);
-            padding: 1.5rem;
+            background: var(--background);
+            padding: 2rem;
             text-align: center;
             position: relative;
             width: 100%;
             border-top: 1px solid rgba(157, 0, 255, 0.2);
-            backdrop-filter: blur(8px);
-            z-index: 10;
             font-family: 'Share Tech Mono', monospace;
             color: var(--text-secondary);
-            margin-top: 2rem;
             box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.2);
         }
 
@@ -596,7 +757,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.5; /* Increased from 0.3 for better visibility */
+            opacity: 0.5;
         }
 
         .particle {
@@ -637,6 +798,14 @@
             .projects-grid, .skills-grid {
                 grid-template-columns: 1fr;
             }
+
+            .timeline-wrapper {
+                padding-left: 2rem;
+            }
+
+            .timeline-item::before {
+                left: -1.5rem;
+            }
         }
 
         /* Cyberpunk Mode specific styles */
@@ -671,138 +840,18 @@
             border-color: var(--secondary);
         }
 
+        .cyberpunk-mode .timeline-item:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3),
+                        0 0 15px var(--green-glow);
+            border-color: var(--secondary);
+        }
+
         .cyberpunk-mode .particle {
             background: var(--secondary) !important;
         }
 
         .cyberpunk-mode .skill-list li::before {
             color: var(--secondary);
-        }
-
-        .changelog-section {
-            background: none;
-            border: none;
-            box-shadow: none;
-            margin: 7rem auto 2rem auto;
-            max-width: 700px;
-            padding: 0 0 2rem 0;
-            position: relative;
-        }
-        .changelog-title {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 2rem;
-            color: var(--secondary);
-            margin-bottom: 2.5rem;
-            text-align: center;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px var(--purple-glow);
-        }
-        .timeline-outer {
-            display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-            position: relative;
-            min-height: 0;
-        }
-        .timeline-line {
-            position: relative;
-            width: 36px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 0.5rem;
-        }
-        .timeline-line::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            width: 6px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--primary), var(--secondary));
-            opacity: 0.25;
-            border-radius: 8px;
-            transform: translateX(-50%);
-            z-index: 0;
-        }
-        .timeline-dot {
-            position: absolute;
-            left: 50%;
-            top: 0;
-            width: 22px;
-            height: 12px;
-            background: var(--primary);
-            border-radius: 12px / 6px;
-            border: 3px solid var(--background);
-            box-shadow: 0 0 0 2px var(--surface);
-            transform: translate(-50%, 0);
-            z-index: 2;
-        }
-        .timeline-list {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-            margin-left: 1.5rem;
-        }
-        .timeline-entry {
-            background: none;
-            border: none;
-            border-radius: 0;
-            padding: 0.5rem 0 0.5rem 0;
-            color: var(--text-secondary);
-            font-family: 'Share Tech Mono', monospace;
-            box-shadow: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-            position: relative;
-            min-height: 60px;
-            justify-content: center;
-        }
-        .timeline-label {
-            color: var(--accent);
-            font-weight: bold;
-            margin-bottom: 0.1rem;
-        }
-        .timeline-tags {
-            margin-top: 0.2rem;
-        }
-        .timeline-tag {
-            background: var(--surface);
-            color: var(--secondary);
-            border-radius: 4px;
-            font-size: 0.78rem;
-            padding: 0.18rem 0.55rem;
-            font-family: 'Share Tech Mono', monospace;
-            border: 1px solid rgba(157,0,255,0.15);
-            vertical-align: middle;
-            margin-right: 0.3rem;
-        }
-        .timeline-github {
-            border-left: none;
-            box-shadow: none;
-        }
-        .timeline-fallback {
-            color: #ff4e4e;
-            font-style: italic;
-        }
-        @media screen and (max-width: 900px) {
-            .timeline-outer {
-                flex-direction: column;
-            }
-            .timeline-line {
-                width: 24px;
-            }
-            .timeline-dot {
-                width: 16px;
-                height: 8px;
-            }
-            .timeline-list {
-                margin-left: 1rem;
-            }
         }
     </style>
 </head>
@@ -850,54 +899,82 @@
                 </a>
                 <a href="https://x.com/AllanatrixQ" target="_blank" class="social-link">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                    Twitter
+                    X
                 </a>
-                <a href="mailto:allanw.mk@gmail.com" class="social-link">
+                <a href="#" onclick="copyEmail()" class="social-link">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
                     Email
+                </a>
+                <a href="https://publish.obsidian.md/nexaxoe/NexaXOE" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    Obsidian Graph
                 </a>
             </div>
         </div>
     </main>
 
-    <!-- Changelog Section (above features, no box, integrated look, single oblong dot on line) -->
+    <!-- Changelog Section -->
     <section class="changelog-section">
-        <h2 class="changelog-title glitch-hover">Changelog</h2>
-        <div class="timeline-outer">
-            <div class="timeline-line" style="height:100%;">
-                <!-- One oblong dot, vertically centered with the first entry -->
-                <div class="timeline-dot" id="main-timeline-dot"></div>
-            </div>
-            <div class="timeline-list" id="timeline-list">
-                <div class="timeline-entry timeline-github">
-                    <span class="timeline-label">Latest GitHub Activity:</span>
-                    <span id="github-activity">Loading latest activity...</span>
+        <h2 class="changelog-title glitch-hover">Development Timeline</h2>
+        <button onclick="refreshChangelog()" class="refresh-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z"/></svg>
+            Refresh
+        </button>
+        <div class="changelog-container">
+            <div class="timeline-wrapper">
+                <div class="timeline-line"></div>
+
+                <div class="timeline-item github-activity">
+                    <div class="timeline-date">LIVE</div>
+                    <div class="timeline-title">GitHub Live Activity</div>
+                    <div class="timeline-description" id="github-activity">Loading latest GitHub activity...</div>
                     <div class="timeline-tags">
-                        <span class="timeline-tag">auto</span>
+                        <span class="timeline-tag">live</span>
+                        <span class="timeline-tag">github</span>
                     </div>
                 </div>
-                <div class="timeline-entry">
-                    <span class="timeline-label">2025-06-12</span>
-                    Drafted PR spec for <strong>LLMKit Prompt Experimentation Suite</strong>. Planning initial commit.
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2025-06-12</div>
+                    <div class="timeline-title">LLMKit Prompt Experimentation Suite</div>
+                    <div class="timeline-description">Drafted comprehensive PR specification for advanced prompt engineering toolkit. Planning initial implementation with multimodel support and performance benchmarking capabilities.</div>
                     <div class="timeline-tags">
                         <span class="timeline-tag">llmkit</span>
                         <span class="timeline-tag">draft</span>
+                        <span class="timeline-tag">planning</span>
                     </div>
                 </div>
-                <div class="timeline-entry">
-                    <span class="timeline-label">2025-06-11</span>
-                    🚀 Shipped <strong>Tokenizer Radio</strong> to HF Spaces with Stripe integration & Loom demo.
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2025-06-11</div>
+                    <div class="timeline-title">Tokenizer Radio Production Release</div>
+                    <div class="timeline-description">Successfully deployed Tokenizer Radio to HuggingFace Spaces with integrated Stripe payment processing and comprehensive Loom demonstration. Full production environment with monitoring and analytics.</div>
                     <div class="timeline-tags">
                         <span class="timeline-tag">release</span>
                         <span class="timeline-tag">huggingface</span>
+                        <span class="timeline-tag">production</span>
                     </div>
                 </div>
-                <div class="timeline-entry">
-                    <span class="timeline-label">2025-06-10</span>
-                    Refactored DataVault's tokenizer vault module. Added async stream queue handler.
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2025-06-10</div>
+                    <div class="timeline-title">DataVault Architecture Optimization</div>
+                    <div class="timeline-description">Completed major refactoring of DataVault's tokenizer vault module with enhanced async stream processing. Implemented high-performance queue handler for improved throughput and reliability.</div>
                     <div class="timeline-tags">
-                        <span class="timeline-tag">datavault</span>
-                        <span class="timeline-tag">bugfix</span>
+                        <span class="timeline-tag">datavolt</span>
+                        <span class="timeline-tag">optimization</span>
+                        <span class="timeline-tag">async</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2025-06-08</div>
+                    <div class="timeline-title">Lambda_Zero Model Integration</div>
+                    <div class="timeline-description">Integrated cutting-edge Nexa models for scientific predictions across biology, astrophysics, and materials science. Enhanced API performance with 40% reduction in response times.</div>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">lambda-zero</span>
+                        <span class="timeline-tag">ml-models</span>
+                        <span class="timeline-tag">api</span>
                     </div>
                 </div>
             </div>
@@ -907,19 +984,31 @@
     <section class="featured-projects">
         <h2>Featured Projects</h2>
         <div class="projects-grid">
-            <!-- AutoAPI -->
+            <!-- Nexa Inference -->
             <div class="project-card">
                 <div class="project-image">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 10.935v2.131l-8 3.947v-2.23l5.64-2.783-5.64-2.79v-2.223l8 3.948zm-16 3.848l-5.64-2.783 5.64-2.79v-2.223l-8 3.948v2.131l8 3.947v-2.23zm7.047-10.783h-2.078l-4.011 16h2.073l4.016-16z"/></svg>
                 </div>
                 <div class="project-content">
-                    <h3 class="project-title">AutoAPI</h3>
-                    <p class="project-description">A simplified machine learning automation framework that handles the complexities of ML workflows through configuration. The project provides an easy-to-use interface for training machine learning models while automatically managing optimization, visualization, and training processes.</p>
-                    <a href="https://github.com/DarkStarStrix/Auto_Api" target="_blank" class="project-link">View on GitHub</a>
+                    <h3 class="project-title">Nexa Inference</h3>
+                    <p class="project-description">Advanced inference engine optimized for Nexa models across multiple domains including scientific computing, natural language processing, and computer vision. Built for high-performance deployment with GPU acceleration and distributed computing capabilities.</p>
+                    <a href="https://github.com/DarkStarStrix/Nexa_Inference" target="_blank" class="project-link">View on GitHub</a>
                 </div>
             </div>
 
-            <!-- DataVolt -->
+            <!-- Tokenizer Radio -->
+            <div class="project-card">
+                <div class="project-image">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 10.935v2.131l-8 3.947v-2.23l5.64-2.783-5.64-2.79v-2.223l8 3.948zm-16 3.848l-5.64-2.783 5.64-2.79v-2.223l-8 3.948v2.131l8 3.947v-2.23zm7.047-10.783h-2.078l-4.011 16h2.073l4.016-16z"/></svg>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Nexa Auto</h3>
+                    <p class="project-description">AN all-in-one, session-aware CLI and TUI tool for fine-tuning Hugging Face-compatible models. It makes secure, repeatable, and portable LLM fine-tuning as simple as following a guided workflow—no notebooks, no cloud lock-in, no headaches.</p>
+                    <a href="https://github.com/DarkStarStrix/Nexa_Auto" target="_blank" class="project-link">View on Github</a>
+                </div>
+            </div>
+
+            <!-- DataVault -->
             <div class="project-card">
                 <div class="project-image">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 10.935v2.131l-8 3.947v-2.23l5.64-2.783-5.64-2.79v-2.223l8 3.948zm-16 3.848l-5.64-2.783 5.64-2.79v-2.223l-8 3.948v2.131l8 3.947v-2.23zm7.047-10.783h-2.078l-4.011 16h2.073l4.016-16z"/></svg>
@@ -928,18 +1017,6 @@
                     <h3 class="project-title">DataVolt</h3>
                     <p class="project-description">DataVolt is an enterprise-grade framework for building and maintaining scalable data engineering pipelines. It provides a comprehensive suite of tools for data ingestion, transformation, and processing, enabling organizations to standardize their data operations and speed up development cycles.</p>
                     <a href="https://github.com/DarkStarStrix/DataVolt" target="_blank" class="project-link">View on GitHub</a>
-                </div>
-            </div>
-
-            <!-- Lambda_Zero -->
-            <div class="project-card">
-                <div class="project-image">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 10.935v2.131l-8 3.947v-2.23l5.64-2.783-5.64-2.79v-2.223l8 3.948zm-16 3.848l-5.64-2.783 5.64-2.79v-2.223l-8 3.948v2.131l8 3.947v-2.23zm7.047-10.783h-2.078l-4.011 16h2.073l4.016-16z"/></svg>
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Lambda_Zero</h3>
-                    <p class="project-description">Lambda_Zero is a unified platform for scientific machine learning, providing the newest Nexa models for predictions in biology (protein structure), astrophysics (stellar properties), and material science (material properties). Access these models via a simple REST API, with results returned in JSON format including predictions and confidence scores (0-100%).</p>
-                    <a href="https://github.com/DarkStarStrix/Lambda_Zero" target="_blank" class="project-link">View on GitHub</a>
                 </div>
             </div>
 
@@ -955,27 +1032,15 @@
                 </div>
             </div>
 
-            <!-- CSE++ Journal -->
+            <!-- Azure Sky Optimizer -->
             <div class="project-card">
                 <div class="project-image">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 10.935v2.131l-8 3.947v-2.23l5.64-2.783-5.64-2.79v-2.223l8 3.948zm-16 3.848l-5.64-2.783 5.64-2.79v-2.223l-8 3.948v2.131l8 3.947v-2.23zm7.047-10.783h-2.078l-4.011 16h2.073l4.016-16z"/></svg>
                 </div>
                 <div class="project-content">
-                    <h3 class="project-title">CSE++ Journal</h3>
-                    <p class="project-description">A decentralized, open-access, community-governed publication platform for high-quality research in scientific machine learning, advanced optimization, computational modeling, systems engineering, and related fields.</p>
-                    <a href="https://github.com/DarkStarStrix/CSE-Repo-of-Advanced-Computation-ML-and-Systems-Engineering" target="_blank" class="project-link">Learn More</a>
-                </div>
-            </div>
-
-            <!-- Non-Convex Optimization Study -->
-            <div class="project-card">
-                <div class="project-image">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 10.935v2.131l-8 3.947v-2.23l5.64-2.783-5.64-2.79v-2.223l8 3.948zm-16 3.848l-5.64-2.783 5.64-2.79v-2.223l-8 3.948v2.131l8 3.947v-2.23zm7.047-10.783h-2.078l-4.011 16h2.073l4.016-16z"/></svg>
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Non-Convex Optimization Study</h3>
-                    <p class="project-description">Research comparing Simulated Annealing and Adam optimization algorithms on the Himmelblau function using NVIDIA T4 GPUs and CuPy acceleration. Comprehensive analysis of non-convex optimization landscapes and algorithm performance.</p>
-                    <a href="https://www.kaggle.com/code/allanwandia/non-convex-research" target="_blank" class="project-link">View Research</a>
+                    <h3 class="project-title">Azure Sky Optimizer</h3>
+                    <p class="project-description">Azure Sky Optimizer is a hybrid optimizer for PyTorch, integrating Simulated Annealing (SA) with Adam to provide robust exploration and precise exploitation in non-convex optimization tasks. Designed for complex machine learning challenges, Azure Sky excels in domains requiring deep exploration of rugged loss landscapes, such as scientific machine learning, symbolic reasoning, and protein folding.</p>
+                    <a href="https://github.com/DarkStarStrix/Azure_Sky_Optimizer" target="_blank" class="project-link">View on GitHub</a>
                 </div>
             </div>
         </div>
@@ -1094,22 +1159,6 @@
                 canvas.height = window.innerHeight;
             });
 
-            // Center the oblong dot with the first timeline entry
-            const dot = document.getElementById('main-timeline-dot');
-            const firstEntry = document.querySelector('.timeline-list .timeline-entry');
-            const line = document.querySelector('.timeline-line');
-            function alignDot() {
-                if (firstEntry && dot && line) {
-                    const entryRect = firstEntry.getBoundingClientRect();
-                    const lineRect = line.getBoundingClientRect();
-                    // Calculate vertical center of first entry relative to the timeline-line
-                    const offset = (firstEntry.offsetTop + firstEntry.offsetHeight / 2) - (dot.offsetHeight / 2);
-                    dot.style.top = offset + 'px';
-                }
-            }
-            alignDot();
-            window.addEventListener('resize', alignDot);
-
             // Fetch latest GitHub activity for changelog
             fetch('/api/github-activity')
                 .then(response => {
@@ -1124,6 +1173,76 @@
                     document.getElementById('github-activity').textContent = 'Could not load GitHub activity.';
                 });
         });
+
+        // Email copy function
+        function copyEmail() {
+            const email = 'allanw.mk@gmail.com';
+            navigator.clipboard.writeText(email).then(() => {
+                // Create temporary notification
+                const notification = document.createElement('div');
+                notification.textContent = 'Email copied to clipboard!';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: var(--gradient);
+                    color: var(--background);
+                    padding: 1rem 2rem;
+                    border-radius: 8px;
+                    font-family: 'Share Tech Mono', monospace;
+                    z-index: 10000;
+                    box-shadow: 0 5px 15px rgba(157, 0, 255, 0.4);
+                `;
+                document.body.appendChild(notification);
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 3000);
+            }).catch(() => {
+                alert('Email: allanw.mk@gmail.com');
+            });
+        }
+
+        // Refresh changelog function
+        function refreshChangelog() {
+            const activityElement = document.getElementById('github-activity');
+            activityElement.textContent = 'Refreshing...';
+
+            // Simulate API call with loading state
+            setTimeout(() => {
+                fetch('/api/github-activity')
+                    .then(response => {
+                        if (!response.ok) throw new Error('Network response was not ok');
+                        return response.json();
+                    })
+                    .then(data => {
+                        const activity = data && data.activity ? data.activity : null;
+                        activityElement.textContent = activity || 'No recent activity found.';
+
+                        // Show refresh success notification
+                        const notification = document.createElement('div');
+                        notification.textContent = 'Feed refreshed!';
+                        notification.style.cssText = `
+                            position: fixed;
+                            top: 20px;
+                            right: 20px;
+                            background: var(--gradient);
+                            color: var(--background);
+                            padding: 1rem 2rem;
+                            border-radius: 8px;
+                            font-family: 'Share Tech Mono', monospace;
+                            z-index: 10000;
+                            box-shadow: 0 5px 15px rgba(0, 255, 157, 0.4);
+                        `;
+                        document.body.appendChild(notification);
+                        setTimeout(() => {
+                            document.body.removeChild(notification);
+                        }, 2000);
+                    })
+                    .catch(() => {
+                        activityElement.textContent = 'Could not load GitHub activity.';
+                    });
+            }, 1000);
+        }
     </script>
 </body>
 </html>
