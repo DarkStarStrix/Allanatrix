@@ -198,6 +198,8 @@
                         "  projects - Open Projects page",
                         "  skills - Open Skills page",
                         "  home - Open Home page",
+                        "  services - Open Services page",
+                        "  blog - Open Blog",
                         "  nexus - Launch Arcane Nexus visualization",
                         "  rpg - Display RPG character card",
                         "  contact - Show contact info",
@@ -207,6 +209,8 @@
                     projects: () => window.location.href = "Projects.html",
                     skills: () => window.location.href = "Skills.html",
                     home: () => window.location.href = "index.html",
+                    services: () => window.location.href = "Services.html",
+                    blog: () => window.open("https://dev.to/darkstalker", "_blank"),
                     nexus: () => {
                         this.displayResponse("Initializing Arcane Nexus...");
                         window.open("Arcane_Network_Nexus.html", "_blank");

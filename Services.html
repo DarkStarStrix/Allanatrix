@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LambdaZero Arc — Scientific Data as a Service (DaaS)</title>
+  <title>Services — AI & Software Engineering</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -87,7 +87,7 @@
       background: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url('hero-bg.jpg');
       background-size: cover;
       color: white;
-      padding: 100px 0 40px 0;
+      padding: 100px 20px 40px 20px;
       text-align: center;
       margin-top: 64px;
     }
@@ -106,7 +106,6 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
-      color: var(--primary);
     }
     main {
       max-width: 900px;
@@ -162,40 +161,32 @@
       font-size: 1.2em;
       top: 0.1em;
     }
-    table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      margin: 2rem 0 1.5rem 0;
-      background: var(--card-bg);
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
+    .service-card {
+        background: var(--card-bg);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        padding: 1.5rem;
+        border-left: 3px solid var(--primary);
+        transition: var(--transition-normal);
     }
-    th, td {
-      padding: 1.1rem 1rem;
-      text-align: left;
-      border-bottom: 1px solid rgba(157, 0, 255, 0.10);
-      color: var(--text);
-      font-size: 1.05rem;
+    .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2), 0 0 15px var(--purple-glow);
     }
-    th {
-      background: var(--primary);
-      color: #fff;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 1.08rem;
-      letter-spacing: 0.03em;
-      border-bottom: 2px solid var(--secondary);
+    .service-card h3 {
+        font-family: 'Share Tech Mono', monospace;
+        color: var(--secondary);
+        margin-bottom: 0.5rem;
     }
-    tr:last-child td {
-      border-bottom: none;
+    .pricing-section {
+        text-align: center;
+        background: var(--card-bg);
+        padding: 2rem;
+        border-radius: var(--border-radius);
     }
-    code {
-      background: rgba(157, 0, 255, 0.10);
-      color: var(--primary);
-      padding: 0.18em 0.45em;
-      border-radius: 4px;
-      font-size: 0.98em;
+    .pricing-section p {
+        max-width: 600px;
+        margin: 0 auto 1rem auto;
     }
     /* Contact form styles */
     .contact-section {
@@ -282,153 +273,59 @@
 <body>
   <nav>
     <div class="nav-container">
-      <h1 class="logo">LambdaZero</h1>
+      <h1 class="logo">Technomancer</h1>
       <div class="nav-links">
         <a href="Story.html">About</a>
         <a href="Projects.html">Projects</a>
         <a href="Skills.html">Skills</a>
         <a href="Services.html" class="active">Services</a>
         <a href="https://dev.to/darkstalker">Blog</a>
+        <a href="index.html">Home</a>
         <button class="button" onclick="window.location.href='Terminal.html'">Terminal\_</button>
       </div>
     </div>
   </nav>
   <div class="hero">
     <div class="hero-content">
-      <h1>LambdaZero Arc — Scientific Data as a Service (DaaS)</h1>
+      <h1>AI & Software Engineering Services</h1>
       <p>
-        High-performance in-silico datasets and expert consulting for bio + materials science.<br>
-        Powered by LambdaZero Arc, a lightweight, containerized scientific inference engine used by researchers, engineers, and emerging biotech companies.
+        Building robust software applications, specializing in ML infrastructure, high-performance computing, and custom toolchains to solve complex problems.
       </p>
     </div>
   </div>
   <main>
     <section>
-      <h2>You Get</h2>
+      <h2>Core Expertise</h2>
+      <p>I build software applications for various purposes, but my primary focus is on developing ML infrastructure, tools, and toolchains. My expertise combines several key domains to deliver comprehensive solutions.</p>
       <ul>
-        <li>High-quality, simulation-ready <code>.csv</code> protein structure datasets</li>
-        <li><code>README.md</code> with schema + usage</li>
-        <li>Optional consulting and licensing</li>
-        <li>Blazing fast generation (&lt;10ms per 1K predictions)</li>
-        <li>Request-based extension at any tier</li>
+        <li><strong>Software Engineering (Backend):</strong> Designing and building scalable, efficient server-side applications and APIs.</li>
+        <li><strong>Machine Learning Engineering (MLE):</strong> Creating and deploying production-ready ML systems, from data pipelines to model serving.</li>
+        <li><strong>High-Performance Computing (HPC):</strong> Optimizing code and infrastructure for computationally intensive tasks in scientific and AI domains.</li>
+        <li><strong>Research & Development:</strong> Exploring and implementing cutting-edge techniques in Optimization, HPC, and Explainable AI (XAI).</li>
       </ul>
     </section>
+
     <section>
-      <h2>Dataset Access Tiers</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Tier</th>
-            <th>Samples Included</th>
-            <th>Description</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Free</strong></td>
-            <td>100 samples</td>
-            <td>Evaluation tier — try the system with basic metadata</td>
-            <td>$0</td>
-          </tr>
-          <tr>
-            <td><strong>Extended</strong></td>
-            <td>10,000 samples</td>
-            <td>Core dataset + metadata for small-scale R&amp;D</td>
-            <td>$49</td>
-          </tr>
-          <tr>
-            <td><strong>Lab</strong></td>
-            <td>100,000+ samples</td>
-            <td>Full-scale dataset + enhanced metadata + export options</td>
-            <td>$199</td>
-          </tr>
-        </tbody>
-      </table>
-      <p><em>Custom formats and feature flags available by request after purchase.</em></p>
+        <h2>What I Offer</h2>
+        <div class="service-card">
+            <h3>Custom Tooling & Infrastructure</h3>
+            <p>Development of bespoke tools, compilers, and infrastructure to accelerate your ML and scientific computing workflows. If you have a unique challenge, I can build a unique solution.</p>
+        </div>
     </section>
-    <section>
-      <h2>Consulting &amp; Licensing</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Tier</th>
-            <th>Includes</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Free</strong></td>
-            <td>Intake + eligibility review</td>
-            <td>$0</td>
-          </tr>
-          <tr>
-            <td><strong>Extended</strong></td>
-            <td>1-hour consult and tailored use case review</td>
-            <td>$300</td>
-          </tr>
-          <tr>
-            <td><strong>Lab</strong></td>
-            <td>Three sessions and custom integration plan + infra advising</td>
-            <td>$900</td>
-          </tr>
-        </tbody>
-      </table>
-      <p><em>Consulting covers dataset tailoring, engine integration, research direction, and model architecture.</em></p>
+
+    <section class="pricing-section">
+      <h2>Simple, Flexible Rates</h2>
+      <p>
+        I offer straightforward pricing to get started quickly. All services are available under one roof, allowing you to mix, match, and scale your project as needed.
+      </p>
+      <p>
+        Need a custom package or a combination of services? Let's talk. We can define a scope and price that fits your budget and goals. More complex or extensive work can be accommodated with a custom quote.
+      </p>
     </section>
-    <section>
-      <h2>Bundled Packages</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Bundle</th>
-            <th>Includes</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Extended Bundle</strong></td>
-            <td>10K dataset + 1-hour consult</td>
-            <td>$325</td>
-          </tr>
-          <tr>
-            <td><strong>Lab Bundle</strong></td>
-            <td>100K dataset + 3 consults + licensing chat</td>
-            <td>$1050</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-    <section>
-      <h2>Who This Is For</h2>
-      <ul>
-        <li>AI researchers need lightweight scientific data</li>
-        <li>Biotech teams accelerating R&amp;D with in-silico models</li>
-        <li>Founders prototyping scientific apps without wet lab drag</li>
-        <li>Engineers need flexible, hosted datasets with expert support</li>
-      </ul>
-    </section>
-    <section>
-      <h2>System Highlights</h2>
-      <ul>
-        <li>&lt;10ms latency per 1K samples</li>
-        <li>Deployed on Raspberry Pi, servers, or local machines</li>
-        <li>Containerized, license-ready, designed for a scale</li>
-        <li>Already in use by three enterprise partners</li>
-      </ul>
-    </section>
-    <section>
-      <h2>License</h2>
-      <ul>
-        <li>Free and Extended: Non-commercial attribution required</li>
-        <li>Lab: Commercial R&amp;D use included</li>
-        <li>Full deployment rights via additional licensing agreement</li>
-      </ul>
-    </section>
+
     <section class="contact-section">
-      <h2>Contact</h2>
+      <h2>Get in Touch</h2>
+      <p style="text-align: center; margin-bottom: 1.5rem;">Have a project in mind? Let's connect and discuss how I can help you achieve your goals.</p>
       <form action="https://formspree.io/f/mdkgdrgp" method="POST">
         <label>
           Your email:
