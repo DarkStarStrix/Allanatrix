@@ -21,24 +21,33 @@
             --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --max-width: 1200px;
+            --content-width: 1100px;
+            --section-spacing: clamp(3.5rem, 6vw, 5rem);
+            --card-radius: 14px;
+            --card-border: 1px solid rgba(157, 0, 255, 0.2);
+            --card-background: rgba(18, 18, 26, 0.75);
+            --card-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: var(--transition-normal);
+            transition: color 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
         }
 
         body {
             font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            line-height: 1.75;
             background: var(--background);
             color: var(--text);
-            line-height: 1.6;
             overflow-x: hidden;
+            scroll-behavior: smooth;
             background-image:
-                radial-gradient(circle at 10% 20%, rgba(157, 0, 255, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 90% 80%, rgba(0, 255, 157, 0.05) 0%, transparent 50%);
+                radial-gradient(circle at 10% 20%, rgba(157, 0, 255, 0.08) 0%, transparent 55%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 157, 0.07) 0%, transparent 55%);
         }
 
         ::-webkit-scrollbar {
@@ -67,8 +76,9 @@
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: var(--max-width);
             margin: 0 auto;
+            padding: 0 clamp(1rem, 5vw, 2.5rem);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -76,9 +86,10 @@
 
         .logo {
             font-family: 'Share Tech Mono', monospace;
-            font-size: 1.75rem;
+            font-size: clamp(1.5rem, 2vw, 1.9rem);
             font-weight: 600;
             background: var(--gradient);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 10px var(--purple-glow);
@@ -106,7 +117,7 @@
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: clamp(1.25rem, 3vw, 2rem);
             align-items: center;
         }
 
@@ -140,93 +151,172 @@
             color: var(--secondary);
         }
 
+        .button {
+            background: rgba(157, 0, 255, 0.1);
+            color: var(--text);
+            border: 2px solid;
+            border-image: var(--gradient) 1;
+            padding: 0.65rem 1.6rem;
+            border-radius: 999px;
+            cursor: pointer;
+            font-family: 'Share Tech Mono', monospace;
+            transition: var(--transition-normal);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            position: relative;
+            overflow: hidden;
+            min-height: 44px;
+            letter-spacing: 0.04em;
+            box-shadow: 0 0 6px var(--purple-glow);
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(157, 0, 255, 0.2), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .button:hover::before {
+            left: 100%;
+        }
+
+        .button:hover {
+            color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 0 12px var(--purple-glow);
+        }
+
         .container {
-            max-width: 1000px;
+            width: min(var(--content-width), calc(100% - 3rem));
             margin: 6rem auto 4rem;
-            padding: 0 2rem;
         }
 
         .intro {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: clamp(3rem, 6vw, 4.5rem);
         }
 
-        h1 {
+        .intro h1 {
             font-family: 'Share Tech Mono', monospace;
-            font-size: 2.5rem;
+            font-size: clamp(2.4rem, 5vw, 3.4rem);
             background: var(--gradient);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px var(--purple-glow);
-            margin-bottom: 1rem;
+            text-shadow: 0 0 18px rgba(157, 0, 255, 0.4);
+            margin-bottom: 1.25rem;
+            letter-spacing: 0.08em;
         }
 
-        .tagline {
+        .intro .tagline {
             font-family: 'Share Tech Mono', monospace;
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            opacity: 0.9;
+            font-size: clamp(1.05rem, 2vw, 1.2rem);
+            color: rgba(224, 254, 224, 0.75);
+            max-width: 720px;
+            margin: 0 auto;
+            letter-spacing: 0.015em;
         }
 
-        .skill-category {
-            background: rgba(26, 26, 26, 0.7);
-            border: 1px solid rgba(157, 0, 255, 0.2);
-            padding: 2rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: var(--transition-normal);
+        .skills-section {
+            display: grid;
+            gap: var(--section-spacing);
         }
 
-        .skill-category:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3),
-                        0 0 15px var(--purple-glow);
+        .section-header {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 2rem;
         }
 
-        h2 {
+        .section-header h2 {
             font-family: 'Share Tech Mono', monospace;
-            font-size: 1.5rem;
+            font-size: clamp(1.8rem, 4vw, 2.3rem);
             color: var(--secondary);
-            margin-bottom: 1rem;
+            letter-spacing: 0.06em;
         }
 
-        .skill-icons {
+        .section-header p {
+            margin-top: 0.75rem;
+            color: rgba(184, 184, 255, 0.85);
+            line-height: 1.7;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: clamp(1.5rem, 3vw, 2.5rem);
+        }
+
+        .skill-card {
+            background: var(--card-background);
+            border: var(--card-border);
+            border-radius: var(--card-radius);
+            padding: clamp(1.75rem, 4vw, 2.2rem);
+            box-shadow: var(--card-shadow);
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 1rem;
-            margin-top: 1rem;
         }
 
-        .skill-icons img {
-            height: 2.5rem;
-            filter: brightness(1.5);
-            transition: transform 0.3s, filter 0.3s;
+        .skill-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 26px 50px rgba(0, 0, 0, 0.38);
+            border-color: rgba(0, 255, 157, 0.38);
         }
 
-        .skill-icons img:hover {
-            transform: scale(1.1);
-            filter: brightness(2);
+        .skill-card h3 {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.2rem;
+            letter-spacing: 0.045em;
+            color: var(--text);
         }
 
-        p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
+        .skill-card p {
+            color: rgba(224, 254, 224, 0.82);
+            line-height: 1.7;
+        }
+
+        .skill-list {
+            list-style: none;
+            display: grid;
+            gap: 0.65rem;
+        }
+
+        .skill-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            color: rgba(184, 184, 255, 0.85);
             line-height: 1.6;
+        }
+
+        .skill-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-family: 'Share Tech Mono', monospace;
         }
 
         .back-link {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            background: rgba(157, 0, 255, 0.1);
+            gap: 0.65rem;
+            background: rgba(157, 0, 255, 0.12);
             color: var(--text);
             text-decoration: none;
-            padding: 0.75rem 1.5rem;
-            border: 1px solid rgba(157, 0, 255, 0.5);
-            border-radius: 4px;
+            padding: 0.75rem 1.75rem;
+            border: 1px solid rgba(157, 0, 255, 0.45);
+            border-radius: 999px;
             font-family: 'Share Tech Mono', monospace;
-            margin-top: 2rem;
+            margin: 2.5rem auto 0;
             transition: var(--transition-fast);
         }
 
@@ -234,8 +324,8 @@
             background: var(--gradient);
             color: var(--background);
             border-color: transparent;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(157, 0, 255, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px rgba(157, 0, 255, 0.35);
         }
 
         .particles {
@@ -262,18 +352,48 @@
             100% { transform: translateY(-100vh); }
         }
 
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 980px) {
             .container {
-                margin: 5rem auto 2rem;
-                padding: 0 1rem;
+                width: min(95%, 680px);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
             }
 
-            h1 {
-                font-size: 2rem;
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
             }
 
-            h2 {
-                font-size: 1.25rem;
+            .container {
+                width: calc(100% - 2rem);
+                margin: 5rem auto 2.5rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .intro h1 {
+                font-size: clamp(2rem, 7vw, 2.4rem);
+            }
+
+            .intro .tagline {
+                font-size: 1rem;
+            }
+
+            .skill-card {
+                padding: 1.5rem;
+            }
+
+            .skill-card h3 {
+                font-size: 1.05rem;
             }
         }
     </style>
@@ -297,73 +417,91 @@
 
     <div class="container">
         <div class="intro">
-            <h1>Turning Vision Into Reality</h1>
-            <p class="tagline">Transforming ambitious technical projects into practical, scalable software solutions</p>
+            <h1>Technical Stack &amp; Tooling</h1>
+            <p class="tagline">Technical Stack &amp; Tooling</p>
         </div>
 
-        <div class="skill-category">
-            <h2>Backend Development</h2>
-            <p>Specialized in building robust backend systems with CRUD functionality and API development. Experience with FastAPI, Node.js, Django, and Flask.</p>
-            <div class="skill-icons">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="python">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="nodejs">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" alt="django">
-                <img src="https://skillicons.dev/icons?i=flask" alt="flask">
-                <img src="https://skillicons.dev/icons?i=fastapi" alt="fastapi">
+        <section class="skills-section">
+            <div class="section-header">
+                <h2>Core Competencies</h2>
+                <p>Languages, frameworks, and systems that underpin my machine learning and infrastructure work.</p>
             </div>
-        </div>
+            <div class="skills-grid">
+                <article class="skill-card">
+                    <h3>Languages &amp; Core Frameworks</h3>
+                    <ul class="skill-list">
+                        <li>Python – primary development language for ML, orchestration, and tooling.</li>
+                        <li>Rust – for systems-level performance and backend microservices.</li>
+                        <li>C – low-level optimization, bindings, and hardware interfacing.</li>
+                        <li>Bash / Shell – job orchestration, automation, and system scripting.</li>
+                    </ul>
+                </article>
 
-        <div class="skill-category">
-            <h2>Machine Learning & AI</h2>
-            <p>Deep expertise in model training, quantization, and ML infrastructure. Research focuses on efficient training methods and novel model architectures.</p>
-            <div class="skill-icons">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="tensorflow">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="pytorch">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg" alt="numpy">
+                <article class="skill-card">
+                    <h3>Machine Learning &amp; AI Frameworks</h3>
+                    <ul class="skill-list">
+                        <li>PyTorch – primary framework for model training, inference, and fine-tuning.</li>
+                        <li>Transformers (Hugging Face) – model loading, tokenization, and adaptation pipelines.</li>
+                        <li>TRL / RLHF frameworks – reinforcement learning from human feedback for open-source LLMs.</li>
+                        <li>vLLM / ExLlama / FlashAttention – optimized inference backends for large model serving.</li>
+                        <li>Diffusers / VAEs – generative modeling, diffusion-based scientific simulations.</li>
+                    </ul>
+                </article>
+
+                <article class="skill-card">
+                    <h3>Model Training &amp; Experimentation</h3>
+                    <ul class="skill-list">
+                        <li>Weights &amp; Biases (W&amp;B) – experiment tracking, telemetry, and visualization.</li>
+                        <li>Axolotl / Swift / Megatron-LM – large-scale fine-tuning, distillation, and evaluation pipelines.</li>
+                        <li>QLoRA / GLORA – parameter-efficient fine-tuning on constrained GPUs.</li>
+                        <li>Hugging Face Hub / Datasets – versioned dataset and model hosting.</li>
+                        <li>Kaggle GPU Runtime – fast prototyping and benchmarking of scientific ML workloads.</li>
+                    </ul>
+                </article>
+
+                <article class="skill-card">
+                    <h3>Data Engineering &amp; Automation</h3>
+                    <ul class="skill-list">
+                        <li>NumPy / Pandas / Arrow / JSON Schema – data processing, validation, and ingestion.</li>
+                        <li>FastAPI – for internal APIs, model serving, and research agent interfaces.</li>
+                        <li>AsyncIO / Multiprocessing – asynchronous task orchestration for dataset generation and evaluation.</li>
+                        <li>Pydantic – schema enforcement, validation, and structured data I/O.</li>
+                        <li>OpenAI / Exa APIs – external integrations for dataset generation and research automation.</li>
+                    </ul>
+                </article>
+
+                <article class="skill-card">
+                    <h3>DevOps, Systems, &amp; Environment</h3>
+                    <ul class="skill-list">
+                        <li>Docker – containerization for reproducible compute environments.</li>
+                        <li>Tailscale – secure peer-to-peer network for distributed nodes.</li>
+                        <li>Linux (Arch, Ubuntu) – main OS environments for development and HPC workloads.</li>
+                        <li>Git / GitHub Actions – version control, CI/CD for pipelines and infra modules.</li>
+                        <li>S3 (MinIO / AWS) – telemetry and dataset storage.</li>
+                    </ul>
+                </article>
+
+                <article class="skill-card">
+                    <h3>Visualization &amp; Research Tools</h3>
+                    <ul class="skill-list">
+                        <li>Plotly / Matplotlib / Seaborn – experiment visualization and scientific plotting.</li>
+                        <li>Obsidian / Markdown – research documentation, knowledge graph integration.</li>
+                        <li>Jupyter / VSCode / Neovim – main development and analysis environments.</li>
+                    </ul>
+                </article>
+
+                <article class="skill-card">
+                    <h3>Hardware &amp; Compute Layer</h3>
+                    <ul class="skill-list">
+                        <li>Multi-GPU orchestration – A100 / RTX 5090 clusters via NexaCompute.</li>
+                        <li>Mixed-precision training (bf16 / fp8) – for performance and cost efficiency.</li>
+                        <li>Distributed compute (Slurm-like job API) – internal orchestration across consumer + HPC nodes.</li>
+                    </ul>
+                </article>
             </div>
-        </div>
+        </section>
 
-        <div class="skill-category">
-            <h2>Quantum Computing</h2>
-            <p>Specialized in quantum optimization and quantum machine learning. Experience with Qiskit and QuTiP for developing quantum algorithms.</p>
-            <div class="skill-icons">
-                <img src="https://github.com/DarkStarStrix/DarkStarStrix/assets/108637439/9a92eb92-0292-4c22-ba0f-ff278cea5df6" alt="Qiskit">
-                <img src="https://github.com/DarkStarStrix/DarkStarStrix/assets/108637439/5337bf3a-5d17-4481-a618-652e3f78770b" alt="QuTIP">
-            </div>
-        </div>
-
-        <div class="skill-category">
-            <h2>DevOps & Cloud</h2>
-            <p>Comprehensive experience with cloud infrastructure and DevOps practices using Docker, AWS, Azure, and Terraform.</p>
-            <div class="skill-icons">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="docker">
-                <img src="https://skillicons.dev/icons?i=aws" alt="aws">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="azure">
-                <img src="https://skillicons.dev/icons?i=terraform" alt="terraform">
-            </div>
-        </div>
-
-        <div class="skill-category">
-            <h2>High-Performance Computing (HPC)</h2>
-            <p>Experience in designing and optimizing systems for high-performance computing, including parallel processing and efficient resource management for scientific and AI workloads.</p>
-            <div class="skill-icons">
-                <img src="https://skillicons.dev/icons?i=linux" alt="linux">
-                <img src="https://skillicons.dev/icons?i=bash" alt="bash">
-            </div>
-        </div>
-
-        <div class="skill-category">
-            <h2>Programming Languages</h2>
-            <p>Proficient in Python, Rust, C/C++, and various other languages. Focus on performance-critical applications and systems programming.</p>
-            <div class="skill-icons">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="python">
-                <img src="https://skillicons.dev/icons?i=rust" alt="rust">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="cpp">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="c">
-            </div>
-        </div>
-
-        <a href="index.html" class="back-link">Back to Home</a>
+        <a href="index.html" class="back-link">← Return to Home</a>
     </div>
 
     <script>

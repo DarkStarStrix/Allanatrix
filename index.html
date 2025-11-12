@@ -24,24 +24,35 @@
             --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+            /* Layout Tokens */
+            --max-width: 1200px;
+            --content-width: 1100px;
+            --section-spacing: clamp(3.5rem, 6vw, 5rem);
+            --card-radius: 14px;
+            --card-border: 1px solid rgba(157, 0, 255, 0.2);
+            --card-background: rgba(18, 18, 26, 0.75);
+            --card-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: var(--transition-normal);
+            transition: color 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
         }
 
         body {
             font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            line-height: 1.75;
             background: var(--background);
             color: var(--text);
-            line-height: 1.6;
             overflow-x: hidden;
+            scroll-behavior: smooth;
             background-image:
-                radial-gradient(circle at 10% 20%, rgba(157, 0, 255, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 90% 80%, rgba(0, 255, 157, 0.05) 0%, transparent 50%);
+                radial-gradient(circle at 10% 20%, rgba(157, 0, 255, 0.08) 0%, transparent 55%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 157, 0.07) 0%, transparent 55%);
         }
 
         /* Scrollbar styling */
@@ -71,8 +82,9 @@
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: var(--max-width);
             margin: 0 auto;
+            padding: 0 clamp(1rem, 5vw, 2.5rem);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -80,9 +92,10 @@
 
         .logo {
             font-family: 'Share Tech Mono', monospace;
-            font-size: 1.75rem;
+            font-size: clamp(1.5rem, 2vw, 1.9rem);
             font-weight: 600;
             background: var(--gradient);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 10px var(--purple-glow);
@@ -110,7 +123,7 @@
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: clamp(1.25rem, 3vw, 2rem);
             align-items: center;
         }
 
@@ -149,8 +162,8 @@
             color: var(--text);
             border: 2px solid;
             border-image: var(--gradient) 1;
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
+            padding: 0.65rem 1.6rem;
+            border-radius: 999px;
             font-weight: 600;
             cursor: pointer;
             font-family: 'Share Tech Mono', monospace;
@@ -158,6 +171,13 @@
             overflow: hidden;
             letter-spacing: 0.5px;
             box-shadow: 0 0 5px var(--purple-glow);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            text-decoration: none;
+            min-height: 44px;
+            transition: var(--transition-normal);
         }
 
         .button::before {
@@ -182,7 +202,7 @@
         }
 
         .hero {
-            padding: 8rem 2rem 4rem;
+            padding: clamp(6rem, 10vw, 9rem) 2rem clamp(3.5rem, 8vw, 5rem);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -190,35 +210,36 @@
         }
 
         .hero-content {
-            max-width: 800px;
+            width: min(840px, 92%);
             text-align: center;
-            background: rgba(26, 26, 26, 0.7);
-            padding: 2rem;
-            border-radius: 8px;
-            border: 1px solid rgba(157, 0, 255, 0.2);
-            backdrop-filter: blur(8px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2),
-                         0 0 20px rgba(157, 0, 255, 0.2);
+            background: rgba(13, 13, 22, 0.82);
+            padding: clamp(2.1rem, 5vw, 2.8rem);
+            border-radius: 16px;
+            border: 1px solid rgba(157, 0, 255, 0.3);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 28px 60px rgba(0, 0, 0, 0.42);
             transform-style: preserve-3d;
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            transition: transform 0.45s ease, box-shadow 0.45s ease, border-color 0.35s ease;
         }
 
         .hero-content:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3),
-                         0 0 30px rgba(157, 0, 255, 0.3);
+            box-shadow: 0 26px 65px rgba(0, 0, 0, 0.45),
+                         0 0 30px rgba(0, 255, 157, 0.32);
+            border-color: rgba(0, 255, 157, 0.45);
         }
 
         .hero h1 {
             font-family: 'Share Tech Mono', monospace;
-            font-size: 3rem;
+            font-size: clamp(2.35rem, 4.5vw, 3.5rem);
             font-weight: 700;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
+            margin-bottom: 1.3rem;
+            line-height: 1.18;
             background: var(--gradient);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px var(--purple-glow);
+            text-shadow: 0 0 8px rgba(157, 0, 255, 0.35);
             position: relative;
         }
 
@@ -235,29 +256,53 @@
         }
 
         .hero p {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            max-width: 90%;
+            font-size: 1.05rem;
+            color: rgba(224, 254, 224, 0.86);
+            margin-bottom: 1.5rem;
+            max-width: 680px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .tagline {
-            display: block;
-            font-size: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
             margin-bottom: 1rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.28rem;
             color: var(--secondary);
+            font-weight: 600;
+            background: rgba(0, 255, 157, 0.08);
+            padding: 0.4rem 1.2rem;
+            border-radius: 999px;
+            border: 1px solid rgba(0, 255, 157, 0.35);
         }
 
         .subtitle {
             font-family: 'Share Tech Mono', monospace;
-            font-size: 1.25rem;
-            opacity: 0.8;
-            max-width: 80%;
-            margin: 0 auto 2rem;
+            font-size: 1.02rem;
+            opacity: 0.88;
+            margin: 0 auto 1.4rem;
+            line-height: 1.75;
+            letter-spacing: 0.012em;
+        }
+
+        .hero-current {
+            color: rgba(0, 255, 157, 0.82);
+        }
+
+        .hero-current a {
+            color: var(--secondary);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 255, 157, 0.35);
+            padding-bottom: 2px;
+        }
+
+        .hero-current a:hover {
+            color: var(--accent);
+            border-color: rgba(157, 0, 255, 0.5);
         }
 
         .highlight {
@@ -278,7 +323,7 @@
             text-decoration: none;
             transition: var(--transition-fast);
             padding: 0.75rem 1.5rem;
-            border-radius: 4px;
+            border-radius: 999px;
             border: 1px solid rgba(157, 0, 255, 0.5);
             font-family: 'Share Tech Mono', monospace;
             background: rgba(26, 26, 26, 0.7);
@@ -321,13 +366,26 @@
             box-shadow: 0 5px 15px rgba(157, 0, 255, 0.4);
         }
 
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1.5rem 0 2.5rem 0;
+        }
+
+        .hero-actions .button {
+            border-radius: 999px;
+            font-size: 0.95rem;
+        }
+
         .mode-toggle {
             background: rgba(26, 26, 26, 0.7);
             border: 2px solid;
             border-image: var(--gradient) 1;
             color: var(--text);
-            padding: 0.75rem 1.5rem;
-            border-radius: 4px;
+            padding: 0.7rem 1.6rem;
+            border-radius: 999px;
             cursor: pointer;
             font-family: 'Share Tech Mono', monospace;
             transition: var(--transition-normal);
@@ -358,11 +416,11 @@
         }
 
         .changelog-section {
-            padding: 4rem 2rem;
-            background: rgba(10, 10, 15, 0.6);
-            border-top: 1px solid rgba(157, 0, 255, 0.1);
-            border-bottom: 1px solid rgba(157, 0, 255, 0.1);
-            max-width: 1200px;
+            padding: var(--section-spacing) 2rem;
+            background: rgba(10, 10, 15, 0.62);
+            border-top: 1px solid rgba(157, 0, 255, 0.15);
+            border-bottom: 1px solid rgba(157, 0, 255, 0.15);
+            max-width: var(--max-width);
             margin: 0 auto;
             position: relative;
         }
@@ -373,6 +431,7 @@
             margin-bottom: 1rem;
             text-align: center;
             background: var(--gradient);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             position: relative;
@@ -447,19 +506,19 @@
         .timeline-item {
             position: relative;
             margin-bottom: 2rem;
-            background: rgba(26, 26, 26, 0.7);
-            border: 1px solid rgba(157, 0, 255, 0.2);
-            border-radius: 8px;
+            background: var(--card-background);
+            border: var(--card-border);
+            border-radius: var(--card-radius);
             padding: 1.5rem;
             transition: var(--transition-normal);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
         }
 
         .timeline-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3),
-                        0 0 15px var(--purple-glow);
-            border-color: var(--primary);
+            transform: translateY(-8px);
+            box-shadow: 0 24px 45px rgba(0, 0, 0, 0.35),
+                        0 0 18px var(--purple-glow);
+            border-color: rgba(0, 255, 157, 0.4);
         }
 
         .timeline-item::before {
@@ -522,8 +581,8 @@
         }
 
         .featured-projects {
-            padding: 4rem 2rem;
-            background: rgba(10, 10, 15, 0.8);
+            padding: var(--section-spacing) 2rem;
+            background: rgba(10, 10, 15, 0.82);
             margin-top: 2rem;
         }
 
@@ -533,6 +592,7 @@
             font-size: 2.5rem;
             margin-bottom: 3rem;
             background: var(--gradient);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             position: relative;
@@ -553,29 +613,29 @@
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: clamp(1.5rem, 3vw, 2.5rem);
+            max-width: min(var(--max-width), 960px);
             margin: 0 auto;
         }
 
         .project-card {
-            background: rgba(26, 26, 26, 0.7);
-            border: 1px solid rgba(157, 0, 255, 0.2);
-            border-radius: 8px;
+            background: var(--card-background);
+            border: var(--card-border);
+            border-radius: var(--card-radius);
             overflow: hidden;
             transition: var(--transition-normal);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
             height: 100%;
             display: flex;
             flex-direction: column;
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3),
-                        0 0 15px var(--purple-glow);
-            border-color: var(--primary);
+            transform: translateY(-12px);
+            box-shadow: 0 24px 45px rgba(0, 0, 0, 0.35),
+                        0 0 18px var(--purple-glow);
+            border-color: rgba(0, 255, 157, 0.45);
         }
 
         .project-image {
@@ -601,23 +661,79 @@
         }
 
         .project-content {
-            padding: 1.5rem;
+            padding: clamp(1.75rem, 4vw, 2.2rem);
             flex-grow: 1;
             display: flex;
             flex-direction: column;
+            gap: 1rem;
         }
 
         .project-title {
             font-family: 'Share Tech Mono', monospace;
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             color: var(--secondary);
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.035em;
         }
 
         .project-description {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
+            color: rgba(184, 184, 255, 0.85);
+            margin-bottom: 1rem;
             flex-grow: 1;
+        }
+
+        .project-highlights {
+            list-style: none;
+            display: grid;
+            gap: 0.75rem;
+            margin: 0 0 1.5rem 0;
+            padding: 0;
+        }
+
+        .project-highlights li {
+            position: relative;
+            padding-left: 1.6rem;
+            color: rgba(224, 254, 224, 0.85);
+        }
+
+        .project-highlights li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .meta-row {
+            margin-top: auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.85rem;
+            border-radius: 999px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border: 1px solid rgba(157, 0, 255, 0.35);
+            color: rgba(224, 254, 224, 0.8);
+            background: rgba(157, 0, 255, 0.1);
+        }
+
+        .badge.badge-archived {
+            background: rgba(157, 0, 255, 0.15);
+            border-color: rgba(157, 0, 255, 0.4);
+            color: rgba(224, 254, 224, 0.7);
+        }
+
+        .badge.badge-active {
+            background: rgba(0, 255, 157, 0.16);
+            border-color: rgba(0, 255, 157, 0.45);
+            color: var(--secondary);
         }
 
         .project-link {
@@ -627,41 +743,43 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1.1rem;
             border: 1px solid rgba(157, 0, 255, 0.5);
-            border-radius: 4px;
+            border-radius: 6px;
             transition: var(--transition-fast);
             margin-top: auto;
             width: fit-content;
-            background: rgba(157, 0, 255, 0.1);
+            background: rgba(157, 0, 255, 0.12);
         }
 
         .project-link:hover {
             background: var(--gradient);
             color: var(--background);
             border-color: transparent;
+            box-shadow: 0 8px 20px rgba(157, 0, 255, 0.35);
         }
 
         .skills-section {
-            padding: 4rem 2rem;
-            background: rgba(26, 26, 26, 0.3);
+            padding: var(--section-spacing) 2rem;
+            background: rgba(26, 26, 26, 0.35);
         }
 
         .skills-container {
-            max-width: 1200px;
+            max-width: var(--max-width);
             margin: 0 auto;
         }
 
         .skills-heading {
             text-align: center;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 2.5rem;
+            font-size: clamp(2.1rem, 4vw, 2.7rem);
             margin-bottom: 3rem;
             color: var(--secondary);
             position: relative;
             display: inline-block;
             left: 50%;
             transform: translateX(-50%);
+            letter-spacing: 0.08em;
         }
 
         .skills-heading::after {
@@ -676,31 +794,33 @@
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: clamp(1.5rem, 3vw, 2.25rem);
         }
 
         .skill-category {
-            background: rgba(26, 26, 26, 0.7);
-            border: 1px solid rgba(157, 0, 255, 0.2);
-            border-radius: 8px;
-            padding: 1.5rem;
+            background: var(--card-background);
+            border: var(--card-border);
+            border-radius: var(--card-radius);
+            padding: 1.75rem;
             transition: var(--transition-normal);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.24);
         }
 
         .skill-category:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2),
-                        0 0 15px var(--purple-glow);
-            border-color: var(--primary);
+            transform: translateY(-8px);
+            box-shadow: 0 24px 40px rgba(0, 0, 0, 0.32),
+                        0 0 18px var(--purple-glow);
+            border-color: rgba(0, 255, 157, 0.45);
         }
 
         .skill-category h3 {
             font-family: 'Share Tech Mono', monospace;
             color: var(--secondary);
             margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(157, 0, 255, 0.2);
+            padding-bottom: 0.65rem;
+            border-bottom: 1px solid rgba(157, 0, 255, 0.25);
+            letter-spacing: 0.05em;
         }
 
         .skill-list {
@@ -708,9 +828,10 @@
         }
 
         .skill-list li {
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
+            margin-bottom: 0.65rem;
+            padding-left: 1.65rem;
             position: relative;
+            color: rgba(224, 254, 224, 0.85);
         }
 
         .skill-list li::before {
@@ -773,6 +894,30 @@
         }
 
         /* Media queries */
+        @media screen and (max-width: 1024px) {
+            .hero-content {
+                padding: clamp(2.25rem, 6vw, 3.1rem);
+            }
+
+            .social-links {
+                gap: 1.1rem;
+            }
+        }
+
+        @media screen and (max-width: 880px) {
+            .hero {
+                padding: clamp(5.5rem, 9vw, 7.5rem) 2rem clamp(3rem, 8vw, 4.5rem);
+            }
+
+            .hero h1 {
+                font-size: clamp(2.15rem, 6vw, 2.75rem);
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+
         @media screen and (max-width: 768px) {
             .nav-container {
                 flex-direction: column;
@@ -790,7 +935,7 @@
             }
 
             .hero h1 {
-                font-size: 2.25rem;
+                font-size: 2.1rem;
             }
 
             .projects-grid, .skills-grid {
@@ -803,6 +948,60 @@
 
             .timeline-item::before {
                 left: -1.5rem;
+            }
+        }
+
+        @media screen and (max-width: 640px) {
+            .hero {
+                padding: 6rem 1.5rem 3.5rem;
+            }
+
+            .hero-content {
+                text-align: left;
+                padding: 1.75rem;
+            }
+
+            .tagline {
+                letter-spacing: 0.25rem;
+                font-size: 0.95rem;
+            }
+
+            .subtitle {
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .social-links {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .social-link {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .timeline-wrapper {
+                padding-left: 1.5rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .nav-links {
+                gap: 0.75rem;
+            }
+
+            .button,
+            .mode-toggle {
+                padding: 0.65rem 1.3rem;
+            }
+
+            .hero h1 {
+                font-size: 1.85rem;
+            }
+
+            .subtitle {
+                font-size: 0.95rem;
             }
         }
 
@@ -874,10 +1073,10 @@
 
     <main class="hero">
         <div class="hero-content">
-            <span class="tagline glitch-hover">AI Systems Engineer</span>
-            <h1 class="glitch-hover">Building Tomorrow's Systems Today</h1>
-            <p class="subtitle">As an AI Systems Engineer, I use AI and machine learning to develop applications and systems, specializing in algorithms and models for tasks requiring human intelligence. My work encompasses backend MLE, HPC, and research into optimization and design patterns for AI4Science, aiming to accelerate scientific breakthroughs. I focus on building tools to increase development speed and accuracy.</p>
-            <p class="subtitle">I'm open to roles in AI Engineering, AI Frontier Labs, and Scientific & R&D Labs. Email for an interview or general inquiry for collaboration.</p>
+            <span class="tagline glitch-hover">Allan — Technomancer of Systems, Science, and Code</span>
+            <h1 class="glitch-hover">I build reproducible ML infrastructure for scientific intelligence.</h1>
+            <p class="subtitle">Independent ML engineer and systems architect focused on autonomous research tooling, distillation pipelines, and HPC-ready inference stacks. Everything I ship is designed for disposable compute, durable results, and transparent provenance.</p>
+            <p class="subtitle hero-current">Current focus: evolving <a href="https://github.com/DarkStarStrix/Nexa_Compute" target="_blank" rel="noopener">NexaCompute</a> and scaling <a href="https://huggingface.co/Allanatrix/Nexa_Sci_distilled_Falcon-10B" target="_blank" rel="noopener">Nexa_Sci_distilled_Falcon-10B</a> into a production-grade scientific assistant.</p>
             <div class="social-links">
                 <a href="https://github.com/DarkStarStrix" target="_blank" class="social-link">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
@@ -920,59 +1119,21 @@
     </main>
 
     <section class="featured-projects">
-        <h2>Featured Projects</h2>
-        <div class="projects-grid">
-            <!-- Nexa Inference -->
+        <h2>NexaCompute</h2>
+        <div class="projects-grid" style="grid-template-columns: 1fr;">
             <div class="project-card">
                 <div class="project-content">
-                    <h3 class="project-title">Nexa Inference</h3>
-                    <p class="project-description">An inference application to serve Scientific Models.</p>
-                    <a href="https://github.com/DarkStarStrix/Nexa_Inference" target="_blank" class="project-link">View on GitHub</a>
-                </div>
-            </div>
-
-            <!-- NexaAuto -->
-            <div class="project-card">
-                <div class="project-content">
-                    <h3 class="project-title">NexaAuto</h3>
-                    <p class="project-description">Repo for fine tune runs and notebook transparency.</p>
-                    <a href="https://github.com/DarkStarStrix/Nexa_Auto" target="_blank" class="project-link">View on GitHub</a>
-                </div>
-            </div>
-
-            <!-- Nexa Research Agent -->
-            <div class="project-card">
-                <div class="project-content">
-                    <h3 class="project-title">Nexa Research Agent</h3>
-                    <p class="project-description">An autonomous research agent.</p>
-                    <a href="https://github.com/DarkStarStrix/Nexa_Research_Agent" target="_blank" class="project-link">View on GitHub</a>
-                </div>
-            </div>
-
-            <!-- PyC -->
-            <div class="project-card">
-                <div class="project-content">
-                    <h3 class="project-title">PyC</h3>
-                    <p class="project-description">A compiler toolchain.</p>
-                    <a href="https://github.com/DarkStarStrix/PyC" target="_blank" class="project-link">View on GitHub</a>
-                </div>
-            </div>
-
-            <!-- NexaPod -->
-            <div class="project-card">
-                <div class="project-content">
-                    <h3 class="project-title">NexaPod</h3>
-                    <p class="project-description">A Distributed Compute Fabric for Scientific Problems.</p>
-                    <a href="https://github.com/DarkStarStrix/NexaPod" target="_blank" class="project-link">View on GitHub</a>
-                </div>
-            </div>
-
-            <!-- NexaToolkit -->
-            <div class="project-card">
-                <div class="project-content">
-                    <h3 class="project-title">NexaToolkit</h3>
-                    <p class="project-description">An all-in-one toolkit for ML ops.</p>
-                    <a href="https://github.com/DarkStarStrix/NexaToolKit" target="_blank" class="project-link">View on GitHub</a>
+                    <h3 class="project-title">NexaCompute Infrastructure</h3>
+                    <p class="project-description">Disposable compute. Durable lineage. NexaCompute orchestrates data prep, distillation, distributed training, LLM-as-judge evaluation, dashboards, and deployment across any GPU provider. The platform remains available for reference but is no longer actively maintained.</p>
+                    <ul class="project-highlights">
+                        <li>End-to-end manifests for distillation, training, evaluation, and serving.</li>
+                        <li>Modular stacks covering <code>nexa_data</code>, <code>nexa_distill</code>, <code>nexa_train</code>, <code>nexa_eval</code>, <code>nexa_ui</code>, and <code>nexa_infra</code>.</li>
+                        <li>Provider-agnostic orchestration patterns for Lambda, CoreWeave, RunPod, AWS, and bespoke clusters.</li>
+                        <li>Historical telemetry and cost tracking for reproducible scientific ML runs.</li>
+                    </ul>
+                    <div class="meta-row">
+                        <a href="https://github.com/DarkStarStrix/Nexa_Compute" class="button" target="_blank" rel="noopener">GitHub Repository</a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -23,6 +23,9 @@
     body {
       font-family: 'Inter', sans-serif;
       background: var(--background);
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(157, 0, 255, 0.18) 0%, transparent 55%),
+        radial-gradient(circle at 90% 80%, rgba(0, 255, 157, 0.14) 0%, transparent 55%);
       color: var(--text);
       line-height: 1.7;
       min-height: 100vh;
@@ -47,6 +50,7 @@
       font-family: 'Share Tech Mono', monospace;
       font-size: 1.75rem;
       background: var(--gradient);
+      background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -71,41 +75,83 @@
       color: var(--text);
       border: 2px solid;
       border-image: var(--gradient) 1;
-      padding: 0.75rem 1.5rem;
-      border-radius: 4px;
+      padding: 0.65rem 1.6rem;
+      border-radius: 999px;
       cursor: pointer;
       font-family: 'Share Tech Mono', monospace;
       transition: var(--transition-normal);
       text-decoration: none;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      position: relative;
+      overflow: hidden;
+      min-height: 44px;
+      letter-spacing: 0.04em;
+      box-shadow: 0 0 6px var(--purple-glow);
+    }
+    .button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(157, 0, 255, 0.2), transparent);
+      transition: all 0.5s ease;
+    }
+    .button:hover::before {
+      left: 100%;
     }
     .button:hover {
       color: var(--secondary);
-      box-shadow: 0 0 10px var(--purple-glow);
+      transform: translateY(-2px);
+      box-shadow: 0 0 12px var(--purple-glow);
     }
     .hero {
-      background: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url('hero-bg.jpg');
-      background-size: cover;
+      background: radial-gradient(circle at 10% 20%, rgba(157, 0, 255, 0.18) 0%, transparent 55%), radial-gradient(circle at 90% 80%, rgba(0, 255, 157, 0.16) 0%, transparent 55%), #05050a;
       color: white;
-      padding: 100px 20px 40px 20px;
+      padding: 110px 20px 60px 20px;
       text-align: center;
       margin-top: 64px;
     }
     .hero-content {
-      max-width: 800px;
+      max-width: 860px;
       margin: 0 auto;
-      padding: 0 20px;
-      background: rgba(26, 26, 26, 0.7);
-      border-radius: 8px;
-      border: 1px solid rgba(157, 0, 255, 0.2);
+      padding: 2.5rem 2rem;
+      background: rgba(13, 13, 22, 0.85);
+      border-radius: 12px;
+      border: 1px solid rgba(157, 0, 255, 0.25);
+      box-shadow: 0 35px 80px rgba(0, 0, 0, 0.35);
     }
     .hero h1 {
       font-family: 'Share Tech Mono', monospace;
-      font-size: 2.5rem;
+      font-size: clamp(2.4rem, 5vw, 3.1rem);
       background: var(--gradient);
+      background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
+      letter-spacing: 0.08em;
+    }
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      margin-top: 1rem;
+    }
+    .nexa-badge {
+      display: inline-block;
+      font-family: 'Share Tech Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.3rem;
+      font-size: 0.85rem;
+      color: var(--secondary);
+      padding: 0.35rem 1.1rem;
+      border: 1px solid rgba(0, 255, 157, 0.4);
+      border-radius: 999px;
+      margin-bottom: 1.25rem;
+      background: rgba(0, 255, 157, 0.08);
     }
     main {
       max-width: 900px;
@@ -123,11 +169,13 @@
       color: var(--secondary);
       text-align: left;
       background: var(--gradient);
+      background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     h1, h2 {
       background: var(--gradient);
+      background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -145,7 +193,7 @@
       list-style: none;
       padding: 0;
       margin: 0 0 1.5rem 0;
-      max-width: 800px;
+      max-width: 900px;
     }
     ul li {
       margin-bottom: 0.7rem;
@@ -158,35 +206,75 @@
       position: absolute;
       left: 0;
       color: var(--primary);
-      font-size: 1.2em;
+      font-size: 1.1em;
       top: 0.1em;
+    }
+    ol {
+      margin: 0 0 1.75rem 1.1rem;
+      color: var(--text);
+    }
+    ol li {
+      margin-bottom: 1rem;
+    }
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
     }
     .service-card {
         background: var(--card-bg);
         border-radius: var(--border-radius);
         box-shadow: var(--shadow);
-        padding: 1.5rem;
-        border-left: 3px solid var(--primary);
+        padding: 1.6rem;
+        border: 1px solid rgba(157, 0, 255, 0.2);
         transition: var(--transition-normal);
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
     }
     .service-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 5px 20px rgba(0,0,0,0.2), 0 0 15px var(--purple-glow);
+        box-shadow: 0 5px 24px rgba(0,0,0,0.25), 0 0 18px var(--purple-glow);
+        border-color: rgba(0, 255, 157, 0.35);
     }
     .service-card h3 {
         font-family: 'Share Tech Mono', monospace;
         color: var(--secondary);
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.35rem;
+        letter-spacing: 0.04em;
     }
-    .pricing-section {
-        text-align: center;
-        background: var(--card-bg);
-        padding: 2rem;
-        border-radius: var(--border-radius);
+    .service-card ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.6rem;
     }
-    .pricing-section p {
-        max-width: 600px;
-        margin: 0 auto 1rem auto;
+    .service-card ul li {
+      position: relative;
+      padding-left: 1.4rem;
+      color: var(--text-secondary);
+    }
+    .service-card ul li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      top: 0.1rem;
+      color: var(--secondary);
+      font-family: 'Share Tech Mono', monospace;
+    }
+    .callout {
+      border-left: 4px solid var(--secondary);
+      background: rgba(0, 255, 157, 0.08);
+      padding: 1.1rem 1.3rem;
+      border-radius: 10px;
+      margin: 1.75rem 0;
+      color: var(--text);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.24);
+    }
+    .callout strong {
+      color: var(--secondary);
     }
     /* Contact form styles */
     .contact-section {
@@ -235,37 +323,30 @@
     }
     @media (max-width: 900px) {
       main {
-        padding: 10px;
+        padding: 16px;
       }
-      table, th, td {
-        font-size: 0.98em;
+      .hero-content {
+        padding: 2rem 1.5rem;
       }
       .hero h1 {
-        font-size: 2rem;
+        font-size: 2.1rem;
       }
       h2 {
-        font-size: 1.2rem;
+        font-size: 1.35rem;
       }
     }
     @media (max-width: 600px) {
-      table, thead, tbody, th, td, tr {
-        display: block;
-        width: 100%;
+      .hero-content {
+        text-align: left;
       }
-      th, td {
-        padding: 0.7rem 0.5rem;
+      .hero h1 {
+        font-size: 1.9rem;
       }
-      th {
-        border-bottom: none;
-      }
-      tr {
-        margin-bottom: 1.2rem;
-        background: var(--card-bg);
-        border-radius: var(--border-radius);
-        box-shadow: var(--shadow);
+      .service-grid {
+        grid-template-columns: 1fr;
       }
       .contact-section {
-        padding: 1rem 0.5rem;
+        padding: 1.25rem 1rem;
       }
     }
   </style>
@@ -287,55 +368,69 @@
   </nav>
   <div class="hero">
     <div class="hero-content">
-      <h1>AI & Software Engineering Services</h1>
+      <span class="nexa-badge">Services</span>
+      <h1>Custom Models &amp; Hosted Fine-Tuning</h1>
       <p>
-        Building robust software applications, specializing in ML infrastructure, high-performance computing, and custom toolchains to solve complex problems.
+        Ship tailored models, run managed distillation pipelines, or commission complete ML systems—powered end-to-end by the NexaCompute infrastructure.
       </p>
     </div>
   </div>
   <main>
-    <section>
-      <h2>Core Expertise</h2>
-      <p>I build software applications for various purposes, but my primary focus is on developing ML infrastructure, tools, and toolchains. My expertise combines several key domains to deliver comprehensive solutions.</p>
-      <ul>
-        <li><strong>Software Engineering (Backend):</strong> Designing and building scalable, efficient server-side applications and APIs.</li>
-        <li><strong>Machine Learning Engineering (MLE):</strong> Creating and deploying production-ready ML systems, from data pipelines to model serving.</li>
-        <li><strong>High-Performance Computing (HPC):</strong> Optimizing code and infrastructure for computationally intensive tasks in scientific and AI domains.</li>
-        <li><strong>Research & Development:</strong> Exploring and implementing cutting-edge techniques in Optimization, HPC, and Explainable AI (XAI).</li>
-      </ul>
+    <section class="section">
+      <h2>What I Deliver</h2>
+      <p>I help teams ship custom models and ML experiences without inheriting infrastructure overhead. Every engagement runs on NexaCompute—my reproducible, cost-aware ML lab—so you gain the outputs without worrying about the plumbing.</p>
+      <div class="service-grid">
+        <article class="service-card">
+          <h3>Custom Models</h3>
+          <p>Bespoke language and multimodal models tuned to your domain.</p>
+          <ul>
+            <li>Model scoping, evaluation harnesses, and deployment playbooks.</li>
+            <li>Domain-specific data curation with rigorous quality gates.</li>
+            <li>Inference-ready endpoints or artifacts you can host internally.</li>
+          </ul>
+        </article>
+        <article class="service-card">
+          <h3>Hosted Fine-Tuning &amp; Distillation</h3>
+          <p>Managed fine-tuning pipelines that stay reproducible end-to-end.</p>
+          <ul>
+            <li>Teacher-student distillation, LoRA/QLoRA, and PEFT strategies.</li>
+            <li>Telemetry, manifests, and cost tracking for every run.</li>
+            <li>Secure, provider-agnostic execution across Lambda, CoreWeave, RunPod, AWS, and more.</li>
+          </ul>
+        </article>
+        <article class="service-card">
+          <h3>Custom Solutions &amp; Tooling</h3>
+          <p>Full-stack ML systems, dashboards, and automation tailored to your workflows.</p>
+          <ul>
+            <li>Evaluation dashboards, Streamlit apps, and guardrail interfaces.</li>
+            <li>Batch or realtime inference pipelines with ops documentation.</li>
+            <li>Operator playbooks, handover sessions, and ongoing advisory.</li>
+          </ul>
+        </article>
+      </div>
     </section>
 
-    <section>
-        <h2>What I Offer</h2>
-        <div class="service-card">
-            <h3>Custom Tooling & Infrastructure</h3>
-            <p>Development of bespoke tools, compilers, and infrastructure to accelerate your ML and scientific computing workflows. If you have a unique challenge, I can build a unique solution.</p>
-        </div>
-    </section>
-
-    <section class="pricing-section">
-      <h2>Simple, Flexible Rates</h2>
-      <p>
-        I offer straightforward pricing to get started quickly. All services are available under one roof, allowing you to mix, match, and scale your project as needed.
-      </p>
-      <p>
-        Need a custom package or a combination of services? Let's talk. We can define a scope and price that fits your budget and goals. More complex or extensive work can be accommodated with a custom quote.
-      </p>
+    <section class="section">
+      <h2>Powered by NexaCompute</h2>
+      <p>NexaCompute handles the data preparation, distillation, distributed training, evaluation, dashboards, and cost telemetry behind the scenes. You get durable artifacts and clear provenance while the compute layer remains disposable.</p>
+      <div class="callout">
+        <strong>Want the full blueprint?</strong> Explore the <a href="Projects.html" style="color: var(--secondary); text-decoration: none;">NexaCompute architecture</a> for module breakdowns, manifests, and pipeline details.
+      </div>
     </section>
 
     <section class="contact-section">
-      <h2>Get in Touch</h2>
-      <p style="text-align: center; margin-bottom: 1.5rem;">Have a project in mind? Let's connect and discuss how I can help you achieve your goals.</p>
+      <h2>Request a Build</h2>
+      <p style="text-align: center; margin-bottom: 1.5rem;">Share a bit about your workload and I’ll follow up with an execution plan, timelines, and recommended infrastructure footprint.</p>
       <form action="https://formspree.io/f/mdkgdrgp" method="POST">
         <label>
           Your email:
           <input type="email" name="email" required>
         </label>
         <label>
-          Your message:
-          <textarea name="message" required></textarea>
+          Project context:
+          <textarea name="message" required placeholder="What are you building? What data or models are in play?"></textarea>
         </label>
-        <button type="submit" class="button">Send</button>
+        <button type="submit" class="button">Request NexaCompute Services</button>
       </form>
     </section>
   </main>

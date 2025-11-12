@@ -21,24 +21,33 @@
             --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --max-width: 1200px;
+            --content-width: 1100px;
+            --section-spacing: clamp(3.5rem, 6vw, 5rem);
+            --card-radius: 14px;
+            --card-border: 1px solid rgba(157, 0, 255, 0.2);
+            --card-background: rgba(18, 18, 26, 0.75);
+            --card-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: var(--transition-normal);
+            transition: color 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
         }
 
         body {
             font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            line-height: 1.75;
             background: var(--background);
             color: var(--text);
-            line-height: 1.6;
             overflow-x: hidden;
+            scroll-behavior: smooth;
             background-image:
-                radial-gradient(circle at 10% 20%, rgba(157, 0, 255, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 90% 80%, rgba(0, 255, 157, 0.05) 0%, transparent 50%);
+                radial-gradient(circle at 10% 20%, rgba(157, 0, 255, 0.08) 0%, transparent 55%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 157, 0.07) 0%, transparent 55%);
         }
 
         ::-webkit-scrollbar {
@@ -67,8 +76,9 @@
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: var(--max-width);
             margin: 0 auto;
+            padding: 0 clamp(1rem, 5vw, 2.5rem);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -76,9 +86,10 @@
 
         .logo {
             font-family: 'Share Tech Mono', monospace;
-            font-size: 1.75rem;
+            font-size: clamp(1.5rem, 2vw, 1.9rem);
             font-weight: 600;
             background: var(--gradient);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 10px var(--purple-glow);
@@ -106,7 +117,7 @@
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: clamp(1.25rem, 3vw, 2rem);
             align-items: center;
         }
 
@@ -140,70 +151,236 @@
             color: var(--secondary);
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 6rem auto 4rem;
-            padding: 0 2rem;
-        }
-
-        h1 {
+        .button {
+            background: rgba(157, 0, 255, 0.1);
+            color: var(--text);
+            border: 2px solid;
+            border-image: var(--gradient) 1;
+            padding: 0.65rem 1.6rem;
+            border-radius: 999px;
+            cursor: pointer;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 2.5rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px var(--purple-glow);
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        h2 {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 1.5rem;
-            color: var(--secondary);
-            margin: 1.5rem 0 1rem;
-        }
-
-        .project-category {
-            background: rgba(26, 26, 26, 0.7);
-            border: 1px solid rgba(157, 0, 255, 0.2);
-            padding: 2rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.04em;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            text-decoration: none;
+            min-height: 44px;
+            box-shadow: 0 0 6px var(--purple-glow);
             transition: var(--transition-normal);
         }
 
-        .project-category:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3),
-                        0 0 15px var(--purple-glow);
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(157, 0, 255, 0.2), transparent);
+            transition: all 0.5s ease;
         }
 
-        .project-category h1 {
-            font-size: 2rem;
+        .button:hover::before {
+            left: 100%;
+        }
+
+        .button:hover {
+            color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 0 12px var(--purple-glow);
+        }
+
+        .container {
+            width: min(var(--content-width), calc(100% - 3rem));
+            margin: 6rem auto 4rem;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: clamp(3rem, 6vw, 4.5rem);
+        }
+
+        .intro h1 {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: clamp(2.4rem, 5vw, 3.4rem);
+            background: var(--gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 18px rgba(157, 0, 255, 0.4);
             margin-bottom: 1.5rem;
-            text-align: left;
+            letter-spacing: 0.08em;
         }
 
-        p {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
+        .intro .lead {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: clamp(1.05rem, 2vw, 1.2rem);
+            color: rgba(224, 254, 224, 0.75);
+            max-width: 720px;
+            margin: 0 auto;
+            letter-spacing: 0.015em;
+        }
+
+        .section {
+            margin-bottom: var(--section-spacing);
+        }
+
+        .section-header {
+            margin-bottom: 1.75rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: clamp(1.8rem, 4vw, 2.3rem);
+            color: var(--secondary);
+            letter-spacing: 0.06em;
+        }
+
+        .section-header p {
+            margin-top: 0.5rem;
+            color: rgba(184, 184, 255, 0.85);
+            max-width: 720px;
+            line-height: 1.7;
+        }
+
+        .item-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: clamp(1.5rem, 3vw, 2.5rem);
+            align-items: stretch;
+            grid-auto-rows: 1fr;
+        }
+
+        .project-item,
+        .experience-item {
+            background: var(--card-background);
+            border: var(--card-border);
+            border-radius: var(--card-radius);
+            padding: clamp(1.75rem, 4vw, 2.25rem);
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            height: 100%;
+        }
+
+        .project-item:hover,
+        .experience-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 26px 50px rgba(0, 0, 0, 0.38);
+            border-color: rgba(0, 255, 157, 0.38);
+        }
+
+        .item-header {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .item-header h3 {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.2rem;
+            letter-spacing: 0.045em;
+            color: var(--text);
+        }
+
+        .badge {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            padding: 0.35rem 0.85rem;
+            border-radius: 999px;
+            border: 1px solid rgba(157, 0, 255, 0.4);
+            background: rgba(157, 0, 255, 0.12);
+            color: rgba(224, 254, 224, 0.85);
+        }
+
+        .badge.badge-active {
+            background: rgba(0, 255, 157, 0.16);
+            border-color: rgba(0, 255, 157, 0.45);
+            color: var(--secondary);
+        }
+
+        .badge.badge-archived {
+            background: rgba(157, 0, 255, 0.15);
+            border-color: rgba(157, 0, 255, 0.4);
+            color: rgba(224, 254, 224, 0.7);
+        }
+
+        .description {
+            color: rgba(224, 254, 224, 0.82);
+            line-height: 1.7;
+        }
+
+        .stat-list {
+            list-style: none;
+            display: grid;
+            gap: 0.65rem;
+            margin-top: 0.5rem;
+        }
+
+        .stat-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            color: rgba(184, 184, 255, 0.85);
             line-height: 1.6;
+        }
+
+        .stat-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .stat-sublist {
+            list-style: none;
+            display: grid;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .stat-sublist li {
+            position: relative;
+            padding-left: 1.5rem;
+            color: rgba(184, 184, 255, 0.75);
+            line-height: 1.6;
+        }
+
+        .stat-sublist li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .meta-row {
+            margin-top: auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
         }
 
         .github-link {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: rgba(157, 0, 255, 0.1);
+            background: rgba(157, 0, 255, 0.12);
             color: var(--text);
             text-decoration: none;
             padding: 0.75rem 1.5rem;
-            border: 1px solid rgba(157, 0, 255, 0.5);
-            border-radius: 4px;
+            border: 1px solid rgba(157, 0, 255, 0.45);
+            border-radius: 999px;
             font-family: 'Share Tech Mono', monospace;
-            margin: 1rem 0;
             transition: var(--transition-fast);
         }
 
@@ -211,22 +388,22 @@
             background: var(--gradient);
             color: var(--background);
             border-color: transparent;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(157, 0, 255, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px rgba(157, 0, 255, 0.35);
         }
 
         .back-link {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            background: rgba(157, 0, 255, 0.1);
+            gap: 0.65rem;
+            background: rgba(157, 0, 255, 0.12);
             color: var(--text);
             text-decoration: none;
-            padding: 0.75rem 1.5rem;
-            border: 1px solid rgba(157, 0, 255, 0.5);
-            border-radius: 4px;
+            padding: 0.75rem 1.75rem;
+            border: 1px solid rgba(157, 0, 255, 0.45);
+            border-radius: 999px;
             font-family: 'Share Tech Mono', monospace;
-            margin-top: 2rem;
+            margin-top: 2.5rem;
             transition: var(--transition-fast);
         }
 
@@ -234,8 +411,21 @@
             background: var(--gradient);
             color: var(--background);
             border-color: transparent;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(157, 0, 255, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px rgba(157, 0, 255, 0.35);
+        }
+
+        .experience-section {
+            display: grid;
+            gap: clamp(1.5rem, 3vw, 2.5rem);
+            grid-auto-rows: 1fr;
+        }
+
+        .experience-heading {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: clamp(1.6rem, 3.2vw, 2.1rem);
+            color: var(--secondary);
+            letter-spacing: 0.05em;
         }
 
         .particles {
@@ -262,18 +452,59 @@
             100% { transform: translateY(-100vh); }
         }
 
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 980px) {
             .container {
-                margin: 5rem auto 2rem;
-                padding: 0 1rem;
+                width: min(95%, 680px);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
             }
 
-            h1 {
-                font-size: 2rem;
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
             }
 
-            h2 {
-                font-size: 1.25rem;
+            .container {
+                width: calc(100% - 2rem);
+                margin: 5rem auto 2.5rem;
+            }
+
+            .item-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .item-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .meta-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .intro h1 {
+                font-size: clamp(2rem, 8vw, 2.4rem);
+            }
+
+            .intro .lead {
+                font-size: 1rem;
+            }
+
+            .project-item,
+            .experience-item {
+                padding: 1.5rem;
+            }
+
+            .item-header h3 {
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -296,80 +527,161 @@
     <div class="particles" id="particles"></div>
 
     <div class="container">
-        <h1>Projects</h1>
-        <p>Here is a summary of my experience, organized by project category with key results:</p>
+        <header class="intro">
+            <h1>Worklog</h1>
+            <p class="lead">Active systems in production today, followed by the archived infrastructure and career milestones that brought them here.</p>
+        </header>
 
-        <div class="project-category">
-            <h1>Quantum Computing</h1>
-            <h2>QSolvers</h2>
-            <p>Developed a quantum solver library focused on applied problems in chemistry and finance using IBM's Qiskit.</p>
-            <p>Achievements: 11,000 lines of bug-free code, six research papers published, proof-of-concepts for optimization challenges like VRP.</p>
-            <p>Developed independently but faced challenges shipping to PyPI due to upstream errors in Qiskit and dependency issues.</p>
-            <a href="https://github.com/DarkStarStrix/QSolvers" class="github-link">GitHub Repository</a>
+        <section class="section" id="current-work">
+            <div class="section-header">
+                <h2>Current Work</h2>
+                <p>The live stack I’m investing in right now.</p>
+            </div>
+            <div class="item-grid">
+                <article class="project-item">
+                    <div class="item-header">
+                        <h3>NexaCompute Infrastructure</h3>
+                        <span class="badge badge-active">Active</span>
+                    </div>
+                    <p class="description">The core platform powering all current engagements—NexaCompute orchestrates data pipelines, knowledge distillation, distributed training, evaluation, dashboards, and inference-ready serving across disposable GPU fleets.</p>
+                    <ul class="stat-list">
+                        <li>Modular architecture (<code>nexa_data</code>, <code>nexa_distill</code>, <code>nexa_train</code>, <code>nexa_eval</code>, <code>nexa_ui</code>, <code>nexa_infra</code>, <code>nexa_inference</code>).</li>
+                        <li>Manifests, telemetry, and cost tracking baked into every run for reproducibility.</li>
+                        <li>Provider-agnostic orchestration (Prime Intellect, Lambda, CoreWeave, RunPod, AWS, bespoke clusters).</li>
+                        <li>Backs all current model releases, including the Falcon-10B distillation.</li>
+                    </ul>
+                    <div class="meta-row">
+                        <a href="https://github.com/DarkStarStrix/Nexa_Compute" class="button" target="_blank" rel="noopener">View NexaCompute on GitHub</a>
+                    </div>
+                </article>
 
-            <h2>Bosonic</h2>
-            <p>Explored Bose-Einstein condensates and non-Abelian anyons as substrates for quantum computation using QuTiP.</p>
-            <p>Achievements: Refined code simulating quantum phenomena, deep theoretical work in condensed matter physics, requiring chip design knowledge.</p>
-            <a href="https://github.com/DarkStarStrix/Bosonic" class="github-link">GitHub Repository</a>
-        </div>
+                <article class="project-item">
+                    <div class="item-header">
+                        <h3>Nexa_Sci_distilled_Falcon-10B</h3>
+                        <span class="badge badge-active">Active</span>
+                    </div>
+                    <p class="description">A Falcon3-10B QLoRA model tuned for scientific question answering, hypothesis generation, and reproducible lab methodology drafting—trained on a 100k-sample synthetic corpus distilled via NexaCompute.</p>
+                    <ul class="stat-list">
+                        <li>Base model: <code>tiiuae/Falcon3-10B-Base</code> with 4-bit NF4 adapters (rank 64, bf16 precision).</li>
+                        <li>Dataset: 100k verified SFT samples (`sft_scientific_v1`) distilled from GPT-4/GPT-5-Mini across biology, materials science, and physics.</li>
+                        <li>Training: 2 × A100 80GB (Prime Intellect), ~10 hours, ≈ $9 USD, validation/test loss 0.410 / 0.413.</li>
+                        <li>Artifacts: merged safetensors, tokenizer, llm.txt, and pending rubric-based evaluation parquet.</li>
+                    </ul>
+                    <div class="meta-row">
+                        <a href="https://huggingface.co/Allanatrix/Nexa_Sci_distilled_Falcon-10B" class="button" target="_blank" rel="noopener">View on Hugging Face</a>
+                    </div>
+                </article>
+            </div>
+        </section>
 
-        <div class="project-category">
-            <h1>Machine Learning & AI</h1>
-            <h2>Emergent Neural Networks</h2>
-            <p>Created a multi-objective optimization model balancing accuracy, stability, and reliability in AI systems.</p>
-            <p>Achievements: Complete framework available on GitHub with accompanying code, data, and white papers.</p>
-            <a href="https://github.com/DarkStarStrix/Emergent-Neural-Networks" class="github-link">GitHub Repository</a>
+        <section class="section" id="archived-systems">
+            <div class="section-header">
+                <h2>Archived Systems</h2>
+                <p>Legacy infrastructure and datasets that remain available for reference but are no longer actively maintained.</p>
+            </div>
+            <div class="item-grid">
+                <article class="project-item">
+                    <div class="item-header">
+                        <h3>ProteinBank Dataset</h3>
+                        <span class="badge badge-archived">Archived</span>
+                    </div>
+                    <p class="description">~100k synthetic protein sequences with secondary-structure labels generated via CNN-BiLSTM and diffusion VAE pipelines. Released for open scientific ML.</p>
+                </article>
 
-            <h2>Thermodynamic Diffusion Models</h2>
-            <p>Developed statistical mechanics models to apply diffusion processes to areas like medical imaging.</p>
-            <p>Achievements: Proof-of-concept completed, pending further scaling.</p>
+                <article class="project-item">
+                    <div class="item-header">
+                        <h3>NexaBio Models (1 &amp; 2)</h3>
+                        <span class="badge badge-archived">Archived</span>
+                    </div>
+                    <p class="description">Two protein-structure prediction models—NexaBio-1 (CNN-BiLSTM, ~70% secondary-structure accuracy) and NexaBio-2 (Diffusion-VAE, ~90% tertiary reconstruction accuracy). Generated 100k+ structures via optimized inference.</p>
+                </article>
 
-            <h2>DataVolt</h2>
-            <p>Developed a data engineering infrastructure to simplify data pipelines, streamlining the process by 80-90%.</p>
-            <a href="https://github.com/DarkStarStrix/DataVolt" class="github-link">GitHub Repository</a>
+                <article class="project-item">
+                    <div class="item-header">
+                        <h3>Materials Dataset</h3>
+                        <span class="badge badge-archived">Archived</span>
+                    </div>
+                    <p class="description">~87k materials with computed properties curated for materials informatics research.</p>
+                </article>
 
-            <h2>AutoAPI</h2>
-            <p>A simplified machine learning automation framework that handles ML workflows through configuration, automating 80% of the training process.</p>
-            <a href="https://github.com/DarkStarStrix/AutoAPI" class="github-link">GitHub Repository</a>
-        </div>
+                <article class="project-item">
+                    <div class="item-header">
+                        <h3>Nexa Research Agent (XR)</h3>
+                        <span class="badge badge-archived">Archived</span>
+                    </div>
+                    <p class="description">Autonomous research agent for generating plans, sourcing citations, and synthesizing reports (~1k LOC, 200+ tests). The codebase is preserved for transparency but no longer maintained.</p>
+                </article>
 
-        <div class="project-category">
-            <h1>Operations Research & Optimization</h1>
-            <h2>Pathfinder</h2>
-            <p>Built and visualized the A* algorithm to simulate maze flooding for optimization.</p>
-            <p>Achievements: Successfully programmed and visualized optimization processes, demonstrating real-world problem-solving.</p>
-            <a href="https://github.com/DarkStarStrix/PathFinder" class="github-link">GitHub Repository</a>
+                <article class="project-item">
+                    <div class="item-header">
+                        <h3>NexaPod</h3>
+                        <span class="badge badge-archived">Archived</span>
+                    </div>
+                    <p class="description">Distributed compute fabric prototype for federating consumer GPUs and HPC clusters—an early experiment towards a Folding@home-style network for scientific workloads.</p>
+                </article>
+            </div>
+        </section>
 
-            <h2>Math Programming & Operations Research Models</h2>
-            <p>Coded models from linear programming to dynamic VRP to showcase algorithmic knowledge.</p>
-            <p>Achievements: Full documentation and coded models demonstrating advanced optimization techniques.</p>
-            <a href="https://github.com/DarkStarStrix/Math-Programming-Models" class="github-link">GitHub Repository</a>
-        </div>
+        <section class="section" id="distillation">
+            <div class="section-header">
+                <h2>Distillation & Research Pipelines</h2>
+            </div>
+            <div class="experience-section">
+                <article class="experience-item">
+                    <p class="description">Designed and shipped NexaCompute, a full end-to-end LLM distillation pipeline (data generation → filtering → training → deployment). Generated and curated a 100k scientific QA dataset using an async OpenAI pipeline with JSON-schema validation, then trained a 10B Falcon3 model with QLoRA (NF4, bf16, gradient checkpointing) on 2×A100 80GB. Achieved clean convergence on validation and test splits, released merged safetensors + model card + llm.txt, and published the distilled model for public inference—demonstrating a reproducible, low-cost method for building domain-specialized scientific assistants.</p>
+                </article>
+                <article class="experience-item">
+                    <p class="description">Built and open-sourced a 10B scientific reasoning model (Falcon3-10B QLoRA) and full training stack “NexaCompute.” Automated generation of 100k domain QA pairs (bio/physics/materials), filtered with strict schema-based QA, then trained on 2×A100 with reproducible manifests, checkpoints, and W&B tracking. Achieved strong convergence on hold-out data and published merged weights for real-world inference—showing how large models can be cheaply specialized into high-fidelity scientific assistants.</p>
+                </article>
+            </div>
+        </section>
 
-        <div class="project-category">
-            <h1>Software & Backend Engineering</h1>
-            <h2>Books Application</h2>
-            <p>Developed a full-stack book application using React, FastAPI, and MongoDB.</p>
-            <p>Deployed on Render but faced challenges with cloud compute costs.</p>
-            <a href="https://github.com/DarkStarStrix/Books" class="github-link">GitHub Repository</a>
-        </div>
+        <section class="section" id="professional-experience">
+            <div class="section-header">
+                <h2>Professional Experience</h2>
+            </div>
+            <div class="experience-section">
+                <article class="experience-item">
+                    <p class="description">Designed and delivered custom machine learning solutions for individual clients across finance and AI research.</p>
+                    <ul class="stat-list">
+                        <li>Developed reinforcement-learning-from-human-feedback (RLHF) fine-tuning pipelines for open-source LLMs.</li>
+                        <li>Built and deployed lightweight crypto-trading models using Python, PyTorch, and on-chain market data.</li>
+                        <li>Implemented automated data ingestion and preprocessing pipelines for personal research dashboards.</li>
+                        <li>Provided reproducible documentation and experiment tracking (Weights &amp; Biases, Hugging Face Hub).</li>
+                    </ul>
+                </article>
 
-        <div class="project-category">
-            <h1>Hackathons & Competitions</h1>
-            <h2>World Scholars Debate Club</h2>
-            <p>Led the team to the top 10 globally at age 16, showcasing leadership and critical thinking.</p>
+                <article class="experience-item">
+                    <p class="description">Contributed to the development of end-to-end ML and research pipelines at an early-stage AI startup. Designed and documented internal systems for model distillation, evaluation, and deployment while collaborating with senior engineers to streamline data workflows, automation, and reproducibility across the stack.</p>
+                    <ul class="stat-list">
+                        <li>Built and maintained the model distillation framework from data generation to evaluation and deployment.</li>
+                        <li>Authored two major internal technical wikis:
+                            <ul class="stat-sublist">
+                                <li>A comprehensive guide to the modern fine-tuning ecosystem (Swift, TRL, Megatron-LM, RL frameworks).</li>
+                                <li>A deep-dive into distributed training protocols and scaling challenges beyond 30B parameters.</li>
+                            </ul>
+                        </li>
+                        <li>Conducted performance benchmarking and API-driven model evaluations; improved internal inference runtime from 20 minutes → 2 seconds through low-level argument tuning and process optimization.</li>
+                        <li>Automated large-scale evaluation pipelines and documented production workflows for remote development, SSH environments, and code review cycles.</li>
+                        <li>Collaborated cross-functionally on synthetic data generation for distillation pipelines, ensuring alignment between research output and production infrastructure.</li>
+                        <li>Integrated and optimized inference pipelines using vLLM and related frameworks for large-scale evaluation and model serving.</li>
+                    </ul>
+                    <p class="description">This role provided extensive exposure to production-grade ML systems, distributed training, and the realities of scaling AI research infrastructure in startup environments.</p>
+                </article>
 
-            <h2>NASA Space Apps Hackathon</h2>
-            <p>Led a technical team to ship an application that sonifies space images, achieving a high ranking.</p>
+                <article class="experience-item">
+                    <p class="description">Trained and benchmarked multiple model architectures (Transformers, CNN-BiLSTM hybrids, diffusion VAEs, etc.) on structured and scientific datasets.</p>
+                    <ul class="stat-list">
+                        <li>Used Kaggle’s GPU runtime for rapid prototyping of scientific ML experiments before scaling them to NexaCompute or Hugging Face.</li>
+                        <li>Developed and validated preprocessing pipelines (tokenization, normalization, augmentation) and verified consistency before dataset release.</li>
+                        <li>Logged and tracked experiment performance using Weights &amp; Biases (W&amp;B) integration for reproducibility.</li>
+                        <li>Applied aggressive optimization strategies (e.g., efficient batching, precision tuning, caching) to minimize runtime and compute cost.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
 
-            <h2>Penny Lane Quantum Hackathon</h2>
-            <p>Solo participation in quantum computing competition, focusing on community collaboration.</p>
-
-            <h2>Jane Street</h2>
-            <p>Participated in a Kaggle competition, coordinating a global team to place 1000th out of 3000 despite joining late.</p>
-        </div>
-
-        <a href="index.html" class="back-link">Back to Home</a>
+        <a href="index.html" class="back-link">← Return to Home</a>
     </div>
 
     <script>
