@@ -276,6 +276,197 @@
     .callout strong {
       color: var(--secondary);
     }
+    /* Case study styles */
+    .case-study-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      border: 1px solid rgba(157, 0, 255, 0.2);
+      margin-bottom: 2rem;
+      transition: var(--transition-normal);
+    }
+    .case-study-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 24px rgba(0,0,0,0.25), 0 0 18px var(--purple-glow);
+      border-color: rgba(0, 255, 157, 0.35);
+    }
+    .case-study-header {
+      border-bottom: 1px solid rgba(157, 0, 255, 0.2);
+      padding-bottom: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .case-study-title {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1.5rem;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+      letter-spacing: 0.04em;
+    }
+    .case-study-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .case-study-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .case-study-meta-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .case-study-meta-value {
+      color: var(--text);
+      font-size: 1rem;
+    }
+    .case-study-section {
+      margin-bottom: 2rem;
+    }
+    .case-study-section h3 {
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--secondary);
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+      margin-top: 1.5rem;
+      letter-spacing: 0.04em;
+    }
+    .case-study-section h3:first-of-type {
+      margin-top: 0;
+    }
+    .case-study-section p {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+    .case-study-infra-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+    .case-study-infra-item {
+      background: rgba(157, 0, 255, 0.05);
+      border: 1px solid rgba(157, 0, 255, 0.15);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+    .case-study-infra-item h4 {
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--secondary);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.04em;
+    }
+    .case-study-infra-item ul {
+      margin: 0;
+      padding: 0;
+    }
+    .case-study-infra-item ul li {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+    .case-study-results {
+      background: rgba(0, 255, 157, 0.08);
+      border-left: 4px solid var(--secondary);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 1.5rem;
+    }
+    .case-study-results ul {
+      margin: 0.75rem 0 0 0;
+    }
+    .case-study-results ul li {
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+    .case-study-note {
+      background: rgba(157, 0, 255, 0.08);
+      border-left: 4px solid var(--primary);
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+    /* Pricing styles */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    .pricing-card {
+      background: rgba(157, 0, 255, 0.05);
+      border: 1px solid rgba(157, 0, 255, 0.2);
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      transition: var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+    }
+    .pricing-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(0, 255, 157, 0.35);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+    .pricing-card h3 {
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--secondary);
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.04em;
+    }
+    .pricing-card h4 {
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--secondary);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.04em;
+    }
+    .pricing-card .price {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1.6rem;
+      color: var(--text);
+      margin: 0.5rem 0;
+      font-weight: 600;
+    }
+    .pricing-card .duration {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .pricing-card p {
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+    }
+    .pricing-card ul {
+      margin: 0.5rem 0 0 0;
+      flex-grow: 1;
+    }
+    .pricing-card ul li {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .pricing-highlight {
+      border-color: rgba(0, 255, 157, 0.4);
+      background: rgba(0, 255, 157, 0.08);
+    }
+    .pricing-subsection {
+      margin-top: 2rem;
+    }
+    .pricing-subsection h3 {
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--secondary);
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.04em;
+    }
     /* Contact form styles */
     .contact-section {
       background: var(--card-bg);
@@ -343,6 +534,15 @@
         font-size: 1.9rem;
       }
       .service-grid {
+        grid-template-columns: 1fr;
+      }
+      .case-study-meta {
+        grid-template-columns: 1fr;
+      }
+      .case-study-infra-grid {
+        grid-template-columns: 1fr;
+      }
+      .pricing-grid {
         grid-template-columns: 1fr;
       }
       .contact-section {
@@ -415,6 +615,244 @@
       <p>NexaCompute handles the data preparation, distillation, distributed training, evaluation, dashboards, and cost telemetry behind the scenes. You get durable artifacts and clear provenance while the compute layer remains disposable.</p>
       <div class="callout">
         <strong>Want the full blueprint?</strong> Explore the <a href="Projects.html" style="color: var(--secondary); text-decoration: none;">NexaCompute architecture</a> for module breakdowns, manifests, and pipeline details.
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Case Studies</h2>
+      <article class="case-study-card">
+        <div class="case-study-header">
+          <h3 class="case-study-title">PROJECT CARD — NexaSci-Falcon-10B (Built on Nexa_Compute)</h3>
+          <div class="case-study-meta">
+            <div class="case-study-meta-item">
+              <span class="case-study-meta-label">Role</span>
+              <span class="case-study-meta-value">Scientific ML Engineer — Distillation, Infra, Deployment</span>
+            </div>
+            <div class="case-study-meta-item">
+              <span class="case-study-meta-label">Timeline</span>
+              <span class="case-study-meta-value">2–3 weeks (included building training infrastructure)</span>
+            </div>
+            <div class="case-study-meta-item">
+              <span class="case-study-meta-label">Cost</span>
+              <span class="case-study-meta-value">~$200</span>
+            </div>
+            <div class="case-study-meta-item">
+              <span class="case-study-meta-label">Infra</span>
+              <span class="case-study-meta-value">Nexa_Compute (custom training + eval system)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-study-section">
+          <h3>Project Summary</h3>
+          <p>I built a 10B-parameter scientific reasoning model — NexaSci-Falcon-10B — using my fully custom ML infrastructure (Nexa_Compute).</p>
+          <p>The model delivers near-frontier performance on scientific task structure (hypothesis generation + methodology design) while running on single-GPU inference hardware.</p>
+        </div>
+
+        <div class="case-study-section">
+          <h3>What I Did</h3>
+          <ul>
+            <li>Designed the data pipeline, generated/filtered 100k scientific Q&A</li>
+            <li>Distilled GPT-4/GPT-5-Mini outputs into Falcon-10B using QLoRA</li>
+            <li>Engineered strict dataset filters, semantic dedupe, and schema validation</li>
+            <li>Designed & executed a reproducible training pipeline</li>
+            <li>Built a rubric-based evaluation suite (correctness, grounding, clarity)</li>
+            <li>Benchmarking on RTX-4090s and A100s via vLLM</li>
+            <li>Documented everything with reproducible manifests + dashboards</li>
+          </ul>
+        </div>
+
+        <div class="case-study-section">
+          <h3>Infrastructure (Nexa_Compute)</h3>
+          <p>A full end-to-end ML system I wrote and maintained:</p>
+          <div class="case-study-infra-grid">
+            <div class="case-study-infra-item">
+              <h4>Data Engine</h4>
+              <ul>
+                <li>JSON → Parquet pipelines</li>
+                <li>Filtering, dedupe, semantic scoring</li>
+                <li>Dataset manifests + reproducibility hashes</li>
+              </ul>
+            </div>
+            <div class="case-study-infra-item">
+              <h4>Training Engine</h4>
+              <ul>
+                <li>QLoRA / GLORA pipelines</li>
+                <li>Distributed config templates (FSDP / DDP / PP)</li>
+                <li>tmux-plus-SSH isolated VM execution</li>
+                <li>Automated checkpointing + merges</li>
+              </ul>
+            </div>
+            <div class="case-study-infra-item">
+              <h4>Eval Engine</h4>
+              <ul>
+                <li>vLLM multi-model generation</li>
+                <li>GPT-4 judge scoring</li>
+                <li>Parquet-based evaluation logs</li>
+                <li>Streamlit dashboard visualizations</li>
+              </ul>
+            </div>
+            <div class="case-study-infra-item">
+              <h4>Inference Engine</h4>
+              <ul>
+                <li>Optimized vLLM presets (bf16 + batch sweeps)</li>
+                <li>INT4/AWQ quant readiness</li>
+                <li>Single-GPU scientific assistant deployment</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-study-section">
+          <h3>Results</h3>
+          <div class="case-study-results">
+            <ul>
+              <li>Within ~10% of GPT-4 / Claude on scientific reasoning tasks</li>
+              <li>Beats or ties several 30B–70B open-source models</li>
+              <li>Stable, structured, evidence-grounded outputs</li>
+              <li>Runs at ~878 tok/s on dual RTX-4090 (bf16)</li>
+              <li>Cost 3–6× less compute than comparable open-source models</li>
+              <li>Entire pipeline trained for ~$200</li>
+              <li>Fully reproducible using Nexa_Compute manifests</li>
+            </ul>
+          </div>
+          <div class="case-study-note">
+            <strong>Note:</strong> The 2–3 week timeline included building the complete training infrastructure from scratch. With Nexa_Compute now established, similar projects can be delivered in significantly less time (typically 1–2 weeks) at the same or lower cost, as the infrastructure overhead is already handled.
+          </div>
+          <p style="margin-top: 1.5rem;"><em>This case study demonstrates the exact kind of scientific model I can build for clients — reliably, quickly, and cost-efficiently.</em></p>
+        </div>
+      </article>
+    </section>
+
+    <section class="section">
+      <h2>Pricing & Engagement Models</h2>
+      <p>I offer flexible engagement models to match your project scope and timeline. All pricing is transparent and upfront—no surprises.</p>
+
+      <div class="pricing-subsection">
+        <h3>Hourly Rate</h3>
+        <p style="margin-bottom: 1rem;">Use only for tiny scoped work</p>
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <h4>Hourly Consulting</h4>
+            <div class="price">$120/hr – $175/hr</div>
+            <p><strong>Ideal for:</strong></p>
+            <ul>
+              <li>Small debugging tasks</li>
+              <li>Eval pipeline fixes</li>
+              <li>Inference optimization</li>
+              <li>Consulting calls</li>
+              <li>Data inspection</li>
+            </ul>
+            <p style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-secondary);"><em>Note: I do not run entire LLM projects on hourly rates.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pricing-subsection">
+        <h3>Fixed-Scope Project Pricing</h3>
+        <p style="margin-bottom: 1rem;">Clients love knowing the price upfront. I love knowing my runway is protected.</p>
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <h3>Tier A — Small Project</h3>
+            <div class="price">$1,500 – $3,000</div>
+            <div class="duration">Duration: 1 week</div>
+            <p><strong>Examples:</strong></p>
+            <ul>
+              <li>Fine-tune a model on your dataset</li>
+              <li>Clean + convert your data</li>
+              <li>Run evals or optimizations</li>
+              <li>Deploy model with vLLM</li>
+            </ul>
+          </div>
+          <div class="pricing-card pricing-highlight">
+            <h3>Tier B — Medium Project</h3>
+            <div class="price">$5,000 – $12,000</div>
+            <div class="duration">Duration: 2–4 weeks</div>
+            <p><strong>Examples:</strong></p>
+            <ul>
+              <li>Full QLoRA distillation</li>
+              <li>Dataset creation (10–50k samples)</li>
+              <li>Evaluation suite + dashboard</li>
+              <li>Deployment on your infrastructure</li>
+            </ul>
+            <p style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-secondary);"><em>The NexaSci-Falcon-10B case study fits this tier.</em></p>
+          </div>
+          <div class="pricing-card">
+            <h3>Tier C — Full Custom Scientific Model</h3>
+            <div class="price">$15,000 – $35,000</div>
+            <div class="duration">Duration: 1–2 months</div>
+            <p><strong>Examples:</strong></p>
+            <ul>
+              <li>Domain-specific scientific LLM (bio, chem, materials, CFD)</li>
+              <li>Multi-stage distillation + post-training</li>
+              <li>Retrieval system + agentic layer</li>
+              <li>Reproducible pipeline + deployment</li>
+            </ul>
+            <p style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-secondary);"><em>Significantly cheaper than competitors ($50k–$120k).</em></p>
+          </div>
+          <div class="pricing-card pricing-highlight">
+            <h3>Scientific Model Quickstart Package</h3>
+            <div class="price">$3,000 Flat</div>
+            <div class="duration">Delivered in 1–2 weeks</div>
+            <p><strong>Deliverables:</strong></p>
+            <ul>
+              <li>Dataset cleaning</li>
+              <li>1 fine-tuned or distilled model</li>
+              <li>Evaluation report</li>
+              <li>Inference-ready export</li>
+              <li>Optional vLLM deployment config</li>
+            </ul>
+            <p style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-secondary);"><em>Guaranteed result with no hassle—perfect for one-shot, production-ready solutions.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pricing-subsection">
+        <h3>Monthly Retainer</h3>
+        <p style="margin-bottom: 1rem;">Best for stability + long-term work. I recommend retainers for ongoing partnerships—they provide stability for both parties and ensure priority delivery.</p>
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <h4>Basic Retainer</h4>
+            <div class="price">$3,000/month</div>
+            <p><strong>Includes:</strong></p>
+            <ul>
+              <li>20 hrs of work</li>
+              <li>Priority responses</li>
+              <li>Bugfixing</li>
+              <li>Eval updates</li>
+              <li>Model maintenance</li>
+            </ul>
+          </div>
+          <div class="pricing-card">
+            <h4>Pro Retainer</h4>
+            <div class="price">$6,000/month</div>
+            <p><strong>Includes:</strong></p>
+            <ul>
+              <li>40 hrs</li>
+              <li>Model distillation cycles</li>
+              <li>Dataset curation</li>
+              <li>Performance tuning</li>
+              <li>Infra assistance</li>
+            </ul>
+          </div>
+          <div class="pricing-card">
+            <h4>Lab-Level Retainer</h4>
+            <div class="price">$10k–$15k/month</div>
+            <p><strong>Includes:</strong></p>
+            <ul>
+              <li>Scientific model development</li>
+              <li>Retrieval + eval suite</li>
+              <li>Periodic training runs</li>
+              <li>Full Nexa_Compute integration</li>
+              <li>Tool-assisted agentic workflows</li>
+            </ul>
+            <p style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-secondary);"><em>Ideal for biotech, materials, and research teams.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top: 2rem;">
+        <strong>Why This Pricing Works:</strong> I delivered a near-frontier 10B model for $200 compute cost. My infrastructure is reproducible, and I can ship data + model + eval loops faster than 95% of the market. Scientific ML is a luxury skillset—clients pay for certainty and expertise, not just time.
       </div>
     </section>
 

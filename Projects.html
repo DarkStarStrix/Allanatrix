@@ -255,8 +255,7 @@
             grid-auto-rows: 1fr;
         }
 
-        .project-item,
-        .experience-item {
+        .project-item {
             background: var(--card-background);
             border: var(--card-border);
             border-radius: var(--card-radius);
@@ -265,6 +264,18 @@
             display: flex;
             flex-direction: column;
             gap: 1rem;
+            height: 100%;
+        }
+
+        .experience-item {
+            background: var(--card-background);
+            border: var(--card-border);
+            border-radius: var(--card-radius);
+            padding: clamp(0.875rem, 2vw, 1rem);
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
             height: 100%;
         }
 
@@ -318,6 +329,13 @@
             line-height: 1.7;
         }
 
+        .experience-item .description {
+            line-height: 1.5;
+            margin-bottom: 0.25rem;
+            margin-top: 0;
+            font-size: 0.9rem;
+        }
+
         .stat-list {
             list-style: none;
             display: grid;
@@ -330,6 +348,19 @@
             padding-left: 1.5rem;
             color: rgba(184, 184, 255, 0.85);
             line-height: 1.6;
+        }
+
+        .experience-item .stat-list {
+            gap: 0.3rem;
+            margin-top: 0.1rem;
+            margin-bottom: 0;
+        }
+
+        .experience-item .stat-list li {
+            padding-left: 1rem;
+            line-height: 1.4;
+            font-size: 0.875rem;
+            margin-bottom: 0;
         }
 
         .stat-list li::before {
@@ -352,6 +383,18 @@
             padding-left: 1.5rem;
             color: rgba(184, 184, 255, 0.75);
             line-height: 1.6;
+        }
+
+        .experience-item .stat-sublist {
+            gap: 0.25rem;
+            margin-top: 0.2rem;
+            margin-bottom: 0;
+        }
+
+        .experience-item .stat-sublist li {
+            padding-left: 1rem;
+            line-height: 1.35;
+            font-size: 0.8rem;
         }
 
         .stat-sublist li::before {
@@ -417,7 +460,7 @@
 
         .experience-section {
             display: grid;
-            gap: clamp(1.5rem, 3vw, 2.5rem);
+            gap: clamp(0.875rem, 1.75vw, 1.25rem);
             grid-auto-rows: 1fr;
         }
 
@@ -498,9 +541,12 @@
                 font-size: 1rem;
             }
 
-            .project-item,
-            .experience-item {
+            .project-item {
                 padding: 1.5rem;
+            }
+
+            .experience-item {
+                padding: 0.875rem;
             }
 
             .item-header h3 {
@@ -517,6 +563,7 @@
                 <a href="Story.html">About</a>
                 <a href="Projects.html">Projects</a>
                 <a href="Skills.html">Skills</a>
+                <a href="Services.html">Services</a>
                 <a href="https://dev.to/darkstalker">Blog</a>
                 <a href="Terminal.html">Terminal</a>
                 <a href="index.html">Home</a>
