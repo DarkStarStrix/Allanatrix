@@ -144,10 +144,9 @@
         .button {
             background: rgba(157, 0, 255, 0.1);
             color: var(--text);
-            border: 2px solid;
-            border-image: var(--gradient) 1;
+            border: 2px solid var(--primary);
             padding: 0.65rem 1.6rem;
-            border-radius: 999px;
+            border-radius: 4px;
             cursor: pointer;
             font-family: 'Share Tech Mono', monospace;
             transition: var(--transition-normal);
@@ -182,6 +181,7 @@
             color: var(--secondary);
             transform: translateY(-2px);
             box-shadow: 0 0 12px var(--purple-glow);
+            border-color: var(--secondary);
         }
 
         .container {

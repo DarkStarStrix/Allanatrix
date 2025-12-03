@@ -154,10 +154,9 @@
         .button {
             background: rgba(157, 0, 255, 0.1);
             color: var(--text);
-            border: 2px solid;
-            border-image: var(--gradient) 1;
+            border: 2px solid var(--primary);
             padding: 0.65rem 1.6rem;
-            border-radius: 999px;
+            border-radius: 4px;
             cursor: pointer;
             font-family: 'Share Tech Mono', monospace;
             position: relative;
@@ -192,6 +191,7 @@
             color: var(--secondary);
             transform: translateY(-2px);
             box-shadow: 0 0 12px var(--purple-glow);
+            border-color: var(--secondary);
         }
 
         .container {
@@ -248,11 +248,10 @@
         }
 
         .item-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            display: flex;
+            flex-direction: column;
             gap: clamp(1.5rem, 3vw, 2.5rem);
             align-items: stretch;
-            grid-auto-rows: 1fr;
         }
 
         .project-item {
@@ -261,10 +260,14 @@
             border-radius: var(--card-radius);
             padding: clamp(1.75rem, 4vw, 2.25rem);
             box-shadow: var(--card-shadow);
+            width: 100%;
+        }
+
+        .project-item-content {
             display: flex;
             flex-direction: column;
             gap: 1rem;
-            height: 100%;
+            width: 100%;
         }
 
         .experience-item {
@@ -322,6 +325,12 @@
             background: rgba(157, 0, 255, 0.15);
             border-color: rgba(157, 0, 255, 0.4);
             color: rgba(224, 254, 224, 0.7);
+        }
+
+        .badge.badge-complete {
+            background: rgba(0, 100, 255, 0.16);
+            border-color: rgba(0, 100, 255, 0.45);
+            color: #66b3ff;
         }
 
         .description {
@@ -422,7 +431,7 @@
             text-decoration: none;
             padding: 0.75rem 1.5rem;
             border: 1px solid rgba(157, 0, 255, 0.45);
-            border-radius: 999px;
+            border-radius: 4px;
             font-family: 'Share Tech Mono', monospace;
             transition: var(--transition-fast);
         }
@@ -444,7 +453,7 @@
             text-decoration: none;
             padding: 0.75rem 1.75rem;
             border: 1px solid rgba(157, 0, 255, 0.45);
-            border-radius: 999px;
+            border-radius: 4px;
             font-family: 'Share Tech Mono', monospace;
             margin-top: 2.5rem;
             transition: var(--transition-fast);
@@ -495,6 +504,11 @@
             100% { transform: translateY(-100vh); }
         }
 
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
         @media screen and (max-width: 980px) {
             .container {
                 width: min(95%, 680px);
@@ -517,8 +531,12 @@
                 margin: 5rem auto 2.5rem;
             }
 
-            .item-grid {
-                grid-template-columns: 1fr;
+            .project-item {
+                flex-direction: column;
+            }
+
+            .project-item > div[style*="display: flex"] {
+                flex-direction: column !important;
             }
 
             .item-header {
@@ -543,6 +561,11 @@
 
             .project-item {
                 padding: 1.5rem;
+                flex-direction: column;
+            }
+
+            .project-item > div[style*="display: flex"] {
+                flex-direction: column !important;
             }
 
             .experience-item {
@@ -586,36 +609,101 @@
             </div>
             <div class="item-grid">
                 <article class="project-item">
-                    <div class="item-header">
-                        <h3>NexaCompute Infrastructure</h3>
-                        <span class="badge badge-active">Active</span>
-                    </div>
-                    <p class="description">The core platform powering all current engagements—NexaCompute orchestrates data pipelines, knowledge distillation, distributed training, evaluation, dashboards, and inference-ready serving across disposable GPU fleets.</p>
-                    <ul class="stat-list">
-                        <li>Modular architecture (<code>nexa_data</code>, <code>nexa_distill</code>, <code>nexa_train</code>, <code>nexa_eval</code>, <code>nexa_ui</code>, <code>nexa_infra</code>, <code>nexa_inference</code>).</li>
-                        <li>Manifests, telemetry, and cost tracking baked into every run for reproducibility.</li>
-                        <li>Provider-agnostic orchestration (Prime Intellect, Lambda, CoreWeave, RunPod, AWS, bespoke clusters).</li>
-                        <li>Backs all current model releases, including the Falcon-10B distillation.</li>
-                    </ul>
-                    <div class="meta-row">
-                        <a href="https://github.com/DarkStarStrix/Nexa_Compute" class="button" target="_blank" rel="noopener">View NexaCompute on GitHub</a>
+                    <div class="project-item-content">
+                        <div class="item-header">
+                            <h3>NexaCompute Infrastructure</h3>
+                            <span class="badge badge-active">Active</span>
+                        </div>
+                        <div style="display: flex; gap: 2rem; align-items: flex-start;">
+                            <div style="flex: 1;">
+                                <p class="description">The core platform powering all current engagements—NexaCompute orchestrates data pipelines, knowledge distillation, distributed training, evaluation, dashboards, and inference-ready serving across disposable GPU fleets.</p>
+                            </div>
+                            <div style="flex: 1;">
+                                <ul class="stat-list">
+                                    <li>Modular architecture (<code>nexa_data</code>, <code>nexa_distill</code>, <code>nexa_train</code>, <code>nexa_eval</code>, <code>nexa_ui</code>, <code>nexa_infra</code>, <code>nexa_inference</code>).</li>
+                                    <li>Manifests, telemetry, and cost tracking baked into every run for reproducibility.</li>
+                                    <li>Provider-agnostic orchestration (Prime Intellect, Lambda, CoreWeave, RunPod, AWS, bespoke clusters).</li>
+                                    <li>Backs all current model releases, including the Falcon-10B distillation.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="meta-row">
+                            <a href="https://github.com/DarkStarStrix/Nexa_Compute" class="button" target="_blank" rel="noopener">View NexaCompute on GitHub</a>
+                        </div>
                     </div>
                 </article>
 
                 <article class="project-item">
-                    <div class="item-header">
-                        <h3>Nexa_Sci_distilled_Falcon-10B</h3>
-                        <span class="badge badge-active">Active</span>
+                    <div class="project-item-content">
+                        <div class="item-header">
+                            <h3>Nexa_Sci_distilled_Falcon-10B</h3>
+                            <span class="badge badge-complete">Complete</span>
+                        </div>
+                        <div style="display: flex; gap: 2rem; align-items: flex-start;">
+                            <div style="flex: 1;">
+                                <p class="description">A Falcon3-10B QLoRA model tuned for scientific question answering, hypothesis generation, and reproducible lab methodology drafting—trained on a 100k-sample synthetic corpus distilled via NexaCompute.</p>
+                            </div>
+                            <div style="flex: 1;">
+                                <ul class="stat-list">
+                                    <li>Base model: <code>tiiuae/Falcon3-10B-Base</code> with 4-bit NF4 adapters (rank 64, bf16 precision).</li>
+                                    <li>Dataset: 100k verified SFT samples (`sft_scientific_v1`) distilled from GPT-4/GPT-5-Mini across biology, materials science, and physics.</li>
+                                    <li>Training: 2 × A100 80GB (Prime Intellect), ~10 hours, ≈ $9 USD, validation/test loss 0.410 / 0.413.</li>
+                                    <li>Artifacts: merged safetensors, tokenizer, llm.txt, and pending rubric-based evaluation parquet.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="meta-row">
+                            <a href="https://huggingface.co/Allanatrix/Nexa_Sci_distilled_Falcon-10B" class="button" target="_blank" rel="noopener">View on Hugging Face</a>
+                        </div>
                     </div>
-                    <p class="description">A Falcon3-10B QLoRA model tuned for scientific question answering, hypothesis generation, and reproducible lab methodology drafting—trained on a 100k-sample synthetic corpus distilled via NexaCompute.</p>
-                    <ul class="stat-list">
-                        <li>Base model: <code>tiiuae/Falcon3-10B-Base</code> with 4-bit NF4 adapters (rank 64, bf16 precision).</li>
-                        <li>Dataset: 100k verified SFT samples (`sft_scientific_v1`) distilled from GPT-4/GPT-5-Mini across biology, materials science, and physics.</li>
-                        <li>Training: 2 × A100 80GB (Prime Intellect), ~10 hours, ≈ $9 USD, validation/test loss 0.410 / 0.413.</li>
-                        <li>Artifacts: merged safetensors, tokenizer, llm.txt, and pending rubric-based evaluation parquet.</li>
-                    </ul>
-                    <div class="meta-row">
-                        <a href="https://huggingface.co/Allanatrix/Nexa_Sci_distilled_Falcon-10B" class="button" target="_blank" rel="noopener">View on Hugging Face</a>
+                </article>
+
+                <article class="project-item">
+                    <div class="project-item-content">
+                        <div class="item-header">
+                            <h3>NexaMol</h3>
+                            <span class="badge badge-active">Active</span>
+                        </div>
+                        <div style="display: flex; gap: 2rem; align-items: flex-start;">
+                            <div style="flex: 1;">
+                                <p class="description"><strong>Spectrum-to-Structure Foundation Model</strong><br><br>NexaMol is a molecular foundation model trained on more than 550 million mass spectra, designed to predict molecular structure directly from raw MS/MS data. This closes one of the largest gaps in scientific machine learning: converting the world's most abundant biochemical measurement into actionable structural knowledge.</p>
+                            </div>
+                            <div style="flex: 1;">
+                                <ul class="stat-list">
+                                    <li><strong>Why This Matters:</strong> Mass spectrometry is the backbone of drug discovery, metabolomics, diagnostics, synthetic biology, and materials science. Billions of spectra are generated every year, yet >95% of molecules remain unidentified because structure prediction still depends on manual workflows, fragile heuristics, or slow search-based tools.</li>
+                                    <li><strong>Impact:</strong> A generalizable model that can infer structure from spectra unlocks automatic compound identification, ultra-fast metabolite annotation, scalable chemical intelligence, accelerated R&D across biotech and pharma, and universal molecular embeddings for downstream models.</li>
+                                    <li><strong>Vision:</strong> NexaMol aims to become the foundation layer for molecular ML, similar to how vision and language models became the foundation layers for their domains.</li>
+                                    <li><strong>Features:</strong> Structure prediction from raw MS/MS, universal chemical embeddings, retrieval + annotation automation. Designed for drug discovery, metabolomics, and synthetic biology.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="meta-row">
+                            <a href="index.html#contact" class="button" target="_blank" rel="noopener">Contact →</a>
+                        </div>
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(18, 18, 26, 0.5); border-radius: 8px; border: 1px solid rgba(157, 0, 255, 0.1);">
+                            <div class="progress-timeline" style="display: flex; justify-content: space-between; align-items: flex-start; padding: 1rem 0;">
+                                <div class="progress-node" style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                    <div style="width: 20px; height: 20px; border-radius: 50%; background: #00ff00; border: 2px solid #00ff00; margin-bottom: 0.5rem;"></div>
+                                    <div style="font-size: 0.75rem; color: rgba(224, 254, 224, 0.8); text-align: center;">Data Processed</div>
+                                </div>
+                                <div class="progress-node" style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                    <div style="width: 20px; height: 20px; border-radius: 50%; background: #00ff00; border: 2px solid #00ff00; margin-bottom: 0.5rem;"></div>
+                                    <div style="font-size: 0.75rem; color: rgba(224, 254, 224, 0.8); text-align: center;">Infra/DB Built</div>
+                                </div>
+                                <div class="progress-node" style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                    <div style="width: 20px; height: 20px; border-radius: 50%; background: #00ff00; border: 2px solid #00ff00; margin-bottom: 0.5rem;"></div>
+                                    <div style="font-size: 0.75rem; color: rgba(224, 254, 224, 0.8); text-align: center;">Eval Suite</div>
+                                </div>
+                                <div class="progress-node" style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                    <div class="active-node" style="width: 20px; height: 20px; border-radius: 50%; background: #0066ff; border: 2px solid #0066ff; margin-bottom: 0.5rem; animation: pulse 2s infinite;"></div>
+                                    <div style="font-size: 0.75rem; color: rgba(224, 254, 224, 0.8); text-align: center;">Model Architecture</div>
+                                </div>
+                                <div class="progress-node" style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                    <div style="width: 20px; height: 20px; border-radius: 50%; background: transparent; border: 2px solid rgba(128, 128, 128, 0.5); margin-bottom: 0.5rem;"></div>
+                                    <div style="font-size: 0.75rem; color: rgba(224, 254, 224, 0.6); text-align: center;">Compute Stage</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </article>
             </div>
