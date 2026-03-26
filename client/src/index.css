@@ -1,0 +1,642 @@
+/* =============================================================================
+   Allanatrix — Data Observatory × Cyberpunk
+   Design System: Deep void ground, electric blue + neon violet accents,
+   cyan data highlights. IBM Plex Mono for all data values, DM Sans for prose.
+   Dot-grid texture, scan-line overlay, asymmetric layouts.
+   ============================================================================= */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/* ── Cyberpunk Palette ─────────────────────────────────────────────────────── */
+:root {
+  /* Ground */
+  --void:           oklch(0.10 0.025 280);   /* deep space navy-violet */
+  --void-raised:    oklch(0.14 0.030 275);   /* card surface */
+  --void-border:    oklch(0.20 0.040 270);   /* subtle border */
+
+  /* Accents */
+  --electric:       oklch(0.72 0.22 255);    /* electric blue */
+  --neon:           oklch(0.68 0.28 300);    /* neon violet/purple */
+  --cyan:           oklch(0.78 0.18 200);    /* cyan data highlight */
+  --green-signal:   oklch(0.72 0.18 145);    /* status green */
+  --amber-warn:     oklch(0.78 0.18 65);     /* amber warning */
+  --red-alert:      oklch(0.65 0.22 25);     /* red alert */
+
+  /* Text */
+  --text-primary:   oklch(0.92 0.008 270);   /* near-white with violet tint */
+  --text-secondary: oklch(0.65 0.025 270);   /* muted violet-grey */
+  --text-dim:       oklch(0.42 0.020 270);   /* very dim */
+
+  /* Glow effects */
+  --glow-electric:  0 0 20px oklch(0.72 0.22 255 / 0.35), 0 0 40px oklch(0.72 0.22 255 / 0.15);
+  --glow-neon:      0 0 20px oklch(0.68 0.28 300 / 0.35), 0 0 40px oklch(0.68 0.28 300 / 0.15);
+  --glow-cyan:      0 0 16px oklch(0.78 0.18 200 / 0.30);
+
+  /* Tailwind semantic mappings */
+  --radius: 0.4rem;
+  --background:              var(--void);
+  --foreground:              var(--text-primary);
+  --card:                    var(--void-raised);
+  --card-foreground:         var(--text-primary);
+  --popover:                 var(--void-raised);
+  --popover-foreground:      var(--text-primary);
+  --primary:                 var(--electric);
+  --primary-foreground:      oklch(0.08 0.02 280);
+  --secondary:               oklch(0.18 0.035 275);
+  --secondary-foreground:    var(--text-primary);
+  --muted:                   oklch(0.16 0.030 275);
+  --muted-foreground:        var(--text-secondary);
+  --accent:                  oklch(0.20 0.060 290);
+  --accent-foreground:       var(--neon);
+  --destructive:             var(--red-alert);
+  --destructive-foreground:  oklch(0.96 0 0);
+  --border:                  var(--void-border);
+  --input:                   oklch(0.18 0.030 275);
+  --ring:                    var(--electric);
+  --chart-1:                 var(--electric);
+  --chart-2:                 var(--neon);
+  --chart-3:                 var(--cyan);
+  --chart-4:                 var(--green-signal);
+  --chart-5:                 var(--amber-warn);
+  --sidebar:                 oklch(0.12 0.028 278);
+  --sidebar-foreground:      var(--text-primary);
+  --sidebar-primary:         var(--electric);
+  --sidebar-primary-foreground: oklch(0.08 0.02 280);
+  --sidebar-accent:          oklch(0.18 0.040 280);
+  --sidebar-accent-foreground: var(--neon);
+  --sidebar-border:          var(--void-border);
+  --sidebar-ring:            var(--electric);
+}
+
+/* ── Base Layer ────────────────────────────────────────────────────────────── */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background-color: var(--void);
+    /* Dot-grid texture */
+    background-image:
+      radial-gradient(circle, oklch(0.72 0.22 255 / 0.08) 1px, transparent 1px);
+    background-size: 28px 28px;
+    /* Scan-line overlay */
+    background-attachment: fixed;
+  }
+
+  /* Scan-line pseudo-overlay via fixed ::before on body */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      oklch(0 0 0 / 0.04) 2px,
+      oklch(0 0 0 / 0.04) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  a[href],
+  select:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+/* ── Typography ────────────────────────────────────────────────────────────── */
+.font-prose {
+  font-family: 'DM Sans', system-ui, sans-serif;
+}
+
+.font-data {
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+}
+
+/* ── Layout Components ─────────────────────────────────────────────────────── */
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: 1280px;
+    }
+  }
+}
+
+/* ── Cyberpunk UI Components ───────────────────────────────────────────────── */
+
+/* Glowing border card */
+.cyber-card {
+  background: var(--void-raised);
+  border: 1px solid var(--void-border);
+  border-radius: var(--radius);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cyber-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--electric), transparent);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.cyber-card:hover {
+  border-color: oklch(0.72 0.22 255 / 0.5);
+  box-shadow: var(--glow-electric);
+}
+
+.cyber-card:hover::before {
+  opacity: 1;
+}
+
+/* Neon variant */
+.cyber-card-neon:hover {
+  border-color: oklch(0.68 0.28 300 / 0.5);
+  box-shadow: var(--glow-neon);
+}
+
+.cyber-card-neon::before {
+  background: linear-gradient(90deg, transparent, var(--neon), transparent);
+}
+
+/* Corner bracket decoration */
+.bracket-corner {
+  position: relative;
+}
+
+.bracket-corner::before,
+.bracket-corner::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: var(--electric);
+  border-style: solid;
+}
+
+.bracket-corner::before {
+  top: -1px; left: -1px;
+  border-width: 2px 0 0 2px;
+}
+
+.bracket-corner::after {
+  bottom: -1px; right: -1px;
+  border-width: 0 2px 2px 0;
+}
+
+/* Glowing text */
+.text-glow-electric {
+  color: var(--electric);
+  text-shadow: 0 0 12px oklch(0.72 0.22 255 / 0.6);
+}
+
+.text-glow-neon {
+  color: var(--neon);
+  text-shadow: 0 0 12px oklch(0.68 0.28 300 / 0.6);
+}
+
+.text-glow-cyan {
+  color: var(--cyan);
+  text-shadow: 0 0 10px oklch(0.78 0.18 200 / 0.5);
+}
+
+/* Nav */
+.nav-link {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 1px;
+  background: var(--electric);
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+  transform-origin: left;
+}
+
+.nav-link:hover {
+  color: var(--electric);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+}
+
+.nav-link.active {
+  color: var(--electric);
+}
+
+/* Status badge */
+.status-badge {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 2px;
+  border: 1px solid;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.status-badge::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.status-active {
+  color: var(--green-signal);
+  border-color: oklch(0.72 0.18 145 / 0.4);
+  background: oklch(0.72 0.18 145 / 0.08);
+}
+
+.status-training {
+  color: var(--cyan);
+  border-color: oklch(0.78 0.18 200 / 0.4);
+  background: oklch(0.78 0.18 200 / 0.08);
+}
+
+.status-planned {
+  color: var(--text-secondary);
+  border-color: oklch(0.42 0.020 270 / 0.4);
+  background: oklch(0.42 0.020 270 / 0.08);
+}
+
+/* Section label */
+.section-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--electric);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-label::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--electric);
+  box-shadow: var(--glow-electric);
+}
+
+/* Metric display */
+.metric-value {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.metric-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* Progress bar */
+.progress-bar {
+  height: 3px;
+  background: var(--void-border);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -2px;
+  width: 6px;
+  height: 7px;
+  border-radius: 50%;
+  background: inherit;
+  box-shadow: 0 0 8px currentColor;
+}
+
+/* Terminal window */
+.terminal-window {
+  background: oklch(0.07 0.020 280);
+  border: 1px solid var(--void-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--glow-electric), inset 0 0 40px oklch(0.72 0.22 255 / 0.03);
+}
+
+.terminal-header {
+  background: oklch(0.12 0.025 278);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1px solid var(--void-border);
+}
+
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.terminal-content {
+  padding: 16px;
+  min-height: 400px;
+  max-height: 600px;
+  overflow-y: auto;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.terminal-content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.terminal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.terminal-content::-webkit-scrollbar-thumb {
+  background: var(--void-border);
+  border-radius: 2px;
+}
+
+.terminal-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-family: 'IBM Plex Mono', monospace;
+  width: 100%;
+  caret-color: var(--electric);
+}
+
+/* Button styles */
+.btn-cyber {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border: 1px solid var(--electric);
+  background: transparent;
+  color: var(--electric);
+  border-radius: var(--radius);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-cyber::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--electric);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.btn-cyber:hover {
+  color: oklch(0.08 0.02 280);
+  box-shadow: var(--glow-electric);
+}
+
+.btn-cyber:hover::before {
+  opacity: 1;
+}
+
+.btn-cyber span {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-cyber-neon {
+  border-color: var(--neon);
+  color: var(--neon);
+}
+
+.btn-cyber-neon:hover {
+  box-shadow: var(--glow-neon);
+}
+
+.btn-cyber-neon::before {
+  background: var(--neon);
+}
+
+/* Divider with label */
+.divider-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-dim);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.divider-label::before,
+.divider-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--void-border));
+}
+
+.divider-label::after {
+  background: linear-gradient(90deg, var(--void-border), transparent);
+}
+
+/* Spectrum image display */
+.spectrum-display {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--void-border);
+}
+
+.spectrum-display img {
+  width: 100%;
+  display: block;
+}
+
+.spectrum-display::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 60%,
+    var(--void) 100%
+  );
+  pointer-events: none;
+}
+
+/* Animations */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes flicker {
+  0%, 95%, 100% { opacity: 1; }
+  96% { opacity: 0.8; }
+  97% { opacity: 1; }
+  98% { opacity: 0.6; }
+}
+
+@keyframes scan {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(100vh); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease both;
+}
+
+.animate-slide-left {
+  animation: slide-in-left 0.5s ease both;
+}
+
+.animate-flicker {
+  animation: flicker 8s ease-in-out infinite;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--void);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--void-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.72 0.22 255 / 0.4);
+}
+
+/* Selection */
+::selection {
+  background: oklch(0.72 0.22 255 / 0.25);
+  color: var(--text-primary);
+}
