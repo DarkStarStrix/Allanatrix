@@ -97,7 +97,7 @@
       "tailwindcss>nanoid": "3.3.7",
       "tar": ">=7.5.11",
       "picomatch": ">=4.0.4",
-      "lodash": ">=4.17.23",
+      "lodash": ">=4.18.1",
       "lodash-es": ">=4.18.1",
       "qs": ">=6.14.2",
       "dompurify": ">=3.3.2",
