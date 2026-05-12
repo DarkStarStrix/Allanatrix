@@ -75,8 +75,9 @@ export default function Projects() {
             <span className="text-glow-electric">Archived Infrastructure</span>
           </h1>
           <p className="text-sm max-w-xl" style={{ color: "var(--text-secondary)" }}>
-            Two active projects in production today — NexaMol and PyC — followed by the
-            archived models and datasets that built toward them.
+            Six active systems: Nexa_Compute (ML infra), Nexa_Mat (materials foundation model),
+            Science Gym (RL for scientific decisions), NexaMol (mass spectrometry), PyC (AI compiler),
+            and NexaMass-V3-Struct (shipped). Followed by archived models and datasets.
           </p>
         </header>
 
@@ -91,7 +92,15 @@ export default function Projects() {
 
           <div className="flex flex-col gap-8">
             {CURRENT_PROJECTS.map((project, i) => {
-              const accentColor = i === 0 ? "var(--neon)" : "var(--electric)";
+              const ACCENT_COLORS = [
+                "var(--electric)",   // Nexa_Compute — blue
+                "var(--cyan)",       // Nexa_Mat — cyan
+                "var(--neon)",       // Science Gym — green
+                "var(--neon)",       // NexaMass-V3 — green (complete)
+                "var(--neon)",       // NexaMol — green
+                "var(--electric)",   // PyC — blue
+              ];
+              const accentColor = ACCENT_COLORS[i % ACCENT_COLORS.length];
               const isNexaMol = project.id === "nexamol";
 
               return (
@@ -224,7 +233,11 @@ export default function Projects() {
                           style={{ color: accentColor, borderColor: `${accentColor}44` }}
                           onMouseEnter={(e) => {
                             e.currentTarget.style.borderColor = accentColor;
-                            e.currentTarget.style.boxShadow = i === 0 ? "var(--glow-neon)" : "var(--glow-electric)";
+                            e.currentTarget.style.boxShadow = accentColor === "var(--neon)"
+                              ? "var(--glow-neon)"
+                              : accentColor === "var(--cyan)"
+                              ? "var(--glow-cyan)"
+                              : "var(--glow-electric)";
                           }}
                           onMouseLeave={(e) => {
                             e.currentTarget.style.borderColor = `${accentColor}44`;
