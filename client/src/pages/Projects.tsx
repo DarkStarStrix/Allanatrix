@@ -8,9 +8,6 @@ import { ArrowRight, ExternalLink } from "lucide-react";
 import Layout from "@/components/Layout";
 import { CURRENT_PROJECTS, ARCHIVED_PROJECTS, type ProgressNode } from "@/lib/data";
 
-const NEXAMOL_SPECTRUM_URL =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663288203906/L2Xrod7JwZpu454UeVMAz9/nexamol-spectrum_37678466.png";
-
 // ── Progress timeline ─────────────────────────────────────────────────────────
 function ProgressTimeline({ nodes }: { nodes: ProgressNode[] }) {
   return (
@@ -101,8 +98,6 @@ export default function Projects() {
                 "var(--electric)",   // PyC — blue
               ];
               const accentColor = ACCENT_COLORS[i % ACCENT_COLORS.length];
-              const isNexaMol = project.id === "nexamol";
-
               return (
                 <article
                   key={project.id}
@@ -115,33 +110,7 @@ export default function Projects() {
                     style={{ background: `linear-gradient(90deg, ${accentColor}, transparent)` }}
                   />
 
-                  {/* NexaMol: full-width spectrum image */}
-                  {isNexaMol && (
-                    <div className="relative overflow-hidden" style={{ maxHeight: "260px" }}>
-                      <img
-                        src={NEXAMOL_SPECTRUM_URL}
-                        alt="NexaMol — Mass Spectrometry ML Pipeline"
-                        style={{ width: "100%", display: "block", objectFit: "cover" }}
-                      />
-                      <div
-                        className="absolute inset-0"
-                        style={{
-                          background: "linear-gradient(to bottom, transparent 40%, var(--void-raised) 100%)",
-                        }}
-                      />
-                      <div className="absolute bottom-3 left-6 right-6 flex items-center justify-between">
-                        <div>
-                          <div className="font-data text-[10px] uppercase tracking-widest" style={{ color: accentColor }}>
-                            NexaMol — MS/MS Prediction Pipeline
-                          </div>
-                          <div className="font-data text-[10px]" style={{ color: "var(--text-dim)" }}>
-                            GeMS v1 corpus · 579 GiB · 6.03M spectra
-                          </div>
-                        </div>
-                        <span className="status-badge status-training">Training</span>
-                      </div>
-                    </div>
-                  )}
+
 
                   <div className="p-6">
                     {/* Header */}

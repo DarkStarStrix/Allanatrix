@@ -401,7 +401,7 @@ export default function Home() {
                     GeMS v1 corpus · 579 GiB · 6.03M spectra
                   </div>
                 </div>
-                <span className="status-badge status-training">Training</span>
+                <span className="status-badge status-complete">Complete</span>
               </div>
             </div>
           </div>
