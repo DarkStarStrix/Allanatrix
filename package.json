@@ -89,6 +89,22 @@
     "vitest": "^3.2.4"
   },
   "packageManager": "pnpm@10.28.2",
+  "overrides": {
+    "path-to-regexp": ">=8.2.0",
+    "send": ">=0.19.0",
+    "serve-static": ">=1.16.0",
+    "body-parser": ">=1.20.3",
+    "cookie": ">=0.7.0",
+    "on-finished": ">=2.4.1",
+    "qs": ">=6.14.2",
+    "semver": ">=7.5.2",
+    "tar": ">=7.5.11",
+    "rollup": ">=4.59.0",
+    "lodash": ">=4.18.1",
+    "lodash-es": ">=4.18.1",
+    "dompurify": ">=3.3.2",
+    "mdast-util-to-hast": ">=13.2.1"
+  },
   "pnpm": {
     "patchedDependencies": {
       "wouter@3.7.1": "patches/wouter@3.7.1.patch"
@@ -103,7 +119,13 @@
       "dompurify": ">=3.3.2",
       "mdast-util-to-hast": ">=13.2.1",
       "rollup": ">=4.59.0",
-      "esbuild": ">=0.25.0"
+      "esbuild": ">=0.25.0",
+      "path-to-regexp": ">=8.2.0",
+      "send": ">=0.19.0",
+      "serve-static": ">=1.16.0",
+      "body-parser": ">=1.20.3",
+      "cookie": ">=0.7.0",
+      "semver": ">=7.5.2"
     }
   }
 }

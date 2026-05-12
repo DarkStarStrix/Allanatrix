@@ -192,14 +192,14 @@ export const CURRENT_PROJECTS: Project[] = [
   {
     id: "nexamol",
     title: "NexaMol",
-    subtitle: "Foundation Model for Mass Spectrometry",
-    status: "active",
-    stage: "Compute — Model Training Next",
+    subtitle: "Foundation Model for Mass Spectrometry — Complete",
+    status: "complete",
+    stage: "Complete — Published",
     company: "Aethron Labs",
     description:
-      "A foundation model trained on the GeMS v1 corpus — 579 GiB of ML-ready mass spectra — learning the underlying language of molecular fragmentation for instant retrieval and structural inference.",
+      "A foundation model trained on the GeMS v1 corpus — 579 GiB of ML-ready mass spectra — learning the underlying language of molecular fragmentation for instant retrieval and structural inference. Training complete and published on HuggingFace.",
     highlights: [
-      "GeMS v1 corpus: 579 GiB of ML-ready mass spectra",
+      "GeMS v1 corpus: 579 GiB of ML-ready mass spectra — training complete",
       "Nearest-neighbor retrieval across full corpus in milliseconds",
       "Structural inference: metabolite candidates + confidence scores",
       "Target: CROs — metabolite ID, impurity analysis, dereplication",
@@ -208,7 +208,7 @@ export const CURRENT_PROJECTS: Project[] = [
     metrics: [
       { label: "Corpus", value: "579 GiB" },
       { label: "V1 Params", value: "3B" },
-      { label: "Stage", value: "Training" },
+      { label: "Status", value: "Complete" },
     ],
     links: [
       { label: "HuggingFace", url: "https://huggingface.co/Allanatrix", external: true },
@@ -217,9 +217,9 @@ export const CURRENT_PROJECTS: Project[] = [
     progress: [
       { id: "data", label: "Dataset Assembly", status: "complete", note: "GeMS v1 — 579 GiB complete" },
       { id: "arch", label: "Architecture Design", status: "complete", note: "3B param foundation model" },
-      { id: "compute", label: "Compute Stage", status: "active", note: "Model training — in progress" },
-      { id: "eval", label: "Evaluation & Benchmarks", status: "next", note: "Nexa Evals suite ready" },
-      { id: "api", label: "API Integration", status: "planned", note: "CRO pilot deployment" },
+      { id: "compute", label: "Compute Stage", status: "complete", note: "Model training — done" },
+      { id: "eval", label: "Evaluation & Benchmarks", status: "complete", note: "Nexa Evals suite complete" },
+      { id: "api", label: "API Integration", status: "complete", note: "Published on HuggingFace" },
     ],
   },
   {
@@ -467,7 +467,7 @@ export const STORY_TIMELINE = [
   {
     year: "2026",
     title: "Aethron Labs — Full Stack AI4Science",
-    body: "Founded Aethron Labs. Shipped NexaMass-V3-Struct (MS/MS structural encoder, published). Training Nexa_Mat — a materials foundation model on 87k crystal structures. Built Science Gym, an RL framework for scientific decision-making under uncertainty. Launched Nexa_Compute, the private ML infrastructure platform powering all training and inference. NexaMol v1 in compute stage. Targeting CROs and battery materials research.",
+    body: "Founded Aethron Labs. Shipped NexaMol v1 (3B param MS/MS foundation model, published) and NexaMass-V3-Struct (structural encoder, published). Training Nexa_Mat — a materials foundation model on 87k crystal structures. Built Science Gym, an RL framework for scientific decision-making under uncertainty. Launched Nexa_Compute, the private ML infrastructure platform powering all training and inference. Targeting CROs and battery materials research.",
   },
 ];
 
@@ -603,9 +603,9 @@ export const TERMINAL_COMMANDS: Record<string, string> = {
     "",
     "  ACTIVE PROJECTS",
     "  ────────────────────────────────────────────",
-    "  [●] NexaMol v1          COMPUTE STAGE",
+    "  [✓] NexaMol v1          COMPLETE",
     "      Foundation model · 579 GiB corpus",
-    "      Dataset complete → Model training next",
+    "      Training done → Published on HuggingFace",
     "",
     "  [●] Nexa_Compute        ACTIVE DEVELOPMENT",
     "      ML infrastructure platform · Private",
@@ -634,9 +634,9 @@ export const TERMINAL_COMMANDS: Record<string, string> = {
   nexamol: [
     "",
     "  NexaMol — Scientific Foundation Model",
-    "  ──────────────────────────────────────",
+    "  ────────────────────────────────────",
     "  Company:   Aethron Labs",
-    "  Stage:     Compute — Model Training Next",
+    "  Stage:     COMPLETE · Published on HuggingFace",
     "  Corpus:    GeMS v1 — 579 GiB ML-ready mass spectra",
     "",
     "  Pipeline:",
@@ -645,7 +645,7 @@ export const TERMINAL_COMMANDS: Record<string, string> = {
     "    Infer    → structural signals + metabolite candidates",
     "",
     "  Model Roadmap:",
-    "    V1 [TRAINING]  3B params — MS/MS retrieval",
+    "    V1 [COMPLETE]  3B params — MS/MS retrieval — published",
     "    V2 [PLANNED]   5B params — cross-instrument",
     "    V3 [ROADMAP]   7B params — multi-modal science",
     "",
