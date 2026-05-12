@@ -78,7 +78,7 @@
     "autoprefixer": "^10.4.20",
     "esbuild": "^0.25.8",
     "pnpm": "^10.28.2",
-    "postcss": "^8.4.47",
+    "postcss": "^8.5.10",
     "prettier": "^3.6.2",
     "tailwindcss": "^4.1.14",
     "tsx": "^4.19.1",
