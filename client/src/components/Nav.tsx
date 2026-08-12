@@ -7,13 +7,15 @@
 
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, Terminal } from "lucide-react";
+import { Menu, X, Terminal, Moon, Sun } from "lucide-react";
 import { NAV_LINKS } from "@/lib/data";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [location] = useLocation();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -31,13 +33,19 @@ export default function Nav() {
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
         background: scrolled
-          ? "oklch(0.10 0.025 280 / 0.92)"
-          : "oklch(0.10 0.025 280 / 0)",
+          ? theme === "dark"
+            ? "oklch(0.10 0.025 280 / 0.94)"
+            : "rgba(246, 243, 236, 0.95)"
+          : "transparent",
         backdropFilter: scrolled ? "blur(16px)" : "none",
         borderBottom: scrolled
           ? "1px solid var(--void-border)"
           : "1px solid transparent",
-        boxShadow: scrolled ? "0 1px 30px oklch(0.72 0.22 255 / 0.06)" : "none",
+        boxShadow: scrolled
+          ? theme === "dark"
+            ? "0 1px 30px oklch(0.72 0.22 255 / 0.06)"
+            : "0 8px 28px rgba(23, 32, 43, 0.08)"
+          : "none",
       }}
     >
       <div className="container">
@@ -106,6 +114,16 @@ export default function Nav() {
             })}
           </div>
 
+          <div className="flex items-center gap-2">
+          <button
+            className="theme-toggle p-2 rounded transition-colors duration-200"
+            onClick={() => toggleTheme?.()}
+            aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+            title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+            aria-pressed={theme === "dark"}
+          >
+            {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
+          </button>
           {/* Mobile toggle */}
           <button
             className="md:hidden p-2 rounded transition-colors duration-200"
@@ -116,7 +134,7 @@ export default function Nav() {
             onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
           >
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          </button></div>
         </div>
       </div>
 

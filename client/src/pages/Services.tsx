@@ -1,295 +1,80 @@
-// =============================================================================
-// Lab — Aethron Labs + contact
-// Data Observatory × Cyberpunk: company overview, NexaMol details, contact form
-// CSS tokens: --void-raised, --electric, --neon, --text-primary, --text-secondary
-// =============================================================================
-
-import { useState } from "react";
+import { ArrowUpRight, Beaker, Database, Layers3, Orbit, Route } from "lucide-react";
 import Layout from "@/components/Layout";
-import { SITE } from "@/lib/data";
-import { ArrowRight, CheckCircle, ExternalLink, Loader2 } from "lucide-react";
 
-interface FormState {
-  name: string;
-  email: string;
-  company: string;
-  message: string;
+const researchTracks = [
+  {
+    number: "01",
+    title: "Cross-domain representations",
+    body: "Compare what makes a useful scientific representation across structurally different modalities, beginning with mass spectrometry and materials science.",
+    icon: Orbit,
+  },
+  {
+    number: "02",
+    title: "Minimum sufficient models",
+    body: "Find the smallest representation that preserves scientifically consequential information, while measuring capability, cost, transfer, and failure.",
+    icon: Layers3,
+  },
+  {
+    number: "03",
+    title: "Expert iteration systems",
+    body: "Connect data, models, evidence, tools, and uncertainty so experts can move from observation to a better next decision without giving up judgment.",
+    icon: Route,
+  },
+];
+
+const buildingBlocks = [
+  ["Information", "Select, normalize, deduplicate, and preserve the signal that a scientific task actually needs."],
+  ["Representation", "Encode structure efficiently through objectives, inductive bias, compression, and model design."],
+  ["Fidelity", "Test what survives external evaluation, distribution shift, uncertainty, and real scientific constraints."],
+  ["Transfer", "Separate principles that generalize across domains from tricks that only work once."],
+];
+
+const artifactGroups = [
+  {
+    label: "DATASETS",
+    title: "Structured information",
+    icon: Database,
+    items: [
+      ["OpenSciTech-Reasoning-1M", "Scientific reasoning examples spanning numerical methods, SciML workflows, CUDA, and scientific Python.", "1M+ examples · CC BY 4.0", "https://huggingface.co/datasets/AethronPhantom/OpenSciTech-Reasoning-1M"],
+      ["Scientific Research Tokenized", "Grounded materials evidence cards, synthesis recipes, and structured decisions.", "433K rows · Apache 2.0", "https://huggingface.co/datasets/AethronPhantom/Scientific_Research_Tokenized"],
+      ["Materials", "Crystal structures and property data supporting the NexaMat research line.", "Materials corpus · Hugging Face", "https://huggingface.co/datasets/AethronPhantom/Materials"],
+    ],
+  },
+  {
+    label: "MODELS",
+    title: "Learned representations",
+    icon: Beaker,
+    items: [
+      ["Nexa_Mat2", "A materials model release connecting crystal structure, property prediction, candidate generation, and evidence.", "Model card · current release", "https://huggingface.co/AethronPhantom/Nexa_Mat2"],
+      ["NexaMass-V3-Struct", "An archived MS/MS encoder for candidate narrowing, structure-aware embeddings, and honest uncertainty.", "14.1M params · Hit@20 0.3505", "https://huggingface.co/AethronPhantom/NexaMass-V3-Struct"],
+    ],
+  },
+  {
+    label: "SYSTEMS / EXPERIMENTS",
+    title: "Executable research",
+    icon: Orbit,
+    items: [
+      ["Vecalx", "An experimental runtime and compiler for continuous, hybrid, and energy-based programs. No defined release date.", "LNN · SNN · EBM · experimental", "https://github.com/DarkStarStrix"],
+      ["Nexa_Compute + PyC", "The internal training, evaluation, inference, compiler, and HPC layers that make the public artifacts possible.", "ML monorepo · internal toolchain", "https://github.com/DarkStarStrix"],
+    ],
+  },
+  {
+    label: "INTERFACES",
+    title: "Ways into the work",
+    icon: Route,
+    items: [
+      ["SciML and AI for Science", "An explainer for the scientific ML problems and methods behind the lab.", "Hugging Face Space", "https://huggingface.co/spaces/AethronPhantom"],
+      ["Nexa Data Studio", "A dataset-generation interface for turning research material into structured training data.", "Hugging Face Space", "https://huggingface.co/spaces/AethronPhantom/Nexa_Data_Studio"],
+      ["NexaMat Crystal Viewer", "A visual interface for exploring the materials representation thread.", "Hugging Face Space", "https://huggingface.co/spaces/AethronPhantom"],
+    ],
+  },
+];
+
+function ArtifactCard({ item }: { item: string[] }) {
+  const [title, body, meta, href] = item;
+  return <a className="lab-artifact-card" href={href} target="_blank" rel="noreferrer"><div><h3>{title}</h3><ArrowUpRight size={17} /></div><p>{body}</p><span className="mono">{meta}</span></a>;
 }
 
 export default function Lab() {
-  const [form, setForm] = useState<FormState>({ name: "", email: "", company: "", message: "" });
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("loading");
-    try {
-      const res = await fetch("https://formspree.io/f/xqkrjkqr", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      if (res.ok) {
-        setStatus("success");
-        setForm({ name: "", email: "", company: "", message: "" });
-      } else {
-        setStatus("error");
-      }
-    } catch {
-      setStatus("error");
-    }
-  };
-
-  const inputStyle: React.CSSProperties = {
-    background: "oklch(0.12 0.025 278)",
-    border: "1px solid var(--void-border)",
-    borderRadius: "var(--radius)",
-    color: "var(--text-primary)",
-    fontFamily: "'IBM Plex Mono', monospace",
-    fontSize: "0.8rem",
-    padding: "0.625rem 0.875rem",
-    width: "100%",
-    outline: "none",
-    transition: "border-color 0.2s",
-  };
-
-  return (
-    <Layout>
-      <div className="container py-16">
-        {/* Header */}
-        <header className="mb-12">
-          <span className="section-label mb-4 block">Company</span>
-          <h1
-            className="font-prose font-bold text-4xl mb-4"
-            style={{ color: "var(--text-primary)", letterSpacing: "-0.02em" }}
-          >
-            <span className="text-glow-electric">Aethron Labs</span>
-          </h1>
-          <p className="text-sm max-w-xl" style={{ color: "var(--text-secondary)" }}>
-            Building foundation models for scientific data interpretation. Mass spectrometry
-            is the language of molecules — NexaMol makes it readable at scale.
-          </p>
-        </header>
-
-        {/* Company overview grid */}
-        <section className="grid lg:grid-cols-3 gap-6 mb-16">
-          {[
-            {
-              title: "The Problem",
-              accent: "var(--red-alert)",
-              body: "Metabolite identification takes 3–6 weeks per compound. Manual workflows, expert bottlenecks, and expensive tooling make mass spectrometry data largely inaccessible to automated pipelines.",
-            },
-            {
-              title: "The Solution",
-              accent: "var(--electric)",
-              body: "NexaMol provides instant retrieval and structural inference across 579 GiB of ML-ready mass spectra. Upload a spectrum, get metabolite candidates and confidence scores in milliseconds.",
-            },
-            {
-              title: "The Market",
-              accent: "var(--neon)",
-              body: "Targeting CROs — contract research organizations — for metabolite ID, impurity analysis, and dereplication workflows. API-level integration into existing LIMS pipelines.",
-            },
-          ].map((card) => (
-            <div key={card.title} className="cyber-card bracket-corner p-5">
-              <div
-                className="absolute top-0 left-0 right-0 h-px"
-                style={{ background: `linear-gradient(90deg, ${card.accent}, transparent)` }}
-              />
-              <h3
-                className="font-data text-xs uppercase tracking-widest mb-3 mt-1"
-                style={{ color: card.accent }}
-              >
-                {card.title}
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-                {card.body}
-              </p>
-            </div>
-          ))}
-        </section>
-
-        {/* NexaMol pipeline */}
-        <section className="cyber-card p-6 mb-16">
-          <div className="flex items-center gap-3 mb-6">
-            <span className="font-data text-[10px] uppercase tracking-widest" style={{ color: "var(--neon)" }}>
-              NexaMol Pipeline
-            </span>
-            <div className="flex-1 h-px" style={{ background: "var(--void-border)" }} />
-            <span className="status-badge status-training">In Training</span>
-          </div>
-          <div className="grid sm:grid-cols-3 gap-4">
-            {[
-              { step: "01", label: "Upload", desc: "Instrument-agnostic spectrum API. Any MS/MS format accepted.", color: "var(--electric)" },
-              { step: "02", label: "Retrieve", desc: "Nearest-neighbor search across 6.03M spectra via FAISS.", color: "var(--neon)" },
-              { step: "03", label: "Infer", desc: "Structural signals, metabolite candidates, confidence scores.", color: "var(--cyan)" },
-            ].map((s) => (
-              <div key={s.step} className="flex flex-col gap-2">
-                <div className="flex items-center gap-2">
-                  <span className="font-data text-2xl font-bold" style={{ color: s.color, opacity: 0.3 }}>
-                    {s.step}
-                  </span>
-                  <span className="font-data text-sm font-semibold" style={{ color: s.color }}>
-                    {s.label}
-                  </span>
-                </div>
-                <p className="text-sm" style={{ color: "var(--text-secondary)" }}>{s.desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Contact section */}
-        <section id="contact">
-          <div className="divider-label mb-10">Get in Touch</div>
-          <div className="grid lg:grid-cols-[40%_60%] gap-12 items-start">
-            {/* Left */}
-            <div>
-              <h2
-                className="font-prose font-bold text-xl mb-3"
-                style={{ color: "var(--text-primary)" }}
-              >
-                Reach out
-              </h2>
-              <p className="text-sm leading-relaxed mb-6" style={{ color: "var(--text-secondary)" }}>
-                Interested in NexaMol, a pilot integration, or just want to talk about
-                AI4Science? Describe your use case and I'll get back within 48 hours.
-              </p>
-              <div className="flex flex-col gap-2 mb-6">
-                {[
-                  "CRO pilot integrations and scoped evaluations",
-                  "Mass spectrometry ML research collaborations",
-                  "Scientific dataset assembly and curation",
-                  "HPC compiler toolchain (PyC) discussions",
-                ].map((item) => (
-                  <div key={item} className="flex items-start gap-2 text-sm">
-                    <CheckCircle size={13} className="mt-0.5 shrink-0" style={{ color: "var(--electric)" }} />
-                    <span style={{ color: "var(--text-secondary)" }}>{item}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-col gap-2">
-                <a
-                  href={`mailto:${SITE.email}`}
-                  className="inline-flex items-center gap-2 font-data text-xs transition-colors duration-200"
-                  style={{ color: "var(--electric)" }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--cyan)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--electric)")}
-                >
-                  {SITE.email}
-                  <ArrowRight size={11} />
-                </a>
-                <a
-                  href="https://aethronlabs.xyz/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 font-data text-xs transition-colors duration-200"
-                  style={{ color: "var(--neon)" }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--cyan)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--neon)")}
-                >
-                  aethronlabs.xyz
-                  <ExternalLink size={11} />
-                </a>
-              </div>
-            </div>
-
-            {/* Right: form */}
-            <div className="cyber-card p-6">
-              {status === "success" ? (
-                <div className="flex flex-col items-center gap-4 py-8 text-center">
-                  <CheckCircle size={36} style={{ color: "var(--green-signal)" }} />
-                  <h3 className="font-prose font-semibold text-lg" style={{ color: "var(--text-primary)" }}>
-                    Message received
-                  </h3>
-                  <p className="font-data text-xs" style={{ color: "var(--text-secondary)" }}>
-                    I'll get back to you within 48 hours.
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div className="flex flex-col gap-1.5">
-                      <label htmlFor="name" className="font-data text-[10px] uppercase tracking-widest" style={{ color: "var(--text-dim)" }}>
-                        Name *
-                      </label>
-                      <input
-                        id="name" name="name" type="text" required
-                        value={form.name} onChange={handleChange}
-                        placeholder="Your name"
-                        style={inputStyle}
-                        onFocus={(e) => (e.currentTarget.style.borderColor = "var(--electric)")}
-                        onBlur={(e) => (e.currentTarget.style.borderColor = "var(--void-border)")}
-                      />
-                    </div>
-                    <div className="flex flex-col gap-1.5">
-                      <label htmlFor="email" className="font-data text-[10px] uppercase tracking-widest" style={{ color: "var(--text-dim)" }}>
-                        Email *
-                      </label>
-                      <input
-                        id="email" name="email" type="email" required
-                        value={form.email} onChange={handleChange}
-                        placeholder="you@example.com"
-                        style={inputStyle}
-                        onFocus={(e) => (e.currentTarget.style.borderColor = "var(--electric)")}
-                        onBlur={(e) => (e.currentTarget.style.borderColor = "var(--void-border)")}
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <label htmlFor="company" className="font-data text-[10px] uppercase tracking-widest" style={{ color: "var(--text-dim)" }}>
-                      Company / Project
-                    </label>
-                    <input
-                      id="company" name="company" type="text"
-                      value={form.company} onChange={handleChange}
-                      placeholder="Optional"
-                      style={inputStyle}
-                      onFocus={(e) => (e.currentTarget.style.borderColor = "var(--neon)")}
-                      onBlur={(e) => (e.currentTarget.style.borderColor = "var(--void-border)")}
-                    />
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <label htmlFor="message" className="font-data text-[10px] uppercase tracking-widest" style={{ color: "var(--text-dim)" }}>
-                      Message *
-                    </label>
-                    <textarea
-                      id="message" name="message" required rows={5}
-                      value={form.message} onChange={handleChange}
-                      placeholder="Describe your use case, dataset, or research question..."
-                      style={{ ...inputStyle, resize: "vertical" }}
-                      onFocus={(e) => (e.currentTarget.style.borderColor = "var(--electric)")}
-                      onBlur={(e) => (e.currentTarget.style.borderColor = "var(--void-border)")}
-                    />
-                  </div>
-                  {status === "error" && (
-                    <p className="font-data text-xs" style={{ color: "var(--red-alert)" }}>
-                      Something went wrong. Email directly: {SITE.email}
-                    </p>
-                  )}
-                  <button
-                    type="submit"
-                    disabled={status === "loading"}
-                    className="btn-cyber w-full"
-                    style={{ opacity: status === "loading" ? 0.7 : 1 }}
-                  >
-                    <span className="flex items-center justify-center gap-2">
-                      {status === "loading" ? (
-                        <><Loader2 size={13} className="animate-spin" /> Sending...</>
-                      ) : (
-                        <>Send Message <ArrowRight size={13} /></>
-                      )}
-                    </span>
-                  </button>
-                </form>
-              )}
-            </div>
-          </div>
-        </section>
-      </div>
-    </Layout>
-  );
+  return <Layout><main className="lab-page"><section className="container lab-intro"><div><span className="eyebrow">LAB / RESEARCH PROGRAM</span><h1>Computational representations<br /><em>of the natural world.</em></h1></div><p>Aetheron Labs builds scientific datasets, compact models, evaluation systems, and research infrastructure that make expert scientific iteration more informed and more efficient.</p></section><section className="lab-thesis"><div className="container"><span className="eyebrow">THE PROGRAM</span><p>Scientific progress depends on how information is observed, represented, tested, and acted on. The lab studies which information matters, how to encode it faithfully, what can transfer across domains, and how computation can help experts decide what to do next.</p></div></section><section className="container lab-tracks"><div className="lab-section-heading"><div><span className="eyebrow">THREE CONNECTED QUESTIONS</span><h2>Build the representation.<br /><em>Test the consequences.</em></h2></div><p>The lab is organized as one research program rather than a collection of disconnected demos.</p></div><div className="lab-track-grid">{researchTracks.map(({ number, title, body, icon: Icon }) => <article className="lab-track-card" key={number}><div><span className="mono">{number}</span><Icon size={21} /></div><h3>{title}</h3><p>{body}</p></article>)}</div></section><section className="container lab-blocks"><div className="lab-section-heading compact"><div><span className="eyebrow">BUILDING BLOCKS</span><h2>From raw signal<br /><em>to useful judgment.</em></h2></div></div><div className="lab-block-grid">{buildingBlocks.map(([title, body]) => <article key={title}><span className="mono">{title}</span><p>{body}</p></article>)}</div></section><section className="container lab-materials"><div className="lab-section-heading compact"><div><span className="eyebrow">PUBLIC LAB MATERIALS</span><h2>The artifacts<br /><em>behind the thesis.</em></h2></div><p>Selected public datasets, models, and systems. Each one is a different layer of the same research question.</p></div><div className="lab-artifact-groups">{artifactGroups.map(({ label, title, icon: Icon, items }) => <section className="lab-artifact-group" key={label}><div className="lab-artifact-heading"><Icon size={19} /><div><span className="mono">{label}</span><h3>{title}</h3></div></div><div className="lab-artifact-grid">{items.map((item) => <ArtifactCard item={item} key={item[0]} />)}</div></section>)}</div></section><section className="lab-note"><div className="container"><span className="eyebrow">A RESEARCH INSTRUMENT</span><p>The goal is not to replace scientific judgment. It is to reduce the work around judgment: preparing information, testing representations, retrieving evidence, exposing uncertainty, and preserving what was learned.</p></div></section></main></Layout>;
 }

@@ -14,6 +14,8 @@ interface HistoryEntry {
   text: string;
 }
 
+type TerminalStyle = "clean" | "matrix" | "amber";
+
 const BANNER = [
   "  ╔═══════════════════════════════════════════════════════════╗",
   "  ║  ALLANATRIX TERMINAL v2.0                                 ║",
@@ -35,6 +37,7 @@ export default function Terminal() {
   const [cmdHistory, setCmdHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [terminalStyle, setTerminalStyle] = useState<TerminalStyle>("clean");
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -119,9 +122,9 @@ export default function Terminal() {
 
   return (
     <Layout>
-      <div className="container py-16">
+      <main className={`container terminal-page terminal-style-${terminalStyle}`}>
         {/* Header */}
-        <header className="mb-8">
+        <header className="terminal-intro">
           <span className="section-label mb-4 block">Interactive</span>
           <h1
             className="font-prose font-bold text-4xl mb-2"
@@ -130,8 +133,9 @@ export default function Terminal() {
             Terminal
           </h1>
           <p className="font-data text-xs" style={{ color: "var(--text-dim)" }}>
-            Explore NexaMol, PyC, datasets, and system status. Real data, real commands.
+            Query public artifacts, research systems, and the working state of the lab.
           </p>
+          <div className="terminal-style-switcher" aria-label="Terminal styles">{([['clean', 'Clean'], ['matrix', 'Matrix'], ['amber', 'Amber']] as const).map(([style, label]) => <button key={style} className={terminalStyle === style ? "active" : ""} onClick={() => setTerminalStyle(style)}>{label}</button>)}</div>
         </header>
 
         {/* Terminal window */}
@@ -213,10 +217,7 @@ export default function Terminal() {
           </div>
 
           {/* Quick commands bar */}
-          <div
-            className="px-4 py-3 border-t flex flex-wrap gap-2"
-            style={{ borderColor: "var(--void-border)", background: "oklch(0.09 0.022 280)" }}
-          >
+          <div className="terminal-quickbar">
             {QUICK_CMDS.map((cmd) => (
               <button
                 key={cmd}
@@ -239,7 +240,7 @@ export default function Terminal() {
         </div>
 
         {/* Keyboard hints */}
-        <div className="flex items-center gap-5 mt-4">
+        <div className="terminal-hints">
           {[
             { key: "↑↓", desc: "command history" },
             { key: "Tab", desc: "autocomplete" },
@@ -259,7 +260,7 @@ export default function Terminal() {
             </div>
           ))}
         </div>
-      </div>
+      </main>
     </Layout>
   );
 }

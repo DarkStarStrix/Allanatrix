@@ -10,12 +10,13 @@ import Footer from "./Footer";
 
 interface LayoutProps {
   children: ReactNode;
+  compact?: boolean;
 }
 
-export default function Layout({ children }: LayoutProps) {
+export default function Layout({ children, compact = false }: LayoutProps) {
   return (
     <div
-      className="min-h-screen flex flex-col"
+      className={`min-h-screen flex flex-col${compact ? " compact-layout" : ""}`}
       style={{ background: "var(--void)" }}
     >
       <Nav />
